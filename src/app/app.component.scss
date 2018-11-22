@@ -1,0 +1,24 @@
+.container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto 1fr auto;
+    min-height: 100%;
+    background-color: rgb(250, 250, 250); 
+}
+
+app-header{
+    height: 150px;
+    background-color: blueviolet;
+}
+
+app-nav{
+    height: 50px;
+    background-color: rgb(154, 65, 236);
+}
+
+app-footer{
+    height: 50px;
+    background-color: blueviolet;
+}
+
+
