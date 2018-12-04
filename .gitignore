@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs
+/backend/PJATK.TravelAgency/PJATK.TravelAgency.WebApi/obj/Debug
+/backend/PJATK.TravelAgency/.vs
+/backend/PJATK.TravelAgency/packages
