@@ -1,9 +1,15 @@
 
 <div class="container">
-  <app-header></app-header>    
-  <app-nav></app-nav>
+  <div class="top-block-wrapper">
+    <div class="header-wrapper">
+        <app-header></app-header>    
+    </div>
+    <div class="nav-wrapper">
+      <app-nav></app-nav>
+    </div>  
+  </div>
   <main>
       <router-outlet></router-outlet>    
   </main>
-  <app-footer></app-footer>
+  <!-- <app-footer></app-footer> -->
 </div>

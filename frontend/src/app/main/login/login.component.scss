@@ -1,0 +1,66 @@
+.form-login-wrapper{
+    margin: 0 auto;
+    max-width: 400px;
+    font-family: "Lato", sans-serif;  
+    
+}
+.form-login-wrapper h2{
+    font-size: 38px;
+    color: #46515e;
+    text-align: center;
+    margin-bottom: 25px;
+}
+.form-login-wrapper fieldset{
+    margin-bottom: 15px;
+}
+.form-login-wrapper label{
+    display: block;
+    font-size: 18px;
+    color: #8190a5;
+    margin-bottom: 3px;
+}
+
+.form-login-wrapper input{
+    font-size: 18px;
+    line-height: 35px;
+    height: 35px;
+    padding: 0;
+    text-indent: 10px;
+    color: #46515e;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid rgba(70, 81, 94, 0.5);
+}
+
+.form-login-wrapper a{
+    color: #606873;
+    text-decoration: none;
+}
+
+
+.form-login-wrapper button{
+    background: #f47c48;
+    display: block;
+    border-radius: 5px;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    font-size: 18px;
+    line-height: 35px;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: calc(100% - 30px);
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #f47c48;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+    max-width: 150px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.form-login-wrapper  button:hover{
+    border: 1px solid #f47c48;
+    color: #f47c48;
+    background: #fff;
+}
