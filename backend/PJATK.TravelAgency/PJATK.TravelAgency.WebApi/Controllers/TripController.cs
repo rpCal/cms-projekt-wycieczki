@@ -37,5 +37,20 @@ namespace PJATK.TravelAgency.WebApi.Controllers
 
             return Json(trip);
         }
+
+        [HttpPut]        
+        public IHttpActionResult AddTrip([FromBody] Trip trip)
+        {
+            try
+            {
+                _context.Trips.Add(trip);
+                return Ok(trip);
+            }
+            catch
+            {
+                return BadRequest("Wystąpił błąd podczas próby dodania nowej wycieczki.");
+            }
+            
+        }
     }
 }
