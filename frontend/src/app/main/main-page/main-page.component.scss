@@ -1,0 +1,138 @@
+
+.simple-search-block{
+    background: #fde6da;
+    padding: 30px 20px 10px 20px;
+    font-family: "Lato", sans-serif;    
+    max-width: 350px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 35px;
+}
+.simple-search-block h2{
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+.simple-search-block fieldset{
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.simple-search-block fieldset {
+    
+}
+.simple-search-block fieldset label{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 26px;
+    line-height: 35px;
+}
+.simple-search-block fieldset .input-wrapper{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 26px;
+    line-height: 35px;
+    color: rgb(70, 81, 94);
+}
+.simple-search-block fieldset .input-wrapper input{
+    height: 35px;
+    border: 1px solid rgba(70, 81, 94, 0.5);
+    border-radius: 5px;
+    width: 100%;
+    padding: 0;
+    text-indent: 10px;
+}
+.simple-search-block fieldset .input-wrapper select{
+    height: 35px;
+    border: 1px solid rgba(70, 81, 94, 0.5);
+    border-radius: 5px;
+    width: 100%;
+    padding: 0;
+    text-indent: 10px;
+    background: #fff;
+}
+.simple-search-block button{
+    background: #f47c48;
+    display: block;
+    border-radius: 5px;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    font-size: 18px;
+    line-height: 35px;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: calc(100% - 30px);
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #f47c48;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+    margin-top: 20px;
+}
+.simple-search-block button:hover{
+    border: 1px solid #f47c48;
+    color: #f47c48;
+    background: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.offer-block-with-big-thumb{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 35px;
+}
+.offer-block-with-big-thumb .desc-wrapper{
+    font-family: "Lato", sans-serif;
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    margin-top: 10px;
+}
+.offer-block-with-big-thumb .desc-wrapper h2{
+    color: rgb(70, 81, 94);
+    font-size: 28px;
+}
+.offer-block-with-big-thumb .desc-wrapper h4{
+    font-size: 22px;
+    color: rgb(70, 81, 94);
+}
+.offer-block-with-big-thumb button{
+    background: #f47c48;
+    display: block;
+    border-radius: 5px;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    font-size: 18px;
+    line-height: 44px;
+    margin-left: 15px;
+    margin-right: 0px;
+    width: calc(50% - 15px);
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #f47c48;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+    margin-top: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+.offer-block-with-big-thumb button:hover{
+    border: 1px solid #f47c48;
+    color: #f47c48;
+    background: #fff;
+}
