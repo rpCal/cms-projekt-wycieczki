@@ -44,6 +44,7 @@ namespace PJATK.TravelAgency.WebApi.Controllers
             try
             {
                 _context.Trips.Add(trip);
+                _context.SaveChanges();
                 return Ok(trip);
             }
             catch
