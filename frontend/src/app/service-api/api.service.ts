@@ -1,3 +1,4 @@
+import { Person } from './../model/person';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,12 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiBaseUrl = '';
+  private baseUrl = '';
 
   constructor(private http: HttpClient) { }
 
   test(): Observable<any>{
-    return this.http.get<any>(this.apiBaseUrl + 'https://jsonplaceholder.typicode.com/todos/1')
+    return this.http.get<Person[]>(this.baseUrl + '/users')
   }
   
 }
