@@ -21,6 +21,7 @@ namespace PJATK.TravelAgency.WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("")]
         public JsonResult<List<Trip>> GetAllTrips()
         {
             var trips = _context.Trips.ToList();            
@@ -29,7 +30,8 @@ namespace PJATK.TravelAgency.WebApi.Controllers
         }
 
         [HttpGet]
-        public JsonResult<Trip> GetTrip(Guid id)
+        [Route("/{id}")]
+        public JsonResult<Trip> GetTrip([FromUri]Guid id)
         {
             var trip = _context.Trips.
                 Where(x => x.Id == id).
@@ -38,7 +40,8 @@ namespace PJATK.TravelAgency.WebApi.Controllers
             return Json(trip);
         }
 
-        [HttpPut]        
+        [HttpPut] 
+        [Route("/add")]
         public IHttpActionResult AddTrip([FromBody] Trip trip)
         {
             try
