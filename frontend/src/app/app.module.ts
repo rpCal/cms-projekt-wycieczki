@@ -1,4 +1,3 @@
-import { ErrorInterceptorService } from './http-interceptors/error-interceptor.service';
 import { FakeBackendInterceptor } from './mocks/fake.backend';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -39,8 +38,6 @@ export let fakeBackendProvider = {
     ReactiveFormsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
-
     //disconnet when real api
     fakeBackendProvider
 ],
