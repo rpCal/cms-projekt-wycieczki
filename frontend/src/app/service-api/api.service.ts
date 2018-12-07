@@ -1,4 +1,4 @@
-import { Person } from './../model/person';
+import { User } from './../model/user';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,8 +11,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  test(): Observable<any>{
-    return this.http.get<Person[]>(this.baseUrl + '/users')
+  login(username, password){
+    return this.http.post<any>(this.baseUrl + `/users/authenticate`, { username, password });
   }
-  
 }
