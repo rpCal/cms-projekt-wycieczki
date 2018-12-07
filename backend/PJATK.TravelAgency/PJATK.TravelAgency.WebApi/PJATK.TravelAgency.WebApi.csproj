@@ -163,6 +163,10 @@
     <Compile Include="Migrations\201812061924170_InitialMigration.Designer.cs">
       <DependentUpon>201812061924170_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812071822440_AddedDataAnnotations.cs" />
+    <Compile Include="Migrations\201812071822440_AddedDataAnnotations.Designer.cs">
+      <DependentUpon>201812071822440_AddedDataAnnotations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Category.cs" />
@@ -194,10 +198,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\TravelAgencyApp - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812061924170_InitialMigration.resx">
       <DependentUpon>201812061924170_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812071822440_AddedDataAnnotations.resx">
+      <DependentUpon>201812071822440_AddedDataAnnotations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
