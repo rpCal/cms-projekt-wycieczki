@@ -1,19 +1,21 @@
-<div class="form-login-wrapper">
-  <form>
+<div class='form-login-wrapper'>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h2>Logowanie</h2>
-    <fieldset>
-      <label>Email</label>
-      <input type="email" placeholder="email@example.com">
-    </fieldset>
-    <fieldset>
-      <label>Hasło</label>
-      <input type="password" placeholder="*****"/>
-    </fieldset>
-    <fieldset>
-      <a href="">Przypomnij hasło</a>
-    </fieldset>
-    <fieldset>
-      <button>Zaloguj sie</button>
-    </fieldset>
-  </form>
+    <div>
+        <label for="email">Email</label>
+        <input type="text" placeholder="email@example.com" formControlName="email"  />
+    </div>
+    <div>
+        <label for="password">Haslo</label>
+        <input type="password" placeholder="*****" formControlName="password" />
+    </div>
+    <div>
+        <button [disabled]="loading">Zaloguj się</button>
+    </div>
+    <div class="error" *ngIf="error" >{{error}}</div>
+</form>
+
+<button (click)="logout()">
+    Wyloguj się - TESTOWO
+</button>
 </div>
