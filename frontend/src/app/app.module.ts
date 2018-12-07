@@ -10,6 +10,7 @@ import { MainPageComponent } from './main/main-page/main-page.component';
 import { TripListComponent } from './main/trip-list/trip-list.component';
 import { ContactComponent } from './main/contact/contact.component';
 import { LoginComponent } from './main/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoginComponent } from './main/login/login.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
