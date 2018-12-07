@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth-guard/auth.guard';
 import { LoginComponent } from './main/login/login.component';
 import { TripListComponent } from './main/trip-list/trip-list.component';
 import { NgModule } from '@angular/core';
@@ -7,8 +8,8 @@ import { ContactComponent } from './main/contact/contact.component';
 
 const routes: Routes = [
   { path: "main-page", component: MainPageComponent },
-  { path: "trip-list", component: TripListComponent },
-  { path: "contact", component: ContactComponent },
+  { path: "trip-list", component: TripListComponent, },
+  { path: "contact", component: ContactComponent,  canActivate: [AuthGuard] },
   { path: "login", component: LoginComponent }
 ]
 
