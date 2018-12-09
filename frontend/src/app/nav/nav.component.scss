@@ -55,3 +55,46 @@ ul li:hover:after{
     bottom: 0px;
     height: 2px;
 }
+
+#szukaj-li{
+    display: none;
+}
+
+app-burger{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    display: none;
+}
+
+
+@media screen and(max-width: 800px){
+
+    #nav-wrapper{
+        position: fixed;
+        top: 0;
+        width: 200px;
+        padding: 70px 20px 10px 20px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: -2px 2px 15px rgba(0, 0, 0, 0.6);
+    
+        ul {
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: left;
+        
+            li{
+                width: 100%;
+            }
+            
+            #szukaj-li{
+                display: inline;
+            }
+        }
+        
+        app-burger{
+            display: block;
+        }
+        
+    }
+}

@@ -1,0 +1,22 @@
+#burger-menu{
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    right: 0;
+    top: 0;
+
+    span{
+        position: relative;
+        display: block;
+        height: 10px;
+        width: 60px;
+        box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.6);
+        background-color: #f47c48;
+        border-radius: 5%;
+        margin: 10px auto 0px auto;
+    }
+
+    span:nth-child(1) {
+        margin-top: 15px;
+    }
+}

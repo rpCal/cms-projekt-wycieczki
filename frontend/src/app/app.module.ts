@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,6 +14,7 @@ import { TripListComponent } from './main/trip-list/trip-list.component';
 import { ContactComponent } from './main/contact/contact.component';
 import { LoginComponent } from './main/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BurgerComponent } from './nav/burger/burger.component';
 
 export let fakeBackendProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -28,14 +30,16 @@ export let fakeBackendProvider = {
     MainPageComponent,
     TripListComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    BurgerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     //disconnet when real api
