@@ -11,10 +11,10 @@ import { FooterComponent } from './footer/footer.component';
 import { NavComponent } from './nav/nav.component';
 import { MainPageComponent } from './main/main-page/main-page.component';
 import { TripListComponent } from './main/trip-list/trip-list.component';
-import { ContactComponent } from './main/contact/contact.component';
 import { LoginComponent } from './main/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BurgerComponent } from './nav/burger/burger.component';
+import { LastMinuteComponent } from './main/last-minute/last-minute.component';
 
 export let fakeBackendProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -29,9 +29,9 @@ export let fakeBackendProvider = {
     NavComponent,
     MainPageComponent,
     TripListComponent,
-    ContactComponent,
     LoginComponent,
-    BurgerComponent
+    BurgerComponent,
+    LastMinuteComponent
   ],
   imports: [
     BrowserModule,
