@@ -1,4 +1,18 @@
 @import './reset.scss';
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+
+.snackbar-thema {
+    background: white;
+    font-family: "Lato", sans-serif;   
+    border: 1px groove #E78250;
+    border-radius: 15%;
+
+
+    button{
+        color: white;
+        background: #E78250;
+    }
+}
 
 html,body {
     width: 100%;
