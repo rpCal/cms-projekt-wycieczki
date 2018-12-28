@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Newtonsoft.Json;
+using System.Web.Http.Cors;
 
 namespace PJATK.TravelAgency.WebApi.Controllers
 {
@@ -30,7 +31,7 @@ namespace PJATK.TravelAgency.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("/{id}")]
+        [Route("{id}")]
         public JsonResult<Trip> GetTrip([FromUri]Guid id)
         {
             var trip = _context.Trips.
@@ -41,7 +42,8 @@ namespace PJATK.TravelAgency.WebApi.Controllers
         }
 
         [HttpPut] 
-        [Route("/add")]
+        [Route("add")]
+        [EnableCors(origins: "https://travelagencyapp.azurewebsites.net", headers: "*", methods: "*")]
         public IHttpActionResult AddTrip([FromBody] Trip trip)
         {
             try
@@ -50,9 +52,9 @@ namespace PJATK.TravelAgency.WebApi.Controllers
                 _context.SaveChanges();
                 return Ok(trip);
             }
-            catch
+            catch(Exception ex)
             {
-                return BadRequest("Wystąpił błąd podczas próby dodania nowej wycieczki.");
+                return BadRequest("Wystąpił błąd podczas próby dodania nowej wycieczki." + ex.Message);
             }
             
         }
