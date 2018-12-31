@@ -8,6 +8,7 @@ namespace PJATK.TravelAgency.WebApi
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            
         }
     }
 }

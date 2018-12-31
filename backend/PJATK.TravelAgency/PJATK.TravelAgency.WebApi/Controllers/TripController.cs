@@ -44,6 +44,7 @@ namespace PJATK.TravelAgency.WebApi.Controllers
         [HttpPut] 
         [Route("add")]
         [EnableCors(origins: "https://travelagencyapp.azurewebsites.net", headers: "*", methods: "*")]
+        [Authorize]
         public IHttpActionResult AddTrip([FromBody] Trip trip)
         {
             try
@@ -57,6 +58,23 @@ namespace PJATK.TravelAgency.WebApi.Controllers
                 return BadRequest("Wystąpił błąd podczas próby dodania nowej wycieczki." + ex.Message);
             }
             
+        }
+        [Route("delete/{tripId}")]
+        [HttpDelete]
+        [Authorize]
+        public IHttpActionResult DeleteTrip([FromUri] Guid tripId)
+        {
+            try
+            {
+                var tripToDelete = _context.Trips.Where(x => x.Id == tripId).FirstOrDefault();
+                _context.Trips.Remove(tripToDelete);
+                _context.SaveChanges();
+                return Ok("Successfully added a trip");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
