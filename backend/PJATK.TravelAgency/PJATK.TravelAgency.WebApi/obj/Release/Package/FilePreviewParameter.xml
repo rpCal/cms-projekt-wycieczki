@@ -4,7 +4,7 @@
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Robert\\Documents\\GitHub\\cms-projekt-wycieczki\\backend\\PJATK\.TravelAgency\\PJATK\.TravelAgency\.WebApi\\obj\\Release\\Package\\PackageTmp$" />
     <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Robert\\Documents\\GitHub\\cms-projekt-wycieczki\\backend\\PJATK\.TravelAgency\\PJATK\.TravelAgency\.WebApi\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
-  <parameter name="MyDbConnection-Web.config Connection String" description="" value="Data Source=pjatktravelagency.database.windows.net;Initial Catalog=pjatktravelagency;Integrated Security=False;User ID=pjatktravelagency;Password=********;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" tags="">
+  <parameter name="MyDbConnection-Web.config Connection String" description="" value="Data Source=pjatktravelagency.database.windows.net;Initial Catalog=pjatktravelagency;Integrated Security=False;User ID=pjatktravelagency;Password=Test123gbh;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" tags="">
     <parameterEntry kind="XmlFile" scope="C:\\Users\\Robert\\Documents\\GitHub\\cms-projekt-wycieczki\\backend\\PJATK\.TravelAgency\\PJATK\.TravelAgency\.WebApi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MyDbConnection']/@connectionString" />
   </parameter>
 </parameters>
