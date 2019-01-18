@@ -30,7 +30,7 @@ namespace PJATK.TravelAgency.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("/{id}")]
+        [Route("{id}")]
         public JsonResult<Trip> GetTrip([FromUri]Guid id)
         {
             var trip = _context.Trips.
@@ -41,7 +41,7 @@ namespace PJATK.TravelAgency.WebApi.Controllers
         }
 
         [HttpPut] 
-        [Route("/add")]
+        [Route("add")]
         public IHttpActionResult AddTrip([FromBody] Trip trip)
         {
             try
