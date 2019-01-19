@@ -210,3 +210,6 @@ C:\Users\Robert\Documents\GitHub\cms-projekt-wycieczki\backend\PJATK.TravelAgenc
 C:\Users\Robert\Documents\GitHub\cms-projekt-wycieczki\backend\PJATK.TravelAgency\PJATK.TravelAgency.WebApi\obj\Release\PJATK.TravelAgency.WebApi.csproj.GenerateResource.Cache
 C:\Users\Robert\Documents\GitHub\cms-projekt-wycieczki\backend\PJATK.TravelAgency\PJATK.TravelAgency.WebApi\obj\Release\PJATK.TravelAgency.WebApi.dll
 C:\Users\Robert\Documents\GitHub\cms-projekt-wycieczki\backend\PJATK.TravelAgency\PJATK.TravelAgency.WebApi\obj\Release\PJATK.TravelAgency.WebApi.pdb
+C:\Users\Robert\Documents\GitHub\cms-projekt-wycieczki\backend\PJATK.TravelAgency\PJATK.TravelAgency.WebApi\bin\System.Web.Cors.dll
+C:\Users\Robert\Documents\GitHub\cms-projekt-wycieczki\backend\PJATK.TravelAgency\PJATK.TravelAgency.WebApi\bin\System.Web.Http.Cors.dll
+C:\Users\Robert\Documents\GitHub\cms-projekt-wycieczki\backend\PJATK.TravelAgency\PJATK.TravelAgency.WebApi\bin\System.Web.Http.Cors.xml
