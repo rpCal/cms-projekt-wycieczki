@@ -7,9 +7,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Newtonsoft.Json;
+using System.Web.Http.Cors;
 
 namespace PJATK.TravelAgency.WebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("travelAgency/trips")]
     public class TripController : ApiController
     {
