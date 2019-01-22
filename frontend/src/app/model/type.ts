@@ -1,3 +1,3 @@
 export class Type {
-    name: string;
+    constructor(name: string){};
 }
