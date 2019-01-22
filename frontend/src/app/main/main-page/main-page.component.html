@@ -1,66 +1,61 @@
+<div class="container">
+  <div class="block" id="input-block">
+    <form>
+      <h2>Wyszukaj wycieczke</h2>
+      <fieldset>
+        <label for="date_when">Kiedy</label>
+        <div class="input-wrapper">
+          <input type="date" name="date_when" required placeholder="Data" />
+        </div>
+      </fieldset>
 
-<div class="simple-search-block">
-  <form>
-    <h2>Wyszukaj wycieczke</h2>
-    <fieldset>
-      <label for="date_when">Kiedy</label>
-      <div class="input-wrapper">
-        <input type="date" id="date_when" name="date_when" required placeholder="Data" />
-      </div>
-    </fieldset>
+      <fieldset>
+        <label for="end_place">Dokąd</label>
+        <div class="input-wrapper">
+          <input type="text" name="end_place" required placeholder="np. Majorka" />
+        </div>
+      </fieldset>
 
-    <fieldset>
-      <label for="end_place">Dokąd</label>
-      <div class="input-wrapper">
-        <input type="text" id="end_place" name="end_place" required placeholder="np. Majorka" />
-      </div>
-    </fieldset>
+      <fieldset>
+        <label for="start_place">Skąd</label>
+        <div class="input-wrapper">
+          <input type="text" name="start_place" required placeholder="np. Warszawa"/>
+        </div>
+      </fieldset>
 
-    <fieldset>
-      <label for="start_place">Skąd</label>
-      <div class="input-wrapper">
-        <input type="text" id="start_place" name="start_place" required placeholder="np. Warszawa"/>
-      </div>
-    </fieldset>
+      <fieldset>
+        <label for="amount">Osoby</label>
+        <div class="input-wrapper">
+          <select name="amount" required>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </fieldset>
 
-    <fieldset>
-      <label for="amount">Osoby</label>
-      <div class="input-wrapper">
-        <select name="amount" id="amount" required>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <button type="submit">Wyszukaj</button>
-    </fieldset>
-  </form>
-</div>
-
-
-<div class="offer-block-with-big-thumb">
-  <div class="image-wrappper">
-    <img src="./assets/city_image_example_cracow.png">
+      <fieldset class="button">
+        <button type="submit">Wyszukaj</button>
+      </fieldset>
+    </form>
   </div>
-  <div class="desc-wrapper">
-    <h2>Kraków</h2>
-    <h4>już od 250zł</h4>
-  </div>
-  <button>Zobacz oferte</button>
-</div>
 
-<div class="offer-block-with-big-thumb">
-  <div class="image-wrappper">
-    <img src="./assets/city_image_example_warsaw.png">
+
+  <div *ngFor="let trip of trips" id="trip-block" class="block">
+    <h2>{{trip.name}}</h2>
+    <div class="image-block">
+      <img src="./assets/city_image_example_cracow.png">
+    </div>
+    <div class="data-block">
+      <div class="info-block">
+          <h4>Już od {{trip.price}}zł</h4>
+      </div>
+      <div class="submit-block">
+          <button>Zobacz oferte</button>
+      </div>
+    </div>
   </div>
-  <div class="desc-wrapper">
-    <h2>Warszawa</h2>
-    <h4>już od 250zł</h4>
-  </div>
-  <button>Zobacz oferte</button>
+
 </div>
