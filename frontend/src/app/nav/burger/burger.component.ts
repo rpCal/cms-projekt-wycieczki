@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   trigger,
   state,
@@ -24,7 +24,7 @@ import {
         transform: 'rotate(45deg)'
       })),
       state('rotateRight', style({
-        top: '-20px',
+        top: '-10px',
         transform: 'rotate(-45deg)'
       })),
       
@@ -47,7 +47,7 @@ import {
 
       transition('normal => rotateRight', [
         animate('0.2s', style({
-          top: '-20px'
+          top: '-10px'
         })),
         animate('0.2s', style({
           transform: 'rotate(-45deg)'

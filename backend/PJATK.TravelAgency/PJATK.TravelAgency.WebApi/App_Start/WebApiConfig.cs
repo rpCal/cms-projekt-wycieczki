@@ -10,9 +10,10 @@ namespace PJATK.TravelAgency.WebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            config.EnableCors();
             // Web API routes
             config.MapHttpAttributeRoutes();
+            
 
             config.EnableCors();            
 
