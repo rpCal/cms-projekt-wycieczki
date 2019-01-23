@@ -1,96 +1,39 @@
+<div class="container">
 
-
-<div class="filters-block-wrapper">
-  Filtry... <br>
-  obecnie brak
-</div>
-
-
-<div class="results-block-wrapper">
-  <div class="offer-block">
-    <div class="offer-block--image">
-      <img src="./assets/city_image_example_cracow.png"/>
+    <div class="filters-block-wrapper">
+      Filtry... <br>
+      obecnie brak
     </div>
-    <div class="offer-block--data">
-      <h2 class="offer-block--title">
-        Zwiedzanie warszawy i nocleg w hotelu Nowotel
-      </h2>
+
+
+    <div  class="results-block-wrapper">
+
+      <div *ngFor="let trip of trips" class="offer-block">
+          <div class="offer-block--image">
+            <img src="./assets/city_image_example_cracow.png"/>
+          </div>
+          <div class="offer-block--data">
+            <h2 class="offer-block--title">
+              {{trip.describe}}
+            </h2>
+            
+            <h3 class="offer-block--price">
+              <span>Cena:</span> <span> {{trip.price}}zł</span>
+            </h3>
       
-      <h3 class="offer-block--price">
-        <span>Cena:</span> <span> 999zł</span>
-      </h3>
+            <h4 class="offer-block--rating">
+              <span>Oceny:</span> <span> BRAK W MODELU </span>
+            </h4>
+      
+            <h5 class="offer-block--date">
+              <span>Termin:</span> <span> {{trip.departureDate | date:'dd.MM.yyyy' }}-{{trip.arrivalDate | date:'dd.MM.yyyy' }}</span>
+            </h5>
+      
+            <button class="offer-block--order">Zamawiam</button>
+          </div>
+        </div>
 
-      <h4 class="offer-block--rating">
-        <span>Oceny:</span> <span> 4.32</span>
-      </h4>
-
-      <h5 class="offer-block--date">
-        <span>Termin:</span> <span> 22.01.2019-05.02.2019</span>
-      </h5>
-
-      <button class="offer-block--order">Zamawiam</button>
-    </div>
-  </div>
-
-
-
-
-
-
-  <div class="offer-block">
-      <div class="offer-block--image">
-        <img src="./assets/city_image_example_cracow.png"/>
-      </div>
-      <div class="offer-block--data">
-        <h2 class="offer-block--title">
-          Zwiedzanie warszawy i nocleg w hotelu Nowotel
-        </h2>
-        
-        <h3 class="offer-block--price">
-          <span>Cena:</span> <span> 999zł</span>
-        </h3>
-  
-        <h4 class="offer-block--rating">
-          <span>Oceny:</span> <span> 4.32</span>
-        </h4>
-  
-        <h5 class="offer-block--date">
-          <span>Termin:</span> <span> 22.01.2019-05.02.2019</span>
-        </h5>
-  
-        <button class="offer-block--order">Zamawiam</button>
-      </div>
     </div>
 
 
-
-
-
-
-
-
-    <div class="offer-block">
-        <div class="offer-block--image">
-          <img src="./assets/city_image_example_cracow.png"/>
-        </div>
-        <div class="offer-block--data">
-          <h2 class="offer-block--title">
-            Zwiedzanie warszawy i nocleg w hotelu Nowotel
-          </h2>
-          
-          <h3 class="offer-block--price">
-            <span>Cena:</span> <span> 999zł</span>
-          </h3>
-    
-          <h4 class="offer-block--rating">
-            <span>Oceny:</span> <span> 4.32</span>
-          </h4>
-    
-          <h5 class="offer-block--date">
-            <span>Termin:</span> <span> 22.01.2019-05.02.2019</span>
-          </h5>
-    
-          <button class="offer-block--order">Zamawiam</button>
-        </div>
-      </div>
 </div>
