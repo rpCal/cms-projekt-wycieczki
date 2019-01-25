@@ -2,52 +2,43 @@
   <div class="block" id="input-block">
     <form>
       <h2>Wyszukaj wycieczke</h2>
-      <fieldset>
+      <div class=fieldset>
         <label for="date_when">Kiedy</label>
-        <div class="input-wrapper">
-          <input type="date" name="date_when" required placeholder="Data" />
-        </div>
-      </fieldset>
-
-      <fieldset>
+        <input type="date" name="date_when" required placeholder="Data" />
+      </div>
+      
+      <div class=fieldset>
         <label for="end_place">Dokąd</label>
-        <div class="input-wrapper">
-          <input type="text" name="end_place" required placeholder="np. Majorka" />
-        </div>
-      </fieldset>
+        <input type="text" name="end_place" required placeholder="np. Majorka" />  
+      </div>
 
-      <fieldset>
+      <div class=fieldset>
         <label for="start_place">Skąd</label>
-        <div class="input-wrapper">
-          <input type="text" name="start_place" required placeholder="np. Warszawa"/>
-        </div>
-      </fieldset>
+        <input type="text" name="start_place" required placeholder="np. Warszawa"/>
+      </div>
 
-      <fieldset>
+      <div class=fieldset>
         <label for="amount">Osoby</label>
-        <div class="input-wrapper">
-          <select name="amount" required>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-      </fieldset>
+        <select name="amount" required>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
 
-      <fieldset class="button">
+      
+      <div class=fieldset>
         <button type="submit">Wyszukaj</button>
-      </fieldset>
+      </div>
     </form>
   </div>
 
 
   <div *ngFor="let trip of trips" id="trip-block" class="block">
     <h2>{{trip.name}}</h2>
-    <div class="image-block">
-      <img src="./assets/city_image_example_cracow.png">
-    </div>
+    <img src="./assets/city_image_example_cracow.png">
     <div class="data-block">
       <div class="info-block">
           <h4>Już od {{trip.price}}zł</h4>

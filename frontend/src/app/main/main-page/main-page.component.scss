@@ -17,18 +17,17 @@
     }
 
     #input-block{
-
-        fieldset{
+    
+        .fieldset{
+            width: 100%;
             display: flex;
             flex-direction: row;
-            flex-flow: wrap;
             justify-content: space-between;
-            margin-bottom: 10px;
-            margin-top: 5px;
+            margin: 10px;
 
             label{
-                display: inline-block;
                 vertical-align: top;
+                width: 100px;
                 font-size: 26px;
                 line-height: 35px;
             }
@@ -37,9 +36,17 @@
                 height: 35px;
                 border: 1px solid rgba(70, 81, 94, 0.5);
                 border-radius: 5px;
-                width: 200px;
-                padding: 0;
+                width: 150px;
                 text-indent: 10px;
+            }
+
+            select{
+                background: #f47c48;
+                border: 1px solid #f47c48;
+                width: 40px;
+                font-size: 16px;
+                color: #fff;
+                border-radius: 5px;
             }
             
             button{
@@ -86,20 +93,18 @@
 
         img{
             width: 250px;
-            height: 250px;
-            margin-top: 2px;
-            margin-bottom: 2px;
+            height: 230px;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
         
         .data-block{
             display: flex;
-            height: 40px;
-            width: 250px;
-
             flex-direction: row;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
+            padding-right: 5px;
 
             .info-block{
                 h4{
@@ -109,6 +114,7 @@
             }
     
             .submit-block{
+                padding-left: 5px;
                 button{
                     height: 38px;
                     width: 140px;;
