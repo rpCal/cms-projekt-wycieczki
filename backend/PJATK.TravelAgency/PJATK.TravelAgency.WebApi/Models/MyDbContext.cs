@@ -13,7 +13,8 @@ namespace PJATK.TravelAgency.WebApi.Models
         public DbSet<Type> Types { get; set; }
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Rating> Ratings { get; set; }
-        public DbSet<Location> Locations { get; set; }        
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public MyDbContext() : base("name=MyDbConnection")
         {

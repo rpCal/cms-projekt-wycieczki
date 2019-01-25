@@ -42,7 +42,28 @@ namespace PJATK.TravelAgency.WebApi.Controllers
             return Json(trip);
         }
 
-        [HttpPut] 
+        [HttpPut]
+        [Route("update")]
+        public IHttpActionResult ModifyTrip([FromBody]Trip trip)
+        {
+            try
+            {
+                var tripFromDb = _context.Trips
+                    .Where(x => x.Id == trip.Id)
+                    .FirstOrDefault();
+
+                tripFromDb = trip;
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost] 
         [Route("add")]
         public IHttpActionResult AddTrip([FromBody] Trip trip)
         {
@@ -57,6 +78,27 @@ namespace PJATK.TravelAgency.WebApi.Controllers
                 return BadRequest("Wystąpił błąd podczas próby dodania nowej wycieczki.");
             }
             
+        }
+
+        [HttpDelete]
+        [Route("delete/{tripId}")]
+        public IHttpActionResult DeleteTrip([FromUri] Guid tripId)
+        {
+            try
+            {
+                var tripToDelete = _context.Trips
+                    .Where(x => x.Id == tripId)
+                    .FirstOrDefault();
+
+                _context.Trips.Remove(tripToDelete);
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
