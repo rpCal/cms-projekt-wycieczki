@@ -17,6 +17,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BurgerComponent } from './nav/burger/burger.component';
 import { LastMinuteComponent } from './main/last-minute/last-minute.component';
 import { MaterialModule } from './_modules/material.module';
+import { TripDetailComponent } from './main/trip-detail/trip-detail.component';
 
 export let fakeBackendProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -33,7 +34,8 @@ export let fakeBackendProvider = {
     TripListComponent,
     LoginComponent,
     BurgerComponent,
-    LastMinuteComponent
+    LastMinuteComponent,
+    TripDetailComponent
   ],
   imports: [
     BrowserModule,

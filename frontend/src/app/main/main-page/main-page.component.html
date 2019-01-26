@@ -27,7 +27,6 @@
           <option>5</option>
         </select>
       </div>
-
       
       <div class=fieldset>
         <button type="submit">Wyszukaj</button>
@@ -44,7 +43,7 @@
           <h4>Już od {{trip.price}}zł</h4>
       </div>
       <div class="submit-block">
-          <button>Zobacz oferte</button>
+          <button (click)="getDetailTrip(trip)">Zobacz oferte</button>
       </div>
     </div>
   </div>

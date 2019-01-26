@@ -1,0 +1,92 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .trip-detail{
+        background: #fde6da;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        box-shadow: 6px 6px 10px #f47c4867;  
+
+        h2{
+            padding: 20px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .trip-info{
+            div{
+                width: 400px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                
+                label{
+                    display: block;
+                    width: 200px;
+                    font-size: 20px;
+                    line-height: 35px;
+                }
+            
+                span{
+                    display: block;
+                    width: 100px;
+                    font-size: 20px;
+                    line-height: 35px;
+                }
+            }
+        } 
+
+        .trip-image{
+            display: flex;
+            justify-content: center;
+            img{
+                width: 250px;
+                height: 230px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .trip-button{
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            button{
+                flex-basis: 60%;
+                background: #f47c48;
+                width: 50%;
+                border-radius: 5px;
+                color: #fff;
+                font-size: 18px;
+                line-height: 35px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                border: 1px solid #f47c48;
+                cursor: pointer;
+                transition: 0.2s all ease-in-out;
+                outline: 0;
+            }
+    
+            #but1{
+                flex-basis: 60%;
+            }
+
+            #but2{
+                flex-basis: 40%;
+            }
+            button:hover{
+                border: 1px solid #f47c48;
+                color: #f47c48;
+                background: #fff;
+            }
+               
+        }
+ 
+        
+    }
+
+}

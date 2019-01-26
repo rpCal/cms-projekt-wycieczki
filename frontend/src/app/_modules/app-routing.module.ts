@@ -1,3 +1,4 @@
+import { TripDetailComponent } from './../main/trip-detail/trip-detail.component';
 import { AuthGuard } from '../auth-guard/auth.guard';
 import { LoginComponent } from '../main/login/login.component';
 import { TripListComponent } from '../main/trip-list/trip-list.component';
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: "main-page", component: MainPageComponent },
   { path: "trip-list", component: TripListComponent },
   { path: "last-minute", component: LastMinuteComponent,  canActivate: [AuthGuard] },
-  { path: "login", component: LoginComponent }
+  { path: "login", component: LoginComponent },
+  { path: "trip-detail", component: TripDetailComponent },
 ]
 
 @NgModule({

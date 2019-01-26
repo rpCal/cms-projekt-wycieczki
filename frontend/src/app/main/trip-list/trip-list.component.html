@@ -1,8 +1,35 @@
 <div class="container">
 
     <div class="filters-block">
-      Filtry... <br>
-      obecnie brak
+      <form>
+        <h2>Filtruj po:</h2>
+        <div class=fieldset>
+          <label for="date_when">Kiedy</label>
+          <input type="date" name="date_when" required placeholder="Data" />
+        </div>
+        
+        <div class=fieldset>
+          <label for="end_place">Dokąd</label>
+          <input type="text" name="end_place" required placeholder="np. Majorka" />  
+        </div>
+  
+        <div class=fieldset>
+          <label for="start_place">Skąd</label>
+          <input type="text" name="start_place" required placeholder="np. Warszawa"/>
+        </div>
+  
+        <div class=fieldset>
+          <label for="amount">Osoby</label>
+          <select name="amount" required>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        
+      </form>
     </div>
 
 
@@ -31,7 +58,7 @@
           </div>
           
           <div class="data-submit">
-            <button>Zamawiam</button>
+            <button (click)="getDetailTrip(trip)">Szczegóły</button>
           </div>
         
         </div>
