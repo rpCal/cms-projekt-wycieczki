@@ -18,6 +18,7 @@ import { BurgerComponent } from './nav/burger/burger.component';
 import { LastMinuteComponent } from './main/last-minute/last-minute.component';
 import { MaterialModule } from './_modules/material.module';
 import { TripDetailComponent } from './main/trip-detail/trip-detail.component';
+import { RezerwationComponent } from './main/rezerwation/rezerwation.component';
 
 export let fakeBackendProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -35,7 +36,11 @@ export let fakeBackendProvider = {
     LoginComponent,
     BurgerComponent,
     LastMinuteComponent,
-    TripDetailComponent
+    TripDetailComponent,
+    RezerwationComponent
+  ],
+  entryComponents: [
+    RezerwationComponent
   ],
   imports: [
     BrowserModule,
