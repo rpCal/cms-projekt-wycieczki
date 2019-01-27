@@ -9,6 +9,21 @@
         flex-direction: column;
         box-shadow: 6px 6px 10px #f47c4867;  
 
+        .edit{
+            position: absolute;
+            background: #f47c48;
+            border-radius: 5px;
+            color: #fff;
+            text-align: center;
+            border: 1px solid #f47c48;
+            width: 50px;
+            height: 50px;
+        }
+
+        #wrench{
+            font-size: 26px;
+        }
+
         h2{
             margin: auto;
             padding: 20px;
@@ -54,6 +69,7 @@
             display: flex;
             flex-direction: row;
             text-align: center;
+            
             button{
                 flex-basis: 60%;
                 background: #f47c48;
@@ -70,7 +86,6 @@
                 transition: 0.2s all ease-in-out;
                 outline: 0;
             }
-    
             
             button:hover{
                 border: 1px solid #f47c48;
@@ -79,15 +94,17 @@
             }
 
             #but1{
-                flex-basis: 60%;
                 border-top-right-radius: 0px;
                 border-bottom-right-radius: 0px;
             }
 
-            #but2{
-                flex-basis: 40%;
+            .but2{
                 border-bottom-left-radius: 0px;
                 border-top-left-radius: 0px;
+            }
+
+            .but3{
+                border-radius: 5px;
             }
                
         }

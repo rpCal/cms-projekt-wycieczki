@@ -1,7 +1,7 @@
 export class Trip {
     
     constructor(
-        public gguid: string,
+        public guid: string,
         public name: string, 
         public city: string, 
         public departureDate: Date, 

@@ -41,4 +41,20 @@ export class AuthenticationService {
             return false;
         }
     }
+
+    isUser(): boolean{
+        if(localStorage.getItem('currentUser') && this.getRole() === "user"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    isAdmin(): boolean{
+        if(localStorage.getItem('currentUser') && this.getRole() === "admin"){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -18,17 +18,15 @@ export class TripAddComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private sharedTrip: SharedTripService,
               private location: Location,
-              private log: LoggerService) { }
+              private log: LoggerService
+              ) { }
 
   ngOnInit() {
     this.trip = this.sharedTrip.trip;
-    console.log(this.trip);
     if(!this.trip){
       this.trip = Trip.getEmptyTrip();
     }
-
     this.tripForm = this.createFormGroup();
-    
   }
 
   createFormGroup() {
@@ -48,7 +46,7 @@ export class TripAddComponent implements OnInit {
         promote : new FormControl(this.trip.promote, Validators.compose(
           [Validators.max(5), Validators.min(0), Validators.required])),
         url : new FormControl(this.trip.photoUrl,Validators.compose(
-          [Validators.pattern(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i), Validators.required])),
+          [Validators.required])),
         });
   }
 
@@ -58,49 +56,50 @@ export class TripAddComponent implements OnInit {
 
   sendToServer(){
     if(this.tripForm.valid && this.tripForm.controls["departureDate"].value < this.tripForm.controls["arrivalDate"].value){
-      this.log.openSnackBar("Wysyłam - DODAJ FUNKCJE W TYM MIEJSCU Z API");
+      this.log.openSnackBar("Wysyłam - Tu trzeba strzelić do api (service-api)");
     } else {
-      let errorMessage = "Błąd danych: \n\n";
-      if(!this.tripForm.controls["name"].valid){
-        errorMessage += "Nazwa: nie pusta i nie większa niż 30 znaków\n\n";
-      }
-      if(!this.tripForm.controls["city"].valid){
-        errorMessage += "Dokąd: nie puste i nie większe niż 30 znaków\n\n";
-      }
-      if(!this.tripForm.controls["departurePlace"].valid){
-        errorMessage += "Skąd: nie puste i nie większe niż 30 znaków\n\n";
-      }
-      if(!this.tripForm.controls["departureDate"].valid){
-        errorMessage += "Kiedy: nie puste\n\n";
-      }
-      if(!this.tripForm.controls["arrivalDate"].valid){
-        errorMessage += "Powrót: nie puste\n\n";
-      }
-      if(this.tripForm.controls["departureDate"].valid && this.tripForm.controls["arrivalDate"].valid && 
-          this.tripForm.controls["departureDate"].value >= this.tripForm.controls["arrivalDate"].value){
-          errorMessage += "Daty: Kiedy nie może być po Powrót\n\n"
-      }
-      if(!this.tripForm.controls["price"].valid){
-        errorMessage += "Cena: nie pusta i w formacie (100 , 100.2 , 100.53 )\n\n";
-      }
-      if(!this.tripForm.controls["numberOfPlaces"].valid){
-        errorMessage += "Ile miejsc: nie puste\n\n";
-      }
-      if(!this.tripForm.controls["describe"].valid){
-        errorMessage += "Opis: nie pusty\n\n";
-      }
-      if(!this.tripForm.controls["promote"].valid){
-        errorMessage += "Promowanie: nie puste i w zakresie [0,5] (gdzie 0 to wyłączone)\n\n";
-      }
-      if(!this.tripForm.controls["url"].valid){
-        errorMessage += "Url zdjęcia: nie puste i poprawny format 'http:\\\\serwerFTP.nazwa_zdjęcia.pl' \n";
-      }
-      this.log.openSnackBar(errorMessage);
-
-      
+      this.validateMessage();
     }
-    console.log(this.trip)
-    
+    console.log(this.trip);
+  }
+
+  validateMessage(){
+    let errorMessage = "Błąd danych: \n\n";
+    if(!this.tripForm.controls["name"].valid){
+      errorMessage += "Nazwa: nie pusta i nie większa niż 30 znaków\n\n";
+    }
+    if(!this.tripForm.controls["city"].valid){
+      errorMessage += "Dokąd: nie puste i nie większe niż 30 znaków\n\n";
+    }
+    if(!this.tripForm.controls["departurePlace"].valid){
+      errorMessage += "Skąd: nie puste i nie większe niż 30 znaków\n\n";
+    }
+    if(!this.tripForm.controls["departureDate"].valid){
+      errorMessage += "Kiedy: nie puste\n\n";
+    }
+    if(!this.tripForm.controls["arrivalDate"].valid){
+      errorMessage += "Powrót: nie puste\n\n";
+    }
+    if(this.tripForm.controls["departureDate"].valid && this.tripForm.controls["arrivalDate"].valid && 
+        this.tripForm.controls["departureDate"].value >= this.tripForm.controls["arrivalDate"].value){
+        errorMessage += "Daty: Kiedy nie może być po Powrót\n\n"
+    }
+    if(!this.tripForm.controls["price"].valid){
+      errorMessage += "Cena: nie pusta i w formacie (100 , 100.2 , 100.53 )\n\n";
+    }
+    if(!this.tripForm.controls["numberOfPlaces"].valid){
+      errorMessage += "Ile miejsc: nie puste\n\n";
+    }
+    if(!this.tripForm.controls["describe"].valid){
+      errorMessage += "Opis: nie pusty\n\n";
+    }
+    if(!this.tripForm.controls["promote"].valid){
+      errorMessage += "Promowanie: nie puste i w zakresie [0,5] (gdzie 0 to wyłączone)\n\n";
+    }
+    if(!this.tripForm.controls["url"].valid){
+      errorMessage += "Url zdjęcia: nie puste i poprawny format 'http:\\\\serwerFTP.nazwa_zdjęcia.pl' \n";
+    }
+    this.log.openSnackBar(errorMessage);
   }
 
 }

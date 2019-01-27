@@ -39,7 +39,6 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.role = this.auth.getRole();
-    console.log(this.role);
   }
 
   slideMenu(){

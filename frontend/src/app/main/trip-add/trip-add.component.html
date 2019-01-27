@@ -2,9 +2,9 @@
   <div class="add-trip-block">
     <form [formGroup]="tripForm">
     
-      <h2>Wycieczka: 
-        <span *ngIf="trip.guid">{{trip.name}}</span>
-        <span *ngIf="trip.guid==null">Nowa</span>
+      <h2>Wycieczka: <span *ngIf="trip.guid==null">Nowa</span>
+        <span *ngIf="trip.guid"><br/>{{tripForm.controls["name"].value}}<br/>(EDYCJA!)</span>
+        
       </h2>
 
       <div class=fieldset>
