@@ -19,6 +19,7 @@ import { MaterialModule } from './_modules/material.module';
 import { TripDetailComponent } from './main/trip-detail/trip-detail.component';
 import { RezerwationComponent } from './main/rezerwation/rezerwation.component';
 import { TripAddComponent } from './main/trip-add/trip-add.component';
+import { UserReservationComponent } from './main/user-reservation/user-reservation.component';
 
 export let fakeBackendProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -37,7 +38,8 @@ export let fakeBackendProvider = {
     BurgerComponent,
     TripDetailComponent,
     RezerwationComponent,
-    TripAddComponent
+    TripAddComponent,
+    UserReservationComponent
   ],
   entryComponents: [
     RezerwationComponent
