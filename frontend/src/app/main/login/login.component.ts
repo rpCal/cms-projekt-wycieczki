@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
               data => {
                 window.location.reload();
                 this.loading = false;
-                this.router.navigate([this.returnUrl]);
+                window.location.reload();
             },
               error => {
                 this.log.openSnackBar(error.message);

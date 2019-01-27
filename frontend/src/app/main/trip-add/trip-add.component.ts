@@ -50,8 +50,9 @@ export class TripAddComponent implements OnInit {
         });
   }
 
-  backToPrevious() {
-    this.location.back();
+  clearTrip() {
+    this.trip = Trip.getEmptyTrip();
+    this.tripForm.reset();
   }
 
   sendToServer(){
