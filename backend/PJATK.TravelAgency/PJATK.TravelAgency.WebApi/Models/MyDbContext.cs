@@ -8,6 +8,7 @@ namespace PJATK.TravelAgency.WebApi.Models
 {
     public class MyDbContext : DbContext
     {
+        //TODO: zrobić migrację do bazy były zmiany
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Type> Types { get; set; }
@@ -15,6 +16,7 @@ namespace PJATK.TravelAgency.WebApi.Models
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
         public MyDbContext() : base("name=MyDbConnection")
         {

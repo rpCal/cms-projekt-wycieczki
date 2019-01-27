@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -41,5 +42,13 @@ namespace PJATK.TravelAgency.WebApi.Models
 
         public bool Archive { get; set; }
         public int Promote { get; set; }
+               
+        //TODO: jak zrobić relację jeden do wielu w EF Code First?
+        public HashSet<Reservation> Reservations { get; set; }
+
+        [ForeignKey("Rating")]
+        public Guid RatingId { get; set; }
+
+        public Rating Rating { get; set; }
     }
 }

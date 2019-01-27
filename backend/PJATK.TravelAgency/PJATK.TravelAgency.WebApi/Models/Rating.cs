@@ -21,5 +21,8 @@ namespace PJATK.TravelAgency.WebApi.Models
 
         [StringLength(555)]
         public string Comment { get; set; }
+
+        //TODO: jak zrobić relacjęjeden do wielu w EF Code First?
+        public IList<Trip> Trips { get; set; }
     }
 }

@@ -10,5 +10,8 @@ namespace PJATK.TravelAgency.WebApi.Models
     {
         [Key]
         public Guid Id { get; set; }
+
+        //TODO: jak zrobić relację jeden do wielu w EF Code First?
+        public HashSet<Reservation> Reservations { get; set; }
     }
 }

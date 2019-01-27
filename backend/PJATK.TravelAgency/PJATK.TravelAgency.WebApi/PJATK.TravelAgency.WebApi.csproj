@@ -214,6 +214,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\TripController.cs" />
     <Compile Include="Controllers\TypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Models\MyDbContext.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Rating.cs" />
+    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Trip.cs" />
     <Compile Include="Models\Type.cs" />
     <Compile Include="Models\User.cs" />
