@@ -1,11 +1,13 @@
+import { RezerwationComponent } from './../main/rezerwation/rezerwation.component';
 import { Injectable } from '@angular/core';
 import { Trip } from '../model/trip';
+import { Reservation } from '../model/reservation';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FakeDb {
-  createDb() {
+  createTrips() {
     const fakeTrips: Array<Trip> = [
       new Trip('c5a7bf94-01ee-4770-9bab-86ecce289221', 'Super Warszawa',  'Warszawa', new Date(2019, 1, 5), new Date(2019, 1,10), 700, 'Poznaj warszawe od zupełnie innej strony',  'Warszawa',  15, 10, false, 0,  "http://tu.url.do.zdjęcia.html"),
       new Trip('c5a7bf94-01ee-4770-9bab-86ecce289222', 'Łódzki odkrywca',  'Łódź', new Date(2019, 1, 5), new Date(2019, 1,12),  1500, "Łódzka wyprawa po muzeach ", "Warszawa", 10, 3, false , 0,  "http://tu.url.do.zdjęcia.html"),
@@ -38,4 +40,11 @@ export class FakeDb {
     ];
     return fakeTrips;
   }
+
+  createRezerwation() {
+    const fakeRezerwation: Array<Trip> = [
+    ];
+    return fakeRezerwation;
+  }
+
 }

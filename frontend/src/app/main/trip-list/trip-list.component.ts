@@ -18,7 +18,7 @@ export class TripListComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.trips = this.data.createDb();
+    this.trips = this.data.createTrips();
   }
 
   getDetailTrip(trip: Trip){

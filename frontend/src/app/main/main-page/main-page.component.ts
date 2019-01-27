@@ -19,7 +19,7 @@ export class MainPageComponent implements OnInit {
               private sharedTrip: SharedTripService) { }
 
   ngOnInit() {
-    this.trips = this.data.createDb();
+    this.trips = this.data.createTrips();
   }
 
   getDetailTrip(trip: Trip){
