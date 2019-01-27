@@ -1,5 +1,5 @@
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from "@angular/material";
+import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule, MatDatepickerModule, MatNativeDateModule } from "@angular/material";
 
 import { NgModule } from '@angular/core';
 
@@ -7,11 +7,11 @@ import { NgModule } from '@angular/core';
 @NgModule({
   exports: [
     MatSnackBarModule,
-    MatDialogModule,    
-    MatButtonModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRippleModule,
+    MatDatepickerModule,
+    MatNativeDateModule 
   ],
   declarations: []
 })

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LastMinuteComponent } from './last-minute.component';
+import { RezerwationComponent } from './rezerwation.component';
 
-describe('LastMinuteComponent', () => {
-  let component: LastMinuteComponent;
-  let fixture: ComponentFixture<LastMinuteComponent>;
+describe('RezerwationComponent', () => {
+  let component: RezerwationComponent;
+  let fixture: ComponentFixture<RezerwationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LastMinuteComponent ]
+      declarations: [ RezerwationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LastMinuteComponent);
+    fixture = TestBed.createComponent(RezerwationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

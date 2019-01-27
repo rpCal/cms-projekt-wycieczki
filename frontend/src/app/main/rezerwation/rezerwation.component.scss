@@ -1,0 +1,40 @@
+.container{
+    width: 400px;
+    height: auto;
+
+    button{
+        background: #f47c48;
+        border-radius: 5px;
+        color: #fff;
+        width:50%;
+        font-size: 18px;
+        line-height: 35px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border: 1px solid #f47c48;
+        cursor: pointer;
+        transition: 0.2s all ease-in-out;
+        outline: 0;
+    }
+
+    
+    button:hover{
+        border: 1px solid #f47c48;
+        color: #f47c48;
+        background: #fff;
+    }
+
+    #but1{
+        flex-basis: 60%;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    #but2{
+        flex-basis: 40%;
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+     
+}

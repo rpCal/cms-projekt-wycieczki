@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="add-trip-block">
+    <form [formGroup]="tripForm">
+    
+      <h2>Wycieczka: 
+        <span *ngIf="trip.guid">{{trip.name}}</span>
+        <span *ngIf="trip.guid==null">Nowa</span>
+      </h2>
+
+      <div class=fieldset>
+        <label>Nazwa:</label>
+        <input type="text" formControlName="name">
+      </div>
+    
+      <div class=fieldset>
+        <label>Dokąd:</label>
+        <input type="text" formControlName="city">
+      </div>
+
+      <div class=fieldset>
+        <label>Skąd:</label>
+        <input type="text" formControlName="departurePlace">
+      </div>
+
+      <div class=fieldset>
+        <label>Kiedy:</label>
+        <div class="datapicker">
+          <input formControlName="departureDate" class="toggle" [matDatepicker]="start">
+          <mat-datepicker-toggle  matSuffix [for]="start"></mat-datepicker-toggle>
+          <mat-datepicker #start></mat-datepicker>
+        </div>
+      </div>
+
+      <div class=fieldset>
+        <label>Powrót:</label>
+        <div class="datapicker">
+          <input formControlName="arrivalDate"  class="toggle" [matDatepicker]="end">
+          <mat-datepicker-toggle  matSuffix [for]="end"></mat-datepicker-toggle>
+          <mat-datepicker #end></mat-datepicker>
+        </div>
+      </div>
+
+      <div class=fieldset>
+        <label>Cena:</label>
+        <input type="text" formControlName="price">
+      </div> 
+        
+      <div class=fieldset>
+        <label>Ile miejsc:</label>
+        <input type="number" formControlName="numberOfPlaces">
+      </div>    
+      
+      <div class=fieldset>
+        <label>Opis:</label>
+        <textarea formControlName="describe"></textarea>
+      </div>   
+      
+      <div class=fieldset>
+        <label>Promowanie</label>
+        <input type="number" formControlName="promote">
+      </div>
+
+      <div class=fieldset>
+        <label>URL zdjęcia</label>
+        <input type="text" formControlName="url">
+      </div>    
+        
+
+      <div class=fieldset>
+        <button id="but1" (click)="sendToServer()">Zapisz</button>
+        <button id="but2" (click)="backToPrevious()">Powrót</button>
+      </div>
+
+    </form>
+  </div>
+</div>

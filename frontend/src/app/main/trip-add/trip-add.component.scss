@@ -1,0 +1,118 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: center;   
+    text-align: center;       
+    
+
+
+
+    .add-trip-block{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;  
+        width: 700px;
+        background: #fde6da;
+        box-shadow: 6px 6px 10px #f47c4867;  
+
+        @media screen and(max-width: 780px){
+            width: 400px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h2{
+            font-size: 26px;
+            font-weight: bold;
+            padding: 20px;
+        }
+    
+        .fieldset{
+            width: 700px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin: 10px;
+
+            @media screen and(max-width: 780px){
+                width: 300px;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            label{
+                vertical-align: top;
+                width: 150px;
+                font-size: 26px;
+                line-height: 35px;
+            }
+            input{
+                height: 35px;
+                border: 1px groove rgba(70, 81, 94, 0.5);
+                border-radius: 5px;
+                width: 250px;
+                text-indent: 10px;
+            }
+            textarea{
+                width: 250px;
+                height: 200px;
+                border: 1px groove rgba(70, 81, 94, 0.5);
+            }
+            .toggle{
+                width: 210px;
+            }
+
+            .datapicker{
+                display: flex;
+                flex-direction: row;
+            }
+    
+        }
+    
+        button{
+            background: #f47c48;
+            width: calc(100% - 30px);
+            border-radius: 5px;
+            color: #fff;
+            font-size: 18px;
+            line-height: 35px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            border: 1px solid #f47c48;
+            cursor: pointer;
+            transition: 0.2s all ease-in-out;
+            outline: 0;
+        }
+        button:hover{
+            border: 1px solid #f47c48;
+            color: #f47c48;
+            background: #fff;
+        }
+    
+        #but1{
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+    
+        #but2{
+            border-bottom-left-radius: 0px;
+            border-top-left-radius: 0px;
+        }
+
+        @media screen and(max-width: 780px){
+            #but1{
+                border-radius: 5px;
+                margin-bottom: 15px;
+            }
+        
+            #but2{
+                border-radius: 5px;
+            }
+        }
+    }
+
+}
