@@ -3,6 +3,7 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { stringify } from '@angular/compiler/src/util';
+import { User } from '../model/user';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -10,19 +11,31 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let testUser = { email: 'test@test.pl', firstName: 'testname', lastName: 'testsurname', password: 'haslo123',  };
-
+        let user = new User('user@test.pl','Jan','Nowak','haslo','user');
+        let admin = new User('admin@test.pl','Ryszard','Adminowski','haslo','admin');
         return of(null).pipe(mergeMap(() => {
 
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
-                if (request.body.username === testUser.email && request.body.password === testUser.password) {
+                    
+                if (request.body.username === user.email && request.body.password === user.password) {
+                    console.log("elo");
                     let body = {
-                        email: testUser.email,
-                        firstName: testUser.firstName,
-                        lastName: testUser.lastName,
-                        token: 'fake-jwt-token'
+                        email: user.email,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        token: 'fake-jwt-token',
+                        role: user.role
                     };
                     return of(new HttpResponse({ status: 200, body }));
+                } else if (request.body.username === admin.email && request.body.password === admin.password) {
+                    let body = {
+                        email: admin.email,
+                        firstName: admin.firstName,
+                        lastName: admin.lastName,
+                        token: 'fake-jwt-token',
+                        role: admin.role
+                    };
+                    return of(new HttpResponse({ status: 200, body })); 
                 } else {
                      return throwError({ message: 'Username or password is incorrect' } );
                 }

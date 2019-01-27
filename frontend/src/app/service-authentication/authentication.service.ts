@@ -1,3 +1,4 @@
+import { User } from './../model/user';
 import { ApiService } from './../service-api/api.service';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -5,7 +6,6 @@ import { map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     baseUrl = "";
-    isLogin: boolean;
 
     constructor(private api: ApiService) { }
 
@@ -15,7 +15,6 @@ export class AuthenticationService {
                  if (user && user.token) {
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     console.log(localStorage.getItem('currentUser'));
-                    this.isLogin = true;
                 }
                 return user;
             }));
@@ -23,7 +22,23 @@ export class AuthenticationService {
 
     logout() {
         localStorage.removeItem('currentUser');
-        this.isLogin = false;
         console.log('logout');
+    }
+
+    getRole(): string{
+        const user: User = JSON.parse(localStorage.getItem('currentUser'));
+        if(user){
+            return user.role;
+        } else {
+            return "brak";
+        }
+    }
+
+    isLogin(): boolean{
+        if(localStorage.getItem('currentUser')){
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthenticationService } from '../../service-authentication/authentication.service';
+import { LoggerService } from 'src/app/service-logger/logger.service';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +13,11 @@ import { AuthenticationService } from '../../service-authentication/authenticati
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
+    isLogin: boolean = false;
     returnUrl: string;
-    error = '';
-
     constructor(
         private formBuilder: FormBuilder,
+        private log: LoggerService,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService) {}
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
             password: ['', Validators.required]
         });
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.isLogin = this.authenticationService.isLogin();
     }
 
     onSubmit() {
@@ -37,12 +39,12 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
             .subscribe(
               data => {
+                window.location.reload();
                 this.loading = false;
                 this.router.navigate([this.returnUrl]);
-              },
+            },
               error => {
-                this.error = error.message;
-                ;
+                this.log.openSnackBar(error.message);
                 this.loading = false;
               });
                
@@ -50,5 +52,6 @@ export class LoginComponent implements OnInit {
 
     logout(){
         this.authenticationService.logout();
+        window.location.reload();
     }
 }

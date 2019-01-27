@@ -9,13 +9,11 @@
         <label for="password">Haslo</label>
         <input type="password" placeholder="*****" formControlName="password" />
     </div>
-    <div>
+    <div *ngIf="isLogin==false">
         <button [disabled]="loading">Zaloguj się</button>
     </div>
-    <div class="error" *ngIf="error" >{{error}}</div>
-</form>
-
-<button (click)="logout()">
-    Wyloguj się - TESTOWO
-</button>
+    <div *ngIf=isLogin>
+        <button (click)="logout()">Wyloguj się</button>
+    </div>
+  </form>
 </div>

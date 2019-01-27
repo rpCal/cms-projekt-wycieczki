@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../service-authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import {
   trigger,
@@ -32,10 +33,13 @@ import {
 
 export class NavComponent implements OnInit {
   isMenuToggle: boolean = false;
+  role: string = "";
   
-  constructor() { }
+  constructor(private auth: AuthenticationService) { }
 
   ngOnInit() {
+    this.role = this.auth.getRole();
+    console.log(this.role);
   }
 
   slideMenu(){
