@@ -1,0 +1,21 @@
+<div class="container">
+    <div *ngIf="trip" class="trip-detail">
+        <h2>{{trip.name}}</h2>
+        <div class="trip-image">
+            <img src="./assets/city_image_example_cracow.png">
+        </div>
+        <div class="trip-info">
+            <div><label>Skąd: </label><span>{{trip.departurePlace}}</span></div>
+            <div><label>Dokąd: </label><span>{{trip.city}}</span></div>
+            <div><label>Od kiedy: </label><span>{{trip.departureDate  | date:'dd.MM.yyyy' }}</span></div>
+            <div><label>Do kiedy: </label><span>{{trip.arrivalDate | date:'dd.MM.yyyy' }}</span></div>
+            <div><label>Cena: </label><span>{{trip.price}}</span></div>
+            <div><label>Liczba miejsc: </label><span>{{trip.numberOfPlaces}}</span></div>
+            <div><label>Liczba wolnych miejsc: </label><span>{{trip.availableNumberOfPlaces}}</span></div>        
+        </div>
+        <div class="trip-button">
+                <button id="but1" (click)="openDialog()">Rezerwuj</button>
+                <button id="but2" (click)="backToPrevious()">Powrót</button>
+        </div>
+    </div>
+</div>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LastMinuteComponent } from './last-minute.component';
+import { TripDetailComponent } from './trip-detail.component';
 
-describe('LastMinuteComponent', () => {
-  let component: LastMinuteComponent;
-  let fixture: ComponentFixture<LastMinuteComponent>;
+describe('TripDetailComponent', () => {
+  let component: TripDetailComponent;
+  let fixture: ComponentFixture<TripDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LastMinuteComponent ]
+      declarations: [ TripDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LastMinuteComponent);
+    fixture = TestBed.createComponent(TripDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

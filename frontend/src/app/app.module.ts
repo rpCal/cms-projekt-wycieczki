@@ -15,8 +15,10 @@ import { TripListComponent } from './main/trip-list/trip-list.component';
 import { LoginComponent } from './main/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BurgerComponent } from './nav/burger/burger.component';
-import { LastMinuteComponent } from './main/last-minute/last-minute.component';
 import { MaterialModule } from './_modules/material.module';
+import { TripDetailComponent } from './main/trip-detail/trip-detail.component';
+import { RezerwationComponent } from './main/rezerwation/rezerwation.component';
+import { TripAddComponent } from './main/trip-add/trip-add.component';
 
 export let fakeBackendProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -33,7 +35,12 @@ export let fakeBackendProvider = {
     TripListComponent,
     LoginComponent,
     BurgerComponent,
-    LastMinuteComponent
+    TripDetailComponent,
+    RezerwationComponent,
+    TripAddComponent
+  ],
+  entryComponents: [
+    RezerwationComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,8 @@ export let fakeBackendProvider = {
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [
     //disconnet when real api

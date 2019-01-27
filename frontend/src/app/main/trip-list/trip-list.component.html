@@ -1,38 +1,69 @@
 <div class="container">
 
-    <div class="filters-block-wrapper">
-      Filtry... <br>
-      obecnie brak
+    <div class="filters-block">
+      <form>
+        <h2>Filtruj po:</h2>
+        <div class=fieldset>
+          <label for="date_when">Kiedy</label>
+          <input type="date" name="date_when" required placeholder="Data" />
+        </div>
+        
+        <div class=fieldset>
+          <label for="end_place">Dokąd</label>
+          <input type="text" name="end_place" required placeholder="np. Majorka" />  
+        </div>
+  
+        <div class=fieldset>
+          <label for="start_place">Skąd</label>
+          <input type="text" name="start_place" required placeholder="np. Warszawa"/>
+        </div>
+  
+        <div class=fieldset>
+          <label for="amount">Osoby</label>
+          <select name="amount" required>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        
+      </form>
     </div>
 
 
-    <div  class="results-block-wrapper">
-
+    <div  class="results-block">
       <div *ngFor="let trip of trips" class="offer-block">
-          <div class="offer-block--image">
-            <img src="./assets/city_image_example_cracow.png"/>
-          </div>
-          <div class="offer-block--data">
-            <h2 class="offer-block--title">
+    
+        <div class="offer-image">
+          <img src="./assets/city_image_example_cracow.png"/>
+        </div>
+        
+        <div class="offer-data">
+        
+          <div class="data-info">
+            <h2>
               {{trip.describe}}
             </h2>
-            
-            <h3 class="offer-block--price">
-              <span>Cena:</span> <span> {{trip.price}}zł</span>
-            </h3>
-      
-            <h4 class="offer-block--rating">
-              <span>Oceny:</span> <span> BRAK W MODELU </span>
-            </h4>
-      
-            <h5 class="offer-block--date">
+            <h3>
               <span>Termin:</span> <span> {{trip.departureDate | date:'dd.MM.yyyy' }}-{{trip.arrivalDate | date:'dd.MM.yyyy' }}</span>
+            </h3>
+            <h4>
+              <span>Cena:</span> <span> {{trip.price}}zł</span>
+            </h4>
+            <h5>
+              <span>Oceny:</span> <span> BRAK W MODELU </span>
             </h5>
-      
-            <button class="offer-block--order">Zamawiam</button>
           </div>
+          
+          <div class="data-submit">
+            <button (click)="getDetailTrip(trip)">Szczegóły</button>
+          </div>
+        
         </div>
 
+      </div>
     </div>
 
 
