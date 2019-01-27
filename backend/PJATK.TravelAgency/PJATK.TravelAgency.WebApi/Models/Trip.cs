@@ -50,5 +50,7 @@ namespace PJATK.TravelAgency.WebApi.Models
         public Guid RatingId { get; set; }
 
         public Rating Rating { get; set; }
+
+        public double AverageRating { get; set; }
     }
 }

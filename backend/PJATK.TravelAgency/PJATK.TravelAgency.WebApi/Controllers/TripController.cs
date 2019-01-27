@@ -42,6 +42,32 @@ namespace PJATK.TravelAgency.WebApi.Controllers
             return Json(trip);
         }
 
+        [HttpGet]
+        [Route("rated")]
+        public JsonResult<List<Trip>> GetTripsWithRating()
+        {
+            List<Trip> ratedTrips = new List<Trip>();
+
+            var tripsRatings = _context.Trips
+                .Select(x => x);
+                
+
+            foreach (var tripRating in tripsRatings)
+            {
+                var rate = _context.Ratings
+                    .Where(x => x.Id == tripRating.RatingId)
+                    .Select(x => x.RateMark)
+                    .FirstOrDefault();
+
+                if(rate > 0)
+                {
+                    ratedTrips.Add(tripRating);
+                }
+            }
+
+            return Json(ratedTrips);
+        }
+
         [HttpPut]
         [Route("update")]
         public IHttpActionResult ModifyTrip([FromBody]Trip trip)
