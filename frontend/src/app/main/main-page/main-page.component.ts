@@ -22,7 +22,7 @@ export class MainPageComponent implements OnInit {
     this.trips = this.data.createTrips();
     console.log('ngOnInit :: start. GET /trips')
     let res = this.api.getTrips().subscribe((resp) => {
-      console.log('wyszlo', resp.join(''));
+      console.log('wyszlo', resp);
     })
   }
 
