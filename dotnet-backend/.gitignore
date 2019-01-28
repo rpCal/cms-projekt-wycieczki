@@ -1,0 +1,13 @@
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+
+/.vs
+PJATK.TravelAgency/PJATK.TravelAgency.WebApi/obj/Debug
+PJATK.TravelAgency/.vs
+PJATK.TravelAgency/packages
+PJATK.TravelAgency/PJATK.TravelAgency.WebApi/obj/Release/TransformWebConfig/transformed/Web.config
+PJATK.TravelAgency/PJATK.TravelAgency.WebApi/obj/Release/TransformWebConfig/original/Web.config
+PJATK.TravelAgency/PJATK.TravelAgency.WebApi/obj/Release/CSAutoParameterize/original/Web.config
+

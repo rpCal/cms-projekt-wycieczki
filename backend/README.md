@@ -4,4 +4,4 @@ npm run start
 
 
 # HEROKU RELEASE
-git subtree push --prefix backend-nodejs heroku master
+git subtree push --prefix backend heroku master
