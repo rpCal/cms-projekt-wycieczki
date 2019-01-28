@@ -10,3 +10,5 @@
 /backend/PJATK.TravelAgency/PJATK.TravelAgency.WebApi/obj/Release/TransformWebConfig/original/Web.config
 /backend/PJATK.TravelAgency/PJATK.TravelAgency.WebApi/obj/Release/CSAutoParameterize/original/Web.config
 
+
+/backend-nodejs/node_modules
