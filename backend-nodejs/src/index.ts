@@ -2,7 +2,7 @@ import express from 'express';
 import {Request, Response, NextFunction} from "express";
 import { OK } from 'http-status-codes';
 import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
+import cors from 'cors';
 const APP = express();
 const PORT = process.env.PORT || '5000';
 

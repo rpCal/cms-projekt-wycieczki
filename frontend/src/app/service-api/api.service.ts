@@ -13,7 +13,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://pjatktravelagencywebapi20190118114614.azurewebsites.net/travelAgency/';
+  private baseUrl = 'https://pjatk-travel-agency.herokuapp.com/';
   constructor(private http: HttpClient) { }
 
   login(username, password){
@@ -21,7 +21,7 @@ export class ApiService {
   }
 
   getTrips(): Observable<Trip[]> {
-    return this.http.get<Trip[]>(this.baseUrl + "trips");
+    return this.http.get<Trip[]>(this.baseUrl + "");
   }
 
   getTrip(id: number): Observable<Trip> {
