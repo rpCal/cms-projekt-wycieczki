@@ -10,7 +10,8 @@ const PORT = process.env.PORT || '5000';
 var whitelist = ['https://rpcal.github.io', 'http://localhost:4200']
 var corsOptions = {
     origin: (origin, callback) =>  {
-        if (whitelist.indexOf(origin) !== -1) {
+        
+        if (origin === undefined || whitelist.indexOf(origin) !== -1) {
             callback(null, true)
         }else{
             callback(new Error('Not allowed by CORS'))
