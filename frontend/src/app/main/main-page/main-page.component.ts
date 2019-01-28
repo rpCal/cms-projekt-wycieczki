@@ -20,6 +20,7 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit() {
     this.trips = this.data.createTrips();
+    console.log('ngOnInit :: start. GET /trips')
     let res = this.api.getTrips().subscribe((resp) => {
       console.log('wyszlo', resp.join(''));
     })
