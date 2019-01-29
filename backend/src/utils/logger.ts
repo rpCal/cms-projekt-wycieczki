@@ -11,4 +11,6 @@ let logger = createLogger({
     exitOnError: false
 });
 
-export default logger;
+export {
+    logger
+};
