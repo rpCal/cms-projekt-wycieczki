@@ -5,20 +5,23 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import compression from 'compression';
-const session = require('express-session');
-const passport = require('passport');
+import session from 'express-session';
+import passport from 'passport';
 const MongoStore = require('connect-mongo')(session);
-const expressStatusMonitor = require('express-status-monitor');
+import expressStatusMonitor from 'express-status-monitor';
+import methodOverride from 'method-override'
 
 import { } from './utils/passport';
 import {logger} from './utils/logger';
 import appRoutes from './routes';
 
 
+
 let APP;
 const PORT = process.env.PORT || '5000';
 
 const setupConfig = () => {
+    // MongoStore(session);
     const whitelist = ['https://rpcal.github.io', 'http://localhost:4200']
     const corsOptions = {
         origin: (origin, callback) =>  {
@@ -34,6 +37,7 @@ const setupConfig = () => {
     APP.use(cors(corsOptions));
     APP.use(compression());
     APP.use(expressStatusMonitor());
+    APP.use(methodOverride())
     APP.use(bodyParser.json())
     APP.use(bodyParser.urlencoded({ extended: false }))
     APP.use(express.static('public'));
@@ -51,7 +55,6 @@ const setupConfig = () => {
     APP.use(passport.initialize());
     APP.use(passport.session());
 }
-
 const setupRoutes = () => {
     // ROUTES
     APP.use("", appRoutes);
@@ -87,9 +90,7 @@ const setupRoutes = () => {
     APP.use((req:Request, res:Response, next: NextFunction) => {
         res.status(NOT_FOUND).send({ type: "Not Found", message: `Route not found` });
     });
-
 }
-
 
 const createServer = async () => {
 
@@ -97,7 +98,7 @@ const createServer = async () => {
     
     setupConfig();
     setupRoutes();
-    
+
     APP.listen(PORT, () => logger.info(`Server listening on port ${PORT}!`));
 };
 

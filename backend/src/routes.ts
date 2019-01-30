@@ -7,6 +7,14 @@ import JWT from 'jsonwebtoken';
 import {connection } from './utils/mongodb';
 import mongoose from 'mongoose'
 
+// const mongoose = require('mongoose')
+import restify from 'express-restify-mongoose'
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+const docsRouter = express.Router();
+docsRouter.use('/', swaggerUi.serve);
+docsRouter.get('/', swaggerUi.setup(swaggerDocument));
 
 
 const { promisify } = require('util');
@@ -26,6 +34,30 @@ appRoutes.get('/', async (req:Request, res:Response, next: NextFunction) => {
     res.status(OK).send({ results: await Trip.find() })
 })
 
+
+
+const apiV1Router = express.Router()
+restify.serve(apiV1Router, Trip);
+restify.serve(apiV1Router, mongoose.model('Customer', new mongoose.Schema({
+    name: { type: String, required: true },
+    comment: { type: String }
+})))
+restify.serve(apiV1Router, mongoose.model('Invoice', new mongoose.Schema({
+    customer: [{ type: mongoose.Schema.Types.ObjectId }],
+    products: [{ type: mongoose.Schema.Types.ObjectId }]
+})))
+appRoutes.use(apiV1Router);
+
+appRoutes.use('/api-docs', docsRouter);
+
+
+// const apiRouter = express.Router();
+// restify.serve(appRoutes, Trip);
+// restify.serve(appRoutes, mongoose.model('Invoice', new mongoose.Schema({
+//   customer: [{ type: mongoose.Schema.Types.ObjectId }],
+//   products: [{ type: mongoose.Schema.Types.ObjectId }]
+// })))
+// appRoutes.use('/api', apiRouter);
 
 // await connection.dropDatabase();
 // const MyModel = mongoose.model('Test', new mongoose.Schema({ name: String }));
