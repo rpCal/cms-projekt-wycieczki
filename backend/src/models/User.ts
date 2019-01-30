@@ -7,9 +7,9 @@ const userSchema = new mongoose.Schema({
   FirstName: {type: Types.String, access: 'public', required: true },
   LastName: {type: Types.String, access: 'public', required: true },
   Email: {type: Types.String, access: 'public', required: false, unique: true},
-  Password: {type: Types.String, access: 'private', required: false},
-  PasswordResetToken: {type: Types.String, access: 'private', required: false},
-  PasswordResetExpires: {type: Types.Date, access: 'private', required: false},
+  Password: {type: Types.String, access: 'public', required: false},
+  PasswordResetToken: {type: Types.String, access: 'public', required: false},
+  PasswordResetExpires: {type: Types.Date, access: 'public', required: false},
   Tokens:  [{accessToken: Types.String}, {kind: Types.String}], 
   Profile: {
     Name: Types.String,
@@ -36,6 +36,7 @@ userSchema.pre('save', function save(next) {
     });
   });
 });
+
 
 userSchema.methods.comparePassword = function comparePassword(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.Password, (err, isMatch) => {

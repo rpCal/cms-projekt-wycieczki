@@ -5,17 +5,15 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import compression from 'compression';
-import session from 'express-session';
 import passport from 'passport';
-const MongoStore = require('connect-mongo')(session);
 import expressStatusMonitor from 'express-status-monitor';
 import methodOverride from 'method-override'
 import { inspect } from 'util';
 
+import passportJwt from './utils/passport'
 import {logger} from './utils/logger';
+import AppError from './utils/AppError';
 import appRoutes from './routes';
-
-
 
 let APP;
 const PORT = process.env.PORT || '5000';
@@ -42,19 +40,9 @@ const setupConfig = () => {
     APP.use(bodyParser.urlencoded({ extended: false }))
     APP.use(express.static('public'));
     APP.disable('x-powered-by');
-    APP.use(session({
-        resave: true,
-        saveUninitialized: true,
-        secret: process.env.SESSION_SECRET,
-        cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
-        store: new MongoStore({
-            url: process.env.MONGODB_URI,
-            autoReconnect: true,
-        })
-    }));
     APP.use(passport.initialize());
     APP.use(passport.session());
-    require('./utils/passport')(passport);
+    passportJwt(passport);
 }
 const setupRoutes = () => {
     // ROUTES
@@ -62,41 +50,26 @@ const setupRoutes = () => {
     APP.options('*', cors())
 
     // error handler for all the applications
-    APP.use((err:Error, req:Request, res:Response, next: NextFunction) => {
-        let code, message;
-        switch (err.name) {
-            case "UnauthorizedError":
-            case "UnauthorizedAccessError":
-                code = UNAUTHORIZED;
-                message = "You don't have access to this part of app";
-                break;
-            case "BadRequestError":
-            case "NotFoundError":
-                code = NOT_FOUND;
-                message = err.message;
-                break;
-            default:
-                code = INTERNAL_SERVER_ERROR
-                message = "Internal Server Error"
-                break;
+    APP.use((err:AppError, req:Request, res:Response, next: NextFunction) => {
+        const appError: AppError = {
+            message: err.message, 
+            status: err.status,
+            stack: err.stack
         }
-
-        logger.error(inspect(err.stack));
-
-        res.status(code).send({
-            type: code, 
-            message: message
-        });
+        logger.error(inspect(err));
+        res.status(err.status).send(appError);
     });
 
     // handle not found url
     APP.use((req:Request, res:Response, next: NextFunction) => {
-        res.status(NOT_FOUND).send({ type: "Not Found", message: `Route not found` });
+        res.status(NOT_FOUND).send({ 
+            name: "Not Found", 
+            message: `Route not found`, 
+            status: NOT_FOUND } as AppError);
     });
 }
 
 const createServer = async () => {
-
     APP = express();
     
     setupConfig();
