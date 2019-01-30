@@ -3,7 +3,7 @@
 import AppError from './../utils/AppError'
 import { Request, Response, NextFunction } from "express";
 import { OK, FORBIDDEN, NOT_FOUND,  NOT_ACCEPTABLE, ACCEPTED, INTERNAL_SERVER_ERROR} from 'http-status-codes';
-
+import jwt from 'jsonwebtoken';
 import Trip from './../models/Trip';
 import User from './../models/User';
 
