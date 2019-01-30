@@ -37,7 +37,7 @@ export default (passport) => {
 //   return next({ message: "No user is passed", status: NOT_ACCEPTABLE, stack: null });
 // }
 
-const authenticateMiddleware = (req: any, res:Response, next: NextFunction) => {
+export const getUserFromJWTToken = (req: any, res:Response, next: NextFunction) => {
   passport.authenticate('jwt', { session: false }, (err, user, failureOrInfo, status) => {
     if(err){
       return next({ message: err, status: NOT_ACCEPTABLE, stack: err.stack });
@@ -49,6 +49,3 @@ const authenticateMiddleware = (req: any, res:Response, next: NextFunction) => {
     next();
   })(req, res, next);
 }
-export {
-  authenticateMiddleware
-};
