@@ -1,6 +1,6 @@
 import express from 'express';
 import {Request, Response, NextFunction} from "express";
-import { OK, FORBIDDEN, NOT_FOUND,  NOT_ACCEPTABLE} from 'http-status-codes';
+import { OK, FORBIDDEN, NOT_FOUND,  NOT_ACCEPTABLE, ACCEPTED} from 'http-status-codes';
 import {logger } from './utils/logger';
 import jwtMiddleware from 'express-jwt';
 import JWT from 'jsonwebtoken';
@@ -16,6 +16,9 @@ const randomBytesAsync = promisify(crypto.randomBytes);
 const JWT_SECRET = process.env.JWT_SECRET || '123123123';
 const User = require('./models/User');
 import Trip from './models/Trip';
+
+const { check, validationResult } = require('express-validator/check');
+
 
 const appRoutes = express.Router();
 
@@ -125,41 +128,37 @@ appRoutes.get('/', async (req:Request, res:Response, next: NextFunction) => {
 
 
 
+import {inspect} from 'util'
 /**
  * POST /login
  * Sign in using email and password.
  */
 const postLogin = (req, res, next) => {
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('password', 'Password cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail({ gmail_remove_dots: false });
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-      return req.status(NOT_ACCEPTABLE);
-    // req.flash('errors', errors);
-    // return res.redirect('/login');
+  
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
   }
 
+  // logger.info('mam wystarczajaco dancyh', inspect(user));
   passport.authenticate('local', (err, user, info) => {
+    logger.info('logowanie sie powiodlo', inspect(err), inspect(user), inspect(info))
     if (err) { return next(err); }
     if (!user) {
-      req.flash('errors', info);
-      return res.redirect('/login');
+      return res.status(NOT_ACCEPTABLE).send({ msg: "Problem with user password" });
     }
-    req.logIn(user, (err) => {
+    
+    req.login(user, (err) => {
       if (err) { return next(err); }
-      req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/');
+      res.status(ACCEPTED).send({ msg: 'Success! You are logged in.'})
     });
   })(req, res, next);
 };
-
+// check('Email').isEmail(),
+//   check('Password').isLength({ min: 5 })
 appRoutes.post('/login', postLogin);
 
 let adminRouter = express.Router();
-import {inspect} from 'util'
 adminRouter.use(jwtMiddleware({ 
     secret: JWT_SECRET,
     getToken: function (req) {

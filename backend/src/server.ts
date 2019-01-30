@@ -11,7 +11,7 @@ const MongoStore = require('connect-mongo')(session);
 import expressStatusMonitor from 'express-status-monitor';
 import methodOverride from 'method-override'
 import { inspect } from 'util';
-import { } from './utils/passport';
+
 import {logger} from './utils/logger';
 import appRoutes from './routes';
 
@@ -54,6 +54,7 @@ const setupConfig = () => {
     }));
     APP.use(passport.initialize());
     APP.use(passport.session());
+    require('./utils/passport')(passport);
 }
 const setupRoutes = () => {
     // ROUTES
