@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   PasswordResetToken: {type: Types.String, access: 'public', required: false},
   PasswordResetExpires: {type: Types.Date, access: 'public', required: false},
   Tokens:  [{accessToken: Types.String}, {kind: Types.String}], 
+  IsAdmin: {type: Types.Boolean, access: 'public', required: false},
   Profile: {
     Name: Types.String,
     Gender: Types.String,

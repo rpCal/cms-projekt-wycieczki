@@ -30,7 +30,8 @@ router.post('/auth/register',
             Email: req.body.Email,
             Password: req.body.Password,
             FirstName: req.body.FirstName,
-            LastName: req.body.LastName
+            LastName: req.body.LastName,
+            IsAdmin: false,
           });
           let newUser = await _user.save();
           res.status(OK).json({ newUser });
