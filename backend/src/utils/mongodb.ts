@@ -4,7 +4,11 @@ import { logger } from './logger';
 let connection;
 const createDatabaseConnection = async () => {
     const MONGODB_URI = process.env.MONGODB_URI || "mongodb://";
-    connection = await mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
+    const MONGO_CONNECTION_OPTS = {
+        useNewUrlParser: true, 
+        useCreateIndex: true
+    };
+    connection = await mongoose.connect(MONGODB_URI, MONGO_CONNECTION_OPTS);
     logger.info(`Successfully connected to MongoDB.`);
 }
 

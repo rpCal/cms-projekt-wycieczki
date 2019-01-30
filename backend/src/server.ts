@@ -10,7 +10,7 @@ import passport from 'passport';
 const MongoStore = require('connect-mongo')(session);
 import expressStatusMonitor from 'express-status-monitor';
 import methodOverride from 'method-override'
-
+import { inspect } from 'util';
 import { } from './utils/passport';
 import {logger} from './utils/logger';
 import appRoutes from './routes';
@@ -21,15 +21,15 @@ let APP;
 const PORT = process.env.PORT || '5000';
 
 const setupConfig = () => {
-    // MongoStore(session);
-    const whitelist = ['https://rpcal.github.io', 'http://localhost:4200']
+    const whitelist = ['https://rpcal.github.io', 'http://localhost']
     const corsOptions = {
         origin: (origin, callback) =>  {
-            if (origin === undefined || whitelist.indexOf(origin) !== -1) {
-                callback(null, true)
-            }else{
-                callback(new Error('Not allowed by CORS'))
-            }
+            callback(null, true)
+            // if (origin === undefined || whitelist.indexOf(origin) !== -1) {
+            //     callback(null, true)
+            // }else{
+            //     callback(new Error('Not allowed by CORS'))
+            // }
         }
     }
     class MorganLoggerStream { write(text: string) {logger.info(text) } }
@@ -79,6 +79,8 @@ const setupRoutes = () => {
                 message = "Internal Server Error"
                 break;
         }
+
+        logger.error(inspect(err.stack));
 
         res.status(code).send({
             type: code, 

@@ -6,49 +6,63 @@ import jwtMiddleware from 'express-jwt';
 import JWT from 'jsonwebtoken';
 import {connection } from './utils/mongodb';
 import mongoose from 'mongoose'
-
-// const mongoose = require('mongoose')
 import restify from 'express-restify-mongoose'
-
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
-const docsRouter = express.Router();
-docsRouter.use('/', swaggerUi.serve);
-docsRouter.get('/', swaggerUi.setup(swaggerDocument));
-
 
 const { promisify } = require('util');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const passport = require('passport');
-
 const randomBytesAsync = promisify(crypto.randomBytes);
-
+const JWT_SECRET = process.env.JWT_SECRET || '123123123';
 const User = require('./models/User');
 import Trip from './models/Trip';
 
 const appRoutes = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || '123123123';
+
+
+
+import _Trip from './models/Trip';
+import _Rating from './models/Rating';
+import _User from './models/User'; 
+import _Reservation from './models/Reservation';
+
+const apiV1Router = express.Router()
+restify.serve(apiV1Router, _Trip);
+restify.serve(apiV1Router, _Rating);
+restify.serve(apiV1Router, _User);
+restify.serve(apiV1Router, _Reservation);
+appRoutes.use(apiV1Router);
+
 
 appRoutes.get('/', async (req:Request, res:Response, next: NextFunction) => {
-    res.status(OK).send({ results: await Trip.find() })
+  res.status(OK).send({ results: await Trip.find() })
 })
 
 
 
-const apiV1Router = express.Router()
-restify.serve(apiV1Router, Trip);
-restify.serve(apiV1Router, mongoose.model('Customer', new mongoose.Schema({
-    name: { type: String, required: true },
-    comment: { type: String }
-})))
-restify.serve(apiV1Router, mongoose.model('Invoice', new mongoose.Schema({
-    customer: [{ type: mongoose.Schema.Types.ObjectId }],
-    products: [{ type: mongoose.Schema.Types.ObjectId }]
-})))
-appRoutes.use(apiV1Router);
 
-appRoutes.use('/api-docs', docsRouter);
+
+
+
+// restify.serve(apiV1Router, mongoose.model('Customer', new mongoose.Schema({
+//     name: { type: String, required: true },
+//     comment: { type: String }
+// })))
+// restify.serve(apiV1Router, mongoose.model('Invoice', new mongoose.Schema({
+//     customer: [{ type: mongoose.Schema.Types.ObjectId }],
+//     products: [{ type: mongoose.Schema.Types.ObjectId }]
+// })))
+
+// {
+//   access: (req) => {
+//     logger.info(inspect(req));
+//     if (req.isAuthenticated()) {
+//       return req.user.isAdmin ? 'private' : 'protected'
+//     } else {
+//       return 'public'
+//     }
+//   }
+// }
 
 
 // const apiRouter = express.Router();
