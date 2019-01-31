@@ -1,11 +1,11 @@
 import { Router } from '@angular/router';
 import { AuthenticationService } from './../../service-authentication/authentication.service';
-import { RezerwationComponent } from './../rezerwation/rezerwation.component';
 import { SharedTripService } from './../../service-shared-trip/shared-trip.service';
 import { Trip } from './../../model/trip';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { RezerwationAddComponent } from '../rezerwation-add/rezerwation-add.component';
 
 
 @Component({
@@ -29,8 +29,6 @@ export class TripDetailComponent implements OnInit {
     if(this.trip == null){
       this.backToPrevious();
     }
-    this.isAdmin = this.auth.isAdmin();
-    this.isUser = this.auth.isUser();
   }
 
   backToPrevious() {
@@ -47,7 +45,7 @@ export class TripDetailComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    this.dialog.open(RezerwationComponent, dialogConfig);
+    this.dialog.open(RezerwationAddComponent, dialogConfig);
   }
 
 }

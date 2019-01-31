@@ -1,5 +1,5 @@
 <div class='form-login-wrapper'>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm">
     <h2>Logowanie</h2>
     <div *ngIf="isLogin==false">
         <div>
@@ -12,7 +12,7 @@
         </div>
     </div>
     <div *ngIf="isLogin==false">
-        <button [disabled]="loading">Zaloguj się</button>
+        <button (click)="login()">Zaloguj się</button>
     </div>
     <div *ngIf=isLogin>
         <button (click)="logout()">Wyloguj się</button>

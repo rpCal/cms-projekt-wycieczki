@@ -3,14 +3,14 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-rezerwation',
-  templateUrl: './rezerwation.component.html',
-  styleUrls: ['./rezerwation.component.scss']
+  selector: 'app-rezerwation-add',
+  templateUrl: './rezerwation-add.component.html',
+  styleUrls: ['./rezerwation-add.component.scss']
 })
-export class RezerwationComponent implements OnInit {
+export class RezerwationAddComponent implements OnInit {
 
   constructor(
-    private dialogRef: MatDialogRef<RezerwationComponent>,
+    private dialogRef: MatDialogRef<RezerwationAddComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private log: LoggerService) { }
 

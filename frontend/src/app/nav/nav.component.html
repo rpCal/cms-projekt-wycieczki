@@ -2,8 +2,8 @@
     <ul>
         <li routerLink="/main-page" routerLinkActive="active">Polecane</li>
         <li routerLink="/trip-list" routerLinkActive="active">Lista wycieczek</li>
-        <li (click)="goToDodaj()" *ngIf="role=='admin'" routerLinkActive="active">Dodaj</li>
-        <li routerLink="/user-reservation" *ngIf="role=='user'" routerLinkActive="active">Rezerwacje</li>
+        <li (click)="goToDodaj()" routerLinkActive="active">Dodaj</li>
+        <li routerLink="/user-reservation" routerLinkActive="active">Rezerwacje</li>
         <li routerLink="/login" routerLinkActive="active"><i class="fas fa-user"></i> Logowanie</li>
         <li routerLink="/search" routerLinkActive="active"><i class="fas fa-search"></i><span id="szukaj-li">Szukaj</span></li>
         <app-burger (click)='slideMenu()'></app-burger>

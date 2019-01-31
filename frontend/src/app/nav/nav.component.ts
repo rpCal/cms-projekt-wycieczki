@@ -40,7 +40,6 @@ export class NavComponent implements OnInit {
   constructor(private auth: AuthenticationService, private sharedTrip: SharedTripService, private router:Router) { }
 
   ngOnInit() {
-    this.role = this.auth.getRole();
   }
 
   slideMenu(){

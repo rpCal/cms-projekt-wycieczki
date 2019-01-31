@@ -1,6 +1,7 @@
+import { FakeDb } from './../../mock/db.service';
+import { ApiService } from './../../service-api/api.service';
 import { Router } from '@angular/router';
 import { SharedTripService } from './../../service-shared-trip/shared-trip.service';
-import { FakeDb } from './../../mocks/fake.db.service';
 import { Component, OnInit } from '@angular/core';
 import { Trip } from 'src/app/model/trip';
 
@@ -14,11 +15,15 @@ export class TripListComponent implements OnInit {
   trips: Array<Trip>;
 
   constructor(private sharedTrip: SharedTripService, 
-              private data:FakeDb,
-              private router: Router) { }
+              private router: Router,
+              private api: ApiService,
+              private fakeDb: FakeDb) { }
 
   ngOnInit() {
-    this.trips = this.data.createTrips();
+    this.trips = this.fakeDb.createTrips();
+    // let res = this.api.getTrips().subscribe(trips => {
+    //   this.trips = trips;
+    // })
   }
 
   getDetailTrip(trip: Trip){

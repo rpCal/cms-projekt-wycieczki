@@ -1,6 +1,6 @@
 <div class="container">
     <div *ngIf="trip"  class="trip-detail">
-        <button *ngIf="isAdmin" (click)="modifyTrip()" class="edit"><i id="wrench" class="fa fa-wrench"></i></button>
+        <button (click)="modifyTrip()" class="edit"><i id="wrench" class="fa fa-wrench"></i></button>
         
         <h2>{{trip.name}}</h2>
         
@@ -19,7 +19,7 @@
         </div>
         
         <div class="trip-button">
-                <button id="but1" *ngIf="isUser" (click)="openDialog()">Rezerwuj</button>
+                <button id="but1" (click)="openDialog()">Rezerwuj</button>
                 <button [ngClass]="{
                     'but3' : isUser==false,
                     'but2' : isUser==true

@@ -4,7 +4,6 @@
     
       <h2>Wycieczka: <span *ngIf="trip.guid==null">Nowa</span>
         <span *ngIf="trip.guid"><br/>{{tripForm.controls["name"].value}}<br/>(EDYCJA!)</span>
-        
       </h2>
 
       <div class=fieldset>
@@ -62,10 +61,9 @@
 
       <div class=fieldset>
         <label>URL zdjęcia</label>
-        <input type="text" formControlName="url">
+        <input type="text" formControlName="photos">
       </div>    
         
-
       <div class=fieldset>
         <button id="but1" (click)="sendToServer()">Zapisz</button>
         <button id="but2" (click)="clearTrip()">Nowa wycieczka</button>

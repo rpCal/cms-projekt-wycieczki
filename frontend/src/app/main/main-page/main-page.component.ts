@@ -1,7 +1,7 @@
+import { FakeDb } from './../../mock/db.service';
 import { Router } from '@angular/router';
 import { ApiService } from './../../service-api/api.service';
 import { Trip } from './../../model/trip';
-import { FakeDb } from './../../mocks/fake.db.service';
 import { Component, OnInit } from '@angular/core';
 import { SharedTripService } from 'src/app/service-shared-trip/shared-trip.service';
 
@@ -13,17 +13,16 @@ import { SharedTripService } from 'src/app/service-shared-trip/shared-trip.servi
 export class MainPageComponent implements OnInit {
   trips: Array<Trip>;
 
-  constructor(private data:FakeDb, 
-              private router:Router, 
+  constructor(private router:Router, 
               private api: ApiService,
-              private sharedTrip: SharedTripService) { }
+              private sharedTrip: SharedTripService,
+              private fakeDb: FakeDb) { }
 
   ngOnInit() {
-    this.trips = this.data.createTrips();
-    console.log('ngOnInit :: start. GET /trips')
-    let res = this.api.getTrips().subscribe((resp) => {
-      console.log('wyszlo', resp);
-    })
+    this.trips = this.fakeDb.createTrips();
+    // let res = this.api.getTrips().subscribe(trips => {
+    //   this.trips = trips;
+    // })
   }
 
   getDetailTrip(trip: Trip){

@@ -1,5 +1,5 @@
+import { ApiService } from './../../service-api/api.service';
 import { LoggerService } from './../../service-logger/logger.service';
-import { Location } from '@angular/common';
 import { SharedTripService } from './../../service-shared-trip/shared-trip.service';
 import { Trip } from './../../model/trip';
 import { Component, OnInit } from '@angular/core';
@@ -17,14 +17,14 @@ export class TripAddComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private sharedTrip: SharedTripService,
-              private location: Location,
+              private api: ApiService,
               private log: LoggerService
               ) { }
 
   ngOnInit() {
     this.trip = this.sharedTrip.trip;
     if(!this.trip){
-      this.trip = Trip.getEmptyTrip();
+      this.trip = Trip.createEmptyTrip();
     }
     this.tripForm = this.createFormGroup();
   }
@@ -35,33 +35,33 @@ export class TripAddComponent implements OnInit {
           [Validators.maxLength(30), Validators.required])),
         city : new FormControl(this.trip.city, Validators.compose(
           [Validators.maxLength(30), Validators.required])),
-        departurePlace : new FormControl(this.trip.departurePlace, Validators.compose(
-          [Validators.maxLength(30), Validators.required])),
         departureDate : new FormControl(this.trip.departureDate, Validators.required),
         arrivalDate : new FormControl(this.trip.arrivalDate, Validators.required),
         price : new FormControl(this.trip.price, Validators.compose(
           [Validators.pattern(/^\d+$|^\d+\.\d{1,2}$/), Validators.required])),
-        numberOfPlaces : new FormControl(this.trip.numberOfPlaces, Validators.required),
         describe : new FormControl(this.trip.describe,  Validators.required),
+        departurePlace : new FormControl(this.trip.departurePlace, Validators.compose(
+          [Validators.maxLength(30), Validators.required])),
+        numberOfPlaces : new FormControl(this.trip.numberOfPlaces, Validators.required),
         promote : new FormControl(this.trip.promote, Validators.compose(
           [Validators.max(5), Validators.min(0), Validators.required])),
-        url : new FormControl(this.trip.photoUrl,Validators.compose(
+        photos : new FormControl(this.trip.photos,Validators.compose(
           [Validators.required])),
         });
   }
 
   clearTrip() {
-    this.trip = Trip.getEmptyTrip();
+    this.trip = Trip.createEmptyTrip();
     this.tripForm.reset();
   }
 
   sendToServer(){
     if(this.tripForm.valid && this.tripForm.controls["departureDate"].value < this.tripForm.controls["arrivalDate"].value){
-      this.log.openSnackBar("Wysyłam - Tu trzeba strzelić do api (service-api)");
+      this.log.openSnackBar("Tu wysłanie do api")
+      this.api.postTripAdmin(this.trip);
     } else {
       this.validateMessage();
     }
-    console.log(this.trip);
   }
 
   validateMessage(){
@@ -97,7 +97,7 @@ export class TripAddComponent implements OnInit {
     if(!this.tripForm.controls["promote"].valid){
       errorMessage += "Promowanie: nie puste i w zakresie [0,5] (gdzie 0 to wyłączone)\n\n";
     }
-    if(!this.tripForm.controls["url"].valid){
+    if(!this.tripForm.controls["photos"].valid){
       errorMessage += "Url zdjęcia: nie puste i poprawny format 'http:\\\\serwerFTP.nazwa_zdjęcia.pl' \n";
     }
     this.log.openSnackBar(errorMessage);

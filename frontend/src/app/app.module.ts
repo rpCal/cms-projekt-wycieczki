@@ -1,4 +1,3 @@
-import { FakeBackendInterceptor } from './mocks/fake.backend';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,15 +16,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BurgerComponent } from './nav/burger/burger.component';
 import { MaterialModule } from './_modules/material.module';
 import { TripDetailComponent } from './main/trip-detail/trip-detail.component';
-import { RezerwationComponent } from './main/rezerwation/rezerwation.component';
 import { TripAddComponent } from './main/trip-add/trip-add.component';
-import { UserReservationComponent } from './main/user-reservation/user-reservation.component';
+import { RezerwationAddComponent } from './main/rezerwation-add/rezerwation-add.component';
+import { RezerwationUserComponent } from './main/rezerwation-user/rezerwation-user.component';
 
-export let fakeBackendProvider = {
-  provide: HTTP_INTERCEPTORS,
-  useClass: FakeBackendInterceptor,
-  multi: true
-};
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,12 +31,12 @@ export let fakeBackendProvider = {
     LoginComponent,
     BurgerComponent,
     TripDetailComponent,
-    RezerwationComponent,
     TripAddComponent,
-    UserReservationComponent
+    RezerwationAddComponent,
+    RezerwationUserComponent
   ],
   entryComponents: [
-    RezerwationComponent
+    RezerwationAddComponent
   ],
   imports: [
     BrowserModule,
@@ -54,10 +48,7 @@ export let fakeBackendProvider = {
     MaterialModule,
     ReactiveFormsModule
   ],
-  providers: [
-    //disconnet when real api
-    fakeBackendProvider
-],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

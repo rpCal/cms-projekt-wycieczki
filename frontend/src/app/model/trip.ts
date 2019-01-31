@@ -17,8 +17,8 @@ export class Trip {
         public photos: string) {
     }
 
-    static getEmptyTrip(): Trip{
-        return new Trip(null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    static createEmptyTrip(): Trip{
+        return new Trip(null,null,null,null,null,null,null,null,null,null,null,null,0,null);
     }
 
 }
