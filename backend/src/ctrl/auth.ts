@@ -207,3 +207,88 @@ export const postRezerwation = async (req:any, res:Response, next: NextFunction)
         next({ message: err, status: INTERNAL_SERVER_ERROR, stack: err.stack } as AppError);
     }
 };
+
+
+export const postRezerwationPay = async (req:any, res:Response, next: NextFunction) => {
+    try{
+        let { RezerwationId } = req.body;
+
+        if(!RezerwationId){
+            return next({ message: "RezerwationId is wrong", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let rezerwation = await Rezerwation.findById(RezerwationId);
+
+        if(!rezerwation){
+            return next({ message: "cant find rezerwation by passed id", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let userId = req.user.id; 
+
+        if(rezerwation['User'] != userId){
+            return next({ message: "you can only change your own rezerwation", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        rezerwation['IsPayed'] = true;
+        
+        await rezerwation.save();
+        
+        res.status(OK).send({ 
+            results: rezerwation
+        })
+    }catch(err){
+        if (err.name === 'MongoError' && err.code === 11000) {
+            next({ message: err.message, status: NOT_ACCEPTABLE, stack: err.stack } as AppError);
+        }
+        next({ message: err, status: INTERNAL_SERVER_ERROR, stack: err.stack } as AppError);
+    }
+}
+
+
+
+export const postRezerwationCancel = async (req:any, res:Response, next: NextFunction) => {
+    try{
+
+        let { RezerwationId } = req.body;
+
+        if(!RezerwationId){
+            return next({ message: "RezerwationId is wrong", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let rezerwation = await Rezerwation.findById(RezerwationId);
+
+        if(!rezerwation){
+            return next({ message: "cant find rezerwation by passed id", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let trip = await Trip.findById(rezerwation['Trip']);
+
+        if(!trip){
+            return next({ message: "cant find trip by passed id", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let userId = req.user.id; 
+
+        if(rezerwation['User'] != userId){
+            return next({ message: "you can only change your own rezerwation", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let NumberOfPlaces = parseInt(rezerwation['NumberOfPlaces']);
+        trip['AvaiableNumberOfPlaces'] = trip['AvaiableNumberOfPlaces'] + NumberOfPlaces;
+        
+        await trip.save();
+        await Rezerwation.deleteOne({ _id: rezerwation._id });
+        
+        res.status(OK).send({ 
+            results: true
+        });
+    }catch(err){
+        if (err.name === 'MongoError' && err.code === 11000) {
+            next({ message: err.message, status: NOT_ACCEPTABLE, stack: err.stack } as AppError);
+        }
+        next({ message: err, status: INTERNAL_SERVER_ERROR, stack: err.stack } as AppError);
+    }
+}
+
+
+

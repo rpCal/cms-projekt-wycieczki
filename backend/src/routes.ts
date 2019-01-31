@@ -13,7 +13,9 @@ import {
   getProfile,
   getHomePage,
   getPublicTrip,
-  postRezerwation
+  postRezerwation,
+  postRezerwationPay,
+  postRezerwationCancel
 } from './ctrl/auth';
 
 const router = express.Router();
@@ -24,7 +26,9 @@ router.post('/auth/register', postRegister);
 router.post('/auth/login', postLogin);
 router.post('/auth/logout', postLogout);
 router.get('/auth/profile', getUserFromJWTToken, getProfile);
-router.post('/auth/rezerwation', getUserFromJWTToken, postRezerwation);
+router.post('/auth/Reservation', getUserFromJWTToken, postRezerwation);
+router.post('/auth/Reservation/pay', getUserFromJWTToken, postRezerwationPay);
+router.post('/auth/Reservation/cancel', getUserFromJWTToken, postRezerwationCancel);
 
 router.get('/public/Trip', getPublicTrip);
 

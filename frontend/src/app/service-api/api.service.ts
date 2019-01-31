@@ -54,8 +54,18 @@ export class ApiService {
  * 
  * 
  * - Stworz zamowienie jako zalogowany
- * URL POST /auth/rezerwation
+ * URL POST /auth/Reservation
  * PAYLOAD {TripId, NumberOfPlaces}
+ * 
+ * 
+ * - Anuluj zamowienie 
+ * URL POST /auth/Reservation/cancel
+ * PAYLOAD {RezerwationId}
+ * 
+ * 
+ * - Oplac zamowienie
+ * URL POST /auth/Reservation/pay
+ * PAYLOAD {RezerwationId}
 */
   
 
