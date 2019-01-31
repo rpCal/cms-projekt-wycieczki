@@ -33,29 +33,31 @@ export const postLogin = async (req: Request, res:Response, next: NextFunction) 
         const { Email, Password } = req.body;
         let user:any = await User.findOne({ "Email": Email });
         if(user == null){
-        return next({ message: "User not found", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "User not found", status: NOT_ACCEPTABLE } as AppError);
         }
         user.comparePassword(Password, function (err, isMatch) {
-        if(err){ 
-            return next({ message: "Wrong password", status: NOT_ACCEPTABLE } as AppError);
+            if(err){ 
+                return next({ message: "Wrong password", status: NOT_ACCEPTABLE } as AppError);
+                }
+            if(isMatch){
+                const secretOrKey = process.env.JWT_SECRET || 'secret';
+                const token = jwt.sign({
+                    _id: user._id,
+                    Email: user.Email,
+                    FirstName: user.FirstName,
+                    LastName: user.LastName,
+                    IsAdmin: user.IsAdmin,
+                }, secretOrKey, {
+                    expiresIn: 604800 //1w
+                });
+
+                res.status(OK).json({
+                    token: `JWT ${token}`,
+                    user: user.toJSON()
+                })
+            }else{
+                return next({ message: "Wrong password", status: NOT_ACCEPTABLE } as AppError);
             }
-        if(isMatch){
-            const secretOrKey = process.env.JWT_SECRET || 'secret';
-            const token = jwt.sign({
-            _id: user._id,
-            Email: user.Email,
-            FirstName: user.FirstName,
-            LastName: user.LastName,
-            }, secretOrKey, {
-            expiresIn: 604800 //1w
-            });
-            res.status(OK).json({
-            token: `JWT ${token}`,
-            user: user.toJSON()
-            })
-        }else{
-            return next({ message: "Wrong password", status: NOT_ACCEPTABLE } as AppError);
-        }
         });
     }catch(err){
         if (err.name === 'MongoError' && err.code === 11000) {
@@ -76,11 +78,12 @@ export const getHomePage = async (req:Request, res:Response, next: NextFunction)
 // EXAMPLE: /public/Trip?limit=3&skip=0&sort_by_field=Price&sort_by_order=-1&where_Date=2019-12-20
 export const getPublicTrip = async (req:Request, res:Response, next: NextFunction) => {
     try{
-        let { 
+        let {
             limit, 
             sort_by_field, 
             sort_by_order, 
             skip, 
+            where_id,
             where_Name, 
             where_City,
             where_Date,
@@ -111,6 +114,10 @@ export const getPublicTrip = async (req:Request, res:Response, next: NextFunctio
             { Archive: false }
         ];
 
+        if(where_id != undefined){
+            WHERE['_id'] = where_id;
+        }
+        
         if(where_Name != undefined){
             WHERE['Name'] = {$regex: '.*' + where_Name + '.*'};
         }
