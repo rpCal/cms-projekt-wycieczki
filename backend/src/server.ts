@@ -19,15 +19,21 @@ let APP;
 const PORT = process.env.PORT || '5000';
 
 const setupConfig = () => {
-    const whitelist = ['https://rpcal.github.io', 'http://localhost']
+    const whitelist = [
+        'https://rpcal.github.io', // production
+        'http://localhost', // development
+        'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop' //postman
+    ];
     const corsOptions = {
         origin: (origin, callback) =>  {
-            callback(null, true)
-            // if (origin === undefined || whitelist.indexOf(origin) !== -1) {
-            //     callback(null, true)
-            // }else{
-            //     callback(new Error('Not allowed by CORS'))
-            // }
+            logger.info("Jaki adres?");
+            logger.info(origin);
+            logger.info(inspect((whitelist.indexOf(origin) !== -1)));
+            if (origin === undefined || whitelist.indexOf(origin) !== -1) {
+                callback(null, true)
+            }else{
+                callback(new Error('Not allowed by CORS'))
+            }
         }
     }
     class MorganLoggerStream { write(text: string) {logger.info(text) } }

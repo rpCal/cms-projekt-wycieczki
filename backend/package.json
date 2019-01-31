@@ -5,10 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "tsc",
-    "dev": "ts-node ./lib/server.ts",
-    "start-nodemon": "nodemon ./dist/server.js",
-    "prod": "npm run build && npm run start"
+    "start-dev": "nodemon -e ts -w ./src -x npm run start"
   },
   "author": "",
   "license": "ISC",
@@ -41,6 +38,7 @@
     "mongoose": "^5.4.7",
     "morgan": "^1.9.1",
     "nodemailer": "^5.1.1",
+    "nodemon": "^1.18.9",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "request": "^2.88.0",

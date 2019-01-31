@@ -8,9 +8,11 @@ import {
 } from './utils/passport'
 import { 
   postLogin,
+  postLogout,
   postRegister, 
   getProfile,
-  getHomePage
+  getHomePage,
+  getPublicTrip
 } from './ctrl/auth';
 
 const router = express.Router();
@@ -19,7 +21,11 @@ router.get('/', getHomePage);
 router.use(apiV1Router);
 router.post('/auth/register', postRegister);
 router.post('/auth/login', postLogin);
+router.post('/auth/logout', postLogout);
 router.get('/auth/profile', getUserFromJWTToken, getProfile);
+
+router.get('/public/Trip', getPublicTrip);
+
 
 
 

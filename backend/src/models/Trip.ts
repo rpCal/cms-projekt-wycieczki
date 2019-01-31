@@ -4,8 +4,8 @@ const Types = mongoose.Schema.Types;
 const TripSchema = new mongoose.Schema({
     Name: {type: Types.String, access: 'public', required: true},
     City: {type: Types.String, access: 'public', required: true}, 
-    DepartureDate: {type: Types.Date, access: 'public', required: true},
-    ArrivalDate: {type: Types.Date, access: 'public', required: true},
+    DepartureDate: {type: Types.Date, access: 'public', required: true}, // data odjazdu
+    ArrivalDate: {type: Types.Date, access: 'public', required: true}, // data przybycia
     Price: {type: Types.Number, access: 'public', required: true},
     Describe: {type: Types.String, access: 'public'},
     DeparturePlace: {type: Types.String, access: 'public'},
@@ -14,7 +14,7 @@ const TripSchema = new mongoose.Schema({
     Archive: {type: Types.Boolean, access: 'public'},
     Promote: {type: Types.Number, access: 'public'},
     AverageRating: {type: Types.String, access: 'public'},
-
+    Photos: [Types.String],
     
     Reservations: [{ type: Types.ObjectId, ref: 'Reservation' }],
     Ratings: [{ type: Types.ObjectId, ref: 'Rating' }],
@@ -25,6 +25,10 @@ const TripSchema = new mongoose.Schema({
 const Trip = mongoose.model('Trip', TripSchema);
 
 export default Trip;
+
+
+
+
 
 
 // @TODO:ADD FIELDS
