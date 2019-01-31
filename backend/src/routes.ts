@@ -36,6 +36,8 @@ router.post('/auth/Reservation/cancel', getUserFromJWTToken, postRezerwationCanc
 router.post('/auth/Reservation', getUserFromJWTToken, postRezerwation);
 
 router.post('/auth/Rating', getUserFromJWTToken, postRating);
+
+  //!!! czy tu nie powinien być post, używasz w deleteRating req.body a w delete nie mamy body (z tego co kojarze), więc może jak trip post i dodać do url /cancel
 router.delete('/auth/Rating', getUserFromJWTToken, deleteRating);
 
 router.get('/public/Rating', getRating); 
