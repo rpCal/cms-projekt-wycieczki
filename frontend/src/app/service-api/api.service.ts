@@ -28,6 +28,11 @@ export class ApiService {
  * - LOGOWANIE:
  * URL POST /auth/login
  * PAYLOAD: {Email, Password} 
+ * MOZESZ SPROBOWAC NA AKTUALNEGO ADMINA 
+{
+	"Email": "test20190130@gmail.com",
+	"Password": "1234567890"
+}
  * 
  * 
  * - REJESTRACJA
@@ -37,7 +42,20 @@ export class ApiService {
  * 
  * - POBIERZ AKTUALNEGO USERA
  * URL GET /auth/profile
- * PAYLOAD trzeba przekazac JWT token z logowania
+ * PAYLOAD trzeba przekazac JWT token z logowania jako header {Authorization: "JWT...."}
+ * 
+ * 
+ * - CRUD DLA WYCIECZKI (tylko dla admina)
+ * URL /api/v1/Trip (GET, POST, PATCH, DELETE)
+ * PAYlOAD te pola, ktore sa opisane w mongoose model. TRZEBA PAMIETAC O WSZYSTKICH POLACH!
+ * 
+ * URL /api/v1/USER 
+ *
+ * 
+ * 
+ * - Stworz zamowienie jako zalogowany
+ * URL POST /auth/rezerwation
+ * PAYLOAD {TripId, NumberOfPlaces}
 */
   
 
@@ -57,4 +75,4 @@ export class ApiService {
     return this.http.post(this.baseUrl + "trips/add", trip, httpOptions);
   }
 
-}
+} 
