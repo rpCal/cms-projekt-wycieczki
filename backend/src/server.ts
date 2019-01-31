@@ -26,9 +26,6 @@ const setupConfig = () => {
     ];
     const corsOptions = {
         origin: (origin, callback) =>  {
-            logger.info("Jaki adres?");
-            logger.info(origin);
-            logger.info(inspect((whitelist.indexOf(origin) !== -1)));
             if (origin === undefined || whitelist.indexOf(origin) !== -1) {
                 callback(null, true)
             }else{

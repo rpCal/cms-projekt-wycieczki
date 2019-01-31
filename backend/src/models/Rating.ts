@@ -3,8 +3,9 @@ const Types = mongoose.Schema.Types;
 
 const RatingSchema = new mongoose.Schema({
     Comment: {type: Types.String, access: 'public', required: false},
-    RateMark: {type: Types.String, access: 'public', required: true, enum: ['VeryPoor', 'Poor', 'Good', 'VeryGood', 'Excelent']},
+    RateMark: {type: Types.Number, access: 'public', required: true},
     Trip: { type: Types.ObjectId, ref: 'Trip' },
+    User: { type: Types.ObjectId, ref: 'User' },
 }, { 
     timestamps: true 
 });

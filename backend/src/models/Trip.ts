@@ -13,7 +13,7 @@ const TripSchema = new mongoose.Schema({
     AvaiableNumberOfPlaces: {type: Types.Number, access: 'public', required: true},
     Archive: {type: Types.Boolean, access: 'public'},
     Promote: {type: Types.Number, access: 'public'},
-    AverageRating: {type: Types.String, access: 'public'},
+    AverageRating: {type: Types.Number, access: 'public'},
     Photos: [Types.String],
     
     Reservations: [{ type: Types.ObjectId, ref: 'Reservation' }],

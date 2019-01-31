@@ -9,6 +9,7 @@ import User from './../models/User';
 import { logger } from '../utils/logger';
 import { inspect } from 'util';
 import Rezerwation from './../models/Reservation';
+import Rating from './../models/Rating';
 
 export const postRegister = async (req: Request, res:Response, next: NextFunction) => {
     try{
@@ -291,4 +292,143 @@ export const postRezerwationCancel = async (req:any, res:Response, next: NextFun
 }
 
 
+
+
+export const postRating = async (req:any, res:Response, next: NextFunction) => {
+    try{
+
+        let { Comment, RateMark, TripId } = req.body;
+
+        if(!Comment){
+            return next({ message: "Comment is wrong", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        if(!RateMark){
+            return next({ message: "RateMark is wrong", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        RateMark = parseInt(RateMark, 10);
+        
+        if(RateMark < 0 || RateMark > 6){
+            return next({ message: "RateMark should be in values [0-6]", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        if(!TripId){
+            return next({ message: "TripId is wrong", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let trip = await Trip.findById(TripId);
+
+        if(!trip){
+            return next({ message: "cant find trip by passed id", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let userId = req.user.id; 
+
+        let rating = await Rating.create({
+            Trip: trip.id,
+            User: userId,
+            Comment: Comment,
+            RateMark: RateMark
+        });
+
+        if(!rating){
+            return next({ message: "cant create rating", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        await __updateAverageRating();
+        
+        res.status(OK).send({ 
+            results: {
+                rating,
+                trip
+            }
+        });
+    }catch(err){
+        if (err.name === 'MongoError' && err.code === 11000) {
+            next({ message: err.message, status: NOT_ACCEPTABLE, stack: err.stack } as AppError);
+        }
+        next({ message: err, status: INTERNAL_SERVER_ERROR, stack: err.stack } as AppError);
+    }
+}
+
+
+
+
+export const deleteRating = async (req:any, res:Response, next: NextFunction) => {
+    try{
+
+        let { RatingId } = req.body;
+
+        if(!RatingId){
+            return next({ message: "RatingId is wrong", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let rating = await Rating.findById(RatingId);
+
+        if(!rating){
+            return next({ message: "cant find rating by passed id", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let trip = await Trip.findById(rating['Trip']);
+
+        if(!trip){
+            return next({ message: "cant find trip by passed id", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let userId = req.user.id; 
+
+        if(rating['User'] != userId){
+            return next({ message: "you can only change your own ratings", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        await Rating.deleteOne({ _id: rating._id });
+        await __updateAverageRating();
+
+        res.status(OK).send({ 
+            results: true
+        });
+    }catch(err){
+        if (err.name === 'MongoError' && err.code === 11000) {
+            next({ message: err.message, status: NOT_ACCEPTABLE, stack: err.stack } as AppError);
+        }
+        next({ message: err, status: INTERNAL_SERVER_ERROR, stack: err.stack } as AppError);
+    }
+}
+
+
+export const getRating = async (req:any, res:Response, next: NextFunction) => {
+    try{
+        let { TripId } = req.query;
+        if(!TripId){
+            return next({ message: "TripId is wrong", status: NOT_ACCEPTABLE } as AppError);
+        }
+        let results = await Rating.find({ Trip: TripId }).sort({ createdAt: -1 });
+        res.status(OK).send({ results })
+    }catch(err){
+        return next({ message: err.message, status: NOT_ACCEPTABLE, stack: err.stack } as AppError);
+    }
+}
+
+
+const __updateAverageRating = async () => {
+    let averageRatings = await Rating.aggregate([
+        { "$unwind": "$Trip" },
+        { 
+            "$group": {
+                "_id": "$Trip",
+                "RatingAvg": { "$avg": "$RateMark" }
+            }
+        }
+    ]);
+    if(averageRatings != null){
+        for(let rating of averageRatings){
+            let trip = await Trip.findById(rating['_id'])
+            if(trip != null){
+                trip['AverageRating'] = rating['RatingAvg'];
+                await trip.save();
+            }
+        }   
+    }
+}
 

@@ -66,6 +66,24 @@ export class ApiService {
  * - Oplac zamowienie
  * URL POST /auth/Reservation/pay
  * PAYLOAD {RezerwationId}
+ * 
+ * 
+ * - Pobierz oceny dla trip
+ * URL GET /auth/Rating?TripId
+ * EXAMPLE: URL GET /public/Rating?TripId=5c526d35217a680eaa9aed02
+ * 
+ * 
+ * - Napisz ocene
+ * URL POST /auth/Rating
+ * PAYLOAD {Comment, RateMark, TripId}
+ * 
+ * 
+ * - usun ocene
+ * URL Delete /auth/Rating
+ * PAYLOAD {RatingId}
+ * 
+ * 
+ *
 */
   
 

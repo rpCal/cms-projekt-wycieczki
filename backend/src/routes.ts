@@ -15,7 +15,10 @@ import {
   getPublicTrip,
   postRezerwation,
   postRezerwationPay,
-  postRezerwationCancel
+  postRezerwationCancel,
+  postRating,
+  deleteRating,
+  getRating
 } from './ctrl/auth';
 
 const router = express.Router();
@@ -25,13 +28,18 @@ router.use(apiV1Router);
 router.post('/auth/register', postRegister);
 router.post('/auth/login', postLogin);
 router.post('/auth/logout', postLogout);
+
 router.get('/auth/profile', getUserFromJWTToken, getProfile);
 router.post('/auth/Reservation', getUserFromJWTToken, postRezerwation);
 router.post('/auth/Reservation/pay', getUserFromJWTToken, postRezerwationPay);
 router.post('/auth/Reservation/cancel', getUserFromJWTToken, postRezerwationCancel);
+router.post('/auth/Reservation', getUserFromJWTToken, postRezerwation);
 
+router.post('/auth/Rating', getUserFromJWTToken, postRating);
+router.delete('/auth/Rating', getUserFromJWTToken, deleteRating);
+
+router.get('/public/Rating', getRating); 
 router.get('/public/Trip', getPublicTrip);
-
 
 
 
