@@ -17,7 +17,9 @@
             <div><label>Do kiedy: </label><span>{{trip.arrivalDate | date:'dd.MM.yyyy' }}</span></div>
             <div><label>Cena: </label><span>{{trip.price}}</span></div>
             <div><label>Liczba miejsc: </label><span>{{trip.numberOfPlaces}}</span></div>
-            <div><label>Liczba wolnych miejsc: </label><span>{{trip.availableNumberOfPlaces}}</span></div>        
+            <div><label>Liczba wolnych miejsc: </label><span>{{trip.availableNumberOfPlaces}}</span></div> 
+            <div><label>Opis: </label><span></span></div>
+            <span class=describe>{{trip.describe}}</span>        
         </div>
         
         <div class="trip-button">

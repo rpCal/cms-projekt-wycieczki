@@ -44,7 +44,7 @@
         
           <div class="data-info">
             <h2>
-              {{trip.describe}}
+              {{trip.name}}
             </h2>
             <h3>
               <span>Termin:</span> <span> {{trip.departureDate | date:'dd.MM.yyyy' }}-{{trip.arrivalDate | date:'dd.MM.yyyy' }}</span>
@@ -53,7 +53,10 @@
               <span>Cena:</span> <span> {{trip.price}}zł</span>
             </h4>
             <h5>
-              <span>Oceny:</span> <span> BRAK W MODELU </span>
+              <span>Oceny:</span> <span> {{trip.averageRating | number : '1.2' }} </span>
+            </h5>
+            <h5>
+              <span>Opis:</span> <span> BRAK W MODELU </span>
             </h5>
           </div>
           

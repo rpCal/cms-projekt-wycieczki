@@ -1,10 +1,10 @@
+import { FakeDbService } from './../../service-fake-db/fake-db.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from './../../service-api/api.service';
 import { LoggerService } from './../../service-logger/logger.service';
 import { Trip } from './../../model/trip';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { getTreeMissingMatchingNodeDefError } from '@angular/cdk/tree';
 
 @Component({
   selector: 'app-trip-add',
@@ -18,7 +18,8 @@ export class TripAddComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private api: ApiService,
               private log: LoggerService,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private fake: FakeDbService,
               ) { }
 
   ngOnInit() {
@@ -64,11 +65,21 @@ export class TripAddComponent implements OnInit {
 
   sendToServer(){
     if(this.tripForm.valid && this.tripForm.controls["departureDate"].value < this.tripForm.controls["arrivalDate"].value){
-      this.log.openSnackBar("Tu wysłanie do api")
-
-      this.api.postTripAdmin(this.trip).subscribe(t => {
-        console.log(t);
-      });
+      this.trip = this.tripForm.value;
+      if(!this.trip._id){
+        this.trip.availableNumberOfPlaces = this.trip.numberOfPlaces;
+      }
+      if(this.trip.availableNumberOfPlaces > this.trip.numberOfPlaces){
+        this.log.openSnackBar("Nie można zmienić, za mało wolnych miejsc");
+      } else {
+        this.api.postTripAdmin(this.trip).subscribe(t => {
+          this.log.openSnackBar("Wysylanie się powiodło")
+          
+          err => {
+            this.log.openSnackBar("Coś się nie powiodło, skontaktuj się z administratorem")  
+          }
+        });
+      }
     } else {
       this.validateMessage();
     }

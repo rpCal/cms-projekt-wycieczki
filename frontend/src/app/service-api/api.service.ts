@@ -95,15 +95,16 @@ login(email, password){
  *
 */
   getTripAdmin(){
-    return this.http.get<Trip>(this.baseUrl + 'api/v1/Trip');
+    return this.http.get<any>(this.baseUrl + 'api/v1/Trip');
   }
 
-  postTripAdmin(trip: Trip){
-    return this.http.post<Trip>(this.baseUrl + 'api/v1/Trip', { trip });
+  postTripAdmin(obj: Trip){
+    console.log(obj)
+    return this.http.post<any>(this.baseUrl + 'api/v1/Trip', { id: obj._id, Name: obj.name, City: obj.city, DepartureDate: obj.departureDate, ArrivalDate: obj.arrivalDate, Price: obj.price, Describe: obj.describe, DeparturePlace: obj.departurePlace, NumberOfPlaces: obj.numberOfPlaces, AvaiableNumberOfPlaces: obj.availableNumberOfPlaces, Archive: obj.archive, Promote: obj.promote, AverageRating: obj.averageRating, Photos: obj.photos});
   }
 
-  delTripAdmin(trip: Trip){
-    return this.http.delete<Trip>(this.baseUrl + 'api/v1/Trip');
+  delTripAdmin(trip){
+    return this.http.delete<any>(this.baseUrl + 'api/v1/Trip');
   }
 
 /** 
