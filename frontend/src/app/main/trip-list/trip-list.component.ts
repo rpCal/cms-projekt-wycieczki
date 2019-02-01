@@ -1,4 +1,4 @@
-import { FakeDb } from './../../mock/db.service';
+import { FakeDbService } from './../../service-fake-db/fake-db.service';
 import { ApiService } from './../../service-api/api.service';
 import { Router } from '@angular/router';
 import { SharedTripService } from './../../service-shared-trip/shared-trip.service';
@@ -17,7 +17,7 @@ export class TripListComponent implements OnInit {
   constructor(private sharedTrip: SharedTripService, 
               private router: Router,
               private api: ApiService,
-              private fakeDb: FakeDb) { }
+              private fakeDb: FakeDbService) { }
 
   ngOnInit() {
     this.trips = this.fakeDb.createTrips();

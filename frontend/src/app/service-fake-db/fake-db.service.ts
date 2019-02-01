@@ -1,14 +1,22 @@
+import { Trip } from './../model/trip';
+import { Reservation } from './../model/reservation';
 import { Injectable } from '@angular/core';
-import { Trip } from '../model/trip';
+import { User } from '../model/user';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class FakeDb {
+export class FakeDbService {
+
+  constructor() { }
+
+  trip1 = new Trip(1, 'Super Warszawa',  'Warszawa', new Date(2019, 1, 5), new Date(2019, 1,10), 700, 'Poznaj warszawe od zupełnie innej strony',  'Warszawa',  15, 10, false, 0, 3.42,  "http://tu.url.do.zdjęcia.html");
+  trip2 = new Trip(2, 'Łódzki odkrywca',  'Łódź', new Date(2019, 1, 5), new Date(2019, 1,12),  1500, "Łódzka wyprawa po muzeach ", "Warszawa", 10, 3, false , 0, 3.41, "http://tu.url.do.zdjęcia.html");
+  user1 = new User(1, 'test@test.pl', 'haslo', 'Jan', 'Nowak');
   createTrips() {
     const fakeTrips: Array<Trip> = [
-      new Trip(1, 'Super Warszawa',  'Warszawa', new Date(2019, 1, 5), new Date(2019, 1,10), 700, 'Poznaj warszawe od zupełnie innej strony',  'Warszawa',  15, 10, false, 0, 3.42,  "http://tu.url.do.zdjęcia.html"),
-      new Trip(2, 'Łódzki odkrywca',  'Łódź', new Date(2019, 1, 5), new Date(2019, 1,12),  1500, "Łódzka wyprawa po muzeach ", "Warszawa", 10, 3, false , 0, 3.41, "http://tu.url.do.zdjęcia.html"),
+      this.trip1,
+      this.trip2,
       new Trip(3, 'Gastro Wrocław', 'Wrocław', new Date(2019, 1, 7), new Date(2019, 1, 12), 2500, "Podróż po najlepszych restauracjach i knajpach we Wrocławi", "Wrocław", 15, 10, false, 0, 3.42,  "http://tu.url.do.zdjęcia.html"),
       new Trip(4, 'Rycerski Kraków', 'Kraków', new Date(2019, 1, 7), new Date(2019, 1,10), 1500, "Poznaj najciekawsze rycerskie zamkamarki krakowa", "Warszawa", 20, 6, false, 0, 3.42, "http://tu.url.do.zdjęcia.html"),
       new Trip(5, 'Super Warszawa',  'Warszawa', new Date(2019, 2, 5), new Date(2019, 2,10), 700, 'Poznaj warszawe od zupełnie innej strony',  'Warszawa',  15, 2, false, 0, 3.42,  "http://tu.url.do.zdjęcia.html"),
@@ -40,7 +48,9 @@ export class FakeDb {
   }
 
   createRezerwation() {
-    const fakeRezerwation: Array<Trip> = [
+    const fakeRezerwation: Array<Reservation> = [
+      new Reservation(1, false, 7, this.trip1, this.user1),
+      new Reservation(1, false, 6, this.trip2, this.user1)
     ];
     return fakeRezerwation;
   }
