@@ -19,23 +19,24 @@ let APP;
 const PORT = process.env.PORT || '5000';
 
 const setupConfig = () => {
-    const whitelist = [
-        'https://rpcal.github.io', // production
-        'http://localhost', // development
-        'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop' //postman
-    ];
-    const corsOptions = {
-        origin: (origin, callback) =>  {
-            if (origin === undefined || whitelist.indexOf(origin) !== -1) {
-                callback(null, true)
-            }else{
-                callback(new Error('Not allowed by CORS'))
-            }
-        }
-    }
+    // const whitelist = [
+    //     'https://rpcal.github.io', // production
+    //     'http://localhost', // development
+    //     'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop' //postman
+    // ];
+    // const corsOptions = {
+    //     origin: (origin, callback) =>  {
+    //         callback(null, true)
+    //         if (origin === undefined || whitelist.indexOf(origin) !== -1) {
+    //             callback(null, true)
+    //         }else{
+    //             callback(new Error('Not allowed by CORS'))
+    //         }
+    //     }
+    // }
     class MorganLoggerStream { write(text: string) {logger.info(text) } }
     APP.use(morgan('dev', { stream: new MorganLoggerStream() }));
-    APP.use(cors(corsOptions));
+    APP.use(cors());
     APP.use(compression());
     APP.use(expressStatusMonitor());
     APP.use(methodOverride())
@@ -50,7 +51,7 @@ const setupConfig = () => {
 const setupRoutes = () => {
     // ROUTES
     APP.use("", appRoutes);
-    APP.options('*', cors())
+    // APP.options('*', cors())
 
     // error handler for all the applications
     APP.use((err:AppError, req:Request, res:Response, next: NextFunction) => {
