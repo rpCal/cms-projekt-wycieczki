@@ -10,7 +10,7 @@ import { logger } from '../utils/logger';
 import { inspect } from 'util';
 import Rezerwation from './../models/Reservation';
 import Rating from './../models/Rating';
-import { not, string, empty, object, validate } from 'joi';
+import { not, string, empty, object, validate, number } from 'joi';
 
 export const postRegister = async (req: Request, res:Response, next: NextFunction) => {
     try{
@@ -33,7 +33,7 @@ export const postRegister = async (req: Request, res:Response, next: NextFunctio
         let user:any = await User.findOne({ "Email": Email });
 
         if(user != null){
-            return next({ message: "User with that email exists", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Użytkownik z takim adresem Email już istnieje", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let _user = new User({
@@ -56,16 +56,71 @@ export const postRegister = async (req: Request, res:Response, next: NextFunctio
     }
 }
 
+export const postProfile = async (req: any, res:Response, next: NextFunction) => {
+    try{
+
+        let requestSchema = object().keys({
+            _id:      string().min(24).required(),
+            Password: string().min(5).required(),
+            FirstName:string().min(2).required(),
+            LastName: string().min(2).required(),
+        });
+        
+        let validation = validate(req.body, requestSchema);
+
+        if(validation.error != null){
+            return next({ message: "Przekazane parametry są bledne", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let { _id, Password, FirstName, LastName } = req.body;
+
+        let loggedInUserId = req.user.id;
+        
+        if(loggedInUserId != _id){
+            return next({ message: "Nie możesz zmienić hasła", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let user:any = await User.findById(_id);
+
+        if(user == null){
+            return next({ message: "Nie znaleziono usera o takim id", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        user['Password'] = Password;
+        user['FirstName'] = FirstName;
+        user['LastName'] = LastName;
+
+        await user.save();
+
+        res.status(OK).json({ results: true });
+    }catch(err){
+      if (err.name === 'MongoError' && err.code === 11000) {
+        next({ message: err.message, status: NOT_ACCEPTABLE, stack: err.stack } as AppError);
+      }
+      next({ message: err, status: INTERNAL_SERVER_ERROR, stack: err.stack } as AppError);
+    }
+}
+
 export const postLogin = async (req: Request, res:Response, next: NextFunction) => {
     try{
+        let requestSchema = object().keys({
+            Password: string().min(5).required(),
+            Email: string().email().required(),
+        });
+        
+        let validation = validate(req.body, requestSchema);
+
+        if(validation.error != null){
+            return next({ message: "Przekazane parametry są bledne", status: NOT_ACCEPTABLE } as AppError);
+        }
         const { Email, Password } = req.body;
         let user:any = await User.findOne({ "Email": Email });
         if(user == null){
-            return next({ message: "User not found", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie znaleziono użytkownika z takim adresem Email", status: NOT_ACCEPTABLE } as AppError);
         }
         user.comparePassword(Password, function (err, isMatch) {
             if(err){ 
-                return next({ message: "Wrong password", status: NOT_ACCEPTABLE } as AppError);
+                return next({ message: "Nie prawidłowe hasło", status: NOT_ACCEPTABLE } as AppError);
                 }
             if(isMatch){
                 const secretOrKey = process.env.JWT_SECRET || 'secret';
@@ -86,7 +141,7 @@ export const postLogin = async (req: Request, res:Response, next: NextFunction) 
                     }
                 })
             }else{
-                return next({ message: "Wrong password", status: NOT_ACCEPTABLE } as AppError);
+                return next({ message: "Nie prawidłowe hasło", status: NOT_ACCEPTABLE } as AppError);
             }
         });
     }catch(err){
@@ -184,26 +239,36 @@ export const postLogout = async (req:Request, res:Response, next: NextFunction) 
 
 export const postRezerwation = async (req:any, res:Response, next: NextFunction) => {
     try{
+        let requestSchema = object().keys({
+            TripId: number().required(),
+            NumberOfPlaces: number().required(),
+        });
+        
+        let validation = validate(req.body, requestSchema);
+
+        if(validation.error != null){
+            return next({ message: "Przekazane parametry są bledne", status: NOT_ACCEPTABLE } as AppError);
+        }
         let { TripId, NumberOfPlaces } = req.body;
 
         if(!TripId){
-            return next({ message: "Trip Id is wrong", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Podane parametry są nieprawidłowe", status: NOT_ACCEPTABLE } as AppError);
         }
 
         if(!NumberOfPlaces){
-            return next({ message: "NumberOfPlaces is wrong", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Podane parametry są nieprawidłowe", status: NOT_ACCEPTABLE } as AppError);
         }
         
         let trip = await Trip.findById(TripId);
 
         if(!trip){
-            return next({ message: "cant find trip by passed id", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "NIe znaleziono wycieczki o podanym id", status: NOT_ACCEPTABLE } as AppError);
         }
 
         NumberOfPlaces = parseInt(NumberOfPlaces);
 
         if(trip['AvaiableNumberOfPlaces'] < NumberOfPlaces){
-            return next({ message: "too many numer of places", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie możesz zarejestrowac wycieczki na tak dużą liczbe osób", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let rezerwation = await Rezerwation.create({
@@ -214,7 +279,7 @@ export const postRezerwation = async (req:any, res:Response, next: NextFunction)
         });
 
         if(!rezerwation){
-            return next({ message: "cant create rezerwation by passed trip and user", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie można utworzyć rezerwacji", status: NOT_ACCEPTABLE } as AppError);
         }
 
         trip['AvaiableNumberOfPlaces'] = trip['AvaiableNumberOfPlaces'] - NumberOfPlaces;
@@ -238,22 +303,31 @@ export const postRezerwation = async (req:any, res:Response, next: NextFunction)
 
 export const postRezerwationPay = async (req:any, res:Response, next: NextFunction) => {
     try{
+        let requestSchema = object().keys({
+            RezerwationId: number().required(),
+        });
+        
+        let validation = validate(req.body, requestSchema);
+
+        if(validation.error != null){
+            return next({ message: "Przekazane parametry są bledne", status: NOT_ACCEPTABLE } as AppError);
+        }
         let { RezerwationId } = req.body;
 
         if(!RezerwationId){
-            return next({ message: "RezerwationId is wrong", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Podany parametr jest nie poprawny", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let rezerwation = await Rezerwation.findById(RezerwationId);
 
         if(!rezerwation){
-            return next({ message: "cant find rezerwation by passed id", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie mozna wyszukać rezerwacji", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let userId = req.user.id; 
 
         if(rezerwation['User'] != userId){
-            return next({ message: "you can only change your own rezerwation", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Brak uprawnien do takich działań", status: NOT_ACCEPTABLE } as AppError);
         }
 
         rezerwation['IsPayed'] = true;
@@ -275,29 +349,37 @@ export const postRezerwationPay = async (req:any, res:Response, next: NextFuncti
 
 export const postRezerwationCancel = async (req:any, res:Response, next: NextFunction) => {
     try{
+        let requestSchema = object().keys({
+            RezerwationId: number().required(),
+        });
+        
+        let validation = validate(req.body, requestSchema);
 
+        if(validation.error != null){
+            return next({ message: "Przekazane parametry są bledne", status: NOT_ACCEPTABLE } as AppError);
+        }
         let { RezerwationId } = req.body;
 
         if(!RezerwationId){
-            return next({ message: "RezerwationId is wrong", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Podany parametr jest nie prawidłowy", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let rezerwation = await Rezerwation.findById(RezerwationId);
 
         if(!rezerwation){
-            return next({ message: "cant find rezerwation by passed id", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie można znalezc rezerwacji o podanym id", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let trip = await Trip.findById(rezerwation['Trip']);
 
         if(!trip){
-            return next({ message: "cant find trip by passed id", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie mozna odszukac wycieczki o podanym id", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let userId = req.user.id; 
 
         if(rezerwation['User'] != userId){
-            return next({ message: "you can only change your own rezerwation", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie masz uprawnien do wykonania tej operacji", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let NumberOfPlaces = parseInt(rezerwation['NumberOfPlaces']);
@@ -322,31 +404,41 @@ export const postRezerwationCancel = async (req:any, res:Response, next: NextFun
 
 export const postRating = async (req:any, res:Response, next: NextFunction) => {
     try{
+        let requestSchema = object().keys({
+            TripId: number().required(),
+            RateMark: number().min(-1).max(7).required(),
+            Comment: string().required()
+        });
+        
+        let validation = validate(req.body, requestSchema);
 
+        if(validation.error != null){
+            return next({ message: "Przekazane parametry są bledne", status: NOT_ACCEPTABLE } as AppError);
+        }
         let { Comment, RateMark, TripId } = req.body;
 
         if(!Comment){
-            return next({ message: "Comment is wrong", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Parametr jest nieprawidłowy", status: NOT_ACCEPTABLE } as AppError);
         }
 
         if(!RateMark){
-            return next({ message: "RateMark is wrong", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Parametr jest nieprawidłowy", status: NOT_ACCEPTABLE } as AppError);
         }
 
         RateMark = parseInt(RateMark, 10);
         
         if(RateMark < 0 || RateMark > 6){
-            return next({ message: "RateMark should be in values [0-6]", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Ocena powinna być z przeciału [0-6]", status: NOT_ACCEPTABLE } as AppError);
         }
 
         if(!TripId){
-            return next({ message: "TripId is wrong", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Parametr jest nieprawidłowy", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let trip = await Trip.findById(TripId);
 
         if(!trip){
-            return next({ message: "cant find trip by passed id", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie znaleziono wycieczki", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let userId = req.user.id; 
@@ -359,7 +451,7 @@ export const postRating = async (req:any, res:Response, next: NextFunction) => {
         });
 
         if(!rating){
-            return next({ message: "cant create rating", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie mozna utworzyć oceny", status: NOT_ACCEPTABLE } as AppError);
         }
 
         await __updateAverageRating();
@@ -383,29 +475,37 @@ export const postRating = async (req:any, res:Response, next: NextFunction) => {
 
 export const deleteRating = async (req:any, res:Response, next: NextFunction) => {
     try{
+        let requestSchema = object().keys({
+            RatingId: number().required(),
+        });
+        
+        let validation = validate(req.body, requestSchema);
 
+        if(validation.error != null){
+            return next({ message: "Przekazane parametry są bledne", status: NOT_ACCEPTABLE } as AppError);
+        }
         let { RatingId } = req.body;
 
         if(!RatingId){
-            return next({ message: "RatingId is wrong", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Parametr jest nieprawidłowy", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let rating = await Rating.findById(RatingId);
 
         if(!rating){
-            return next({ message: "cant find rating by passed id", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie mozna odszukać oceny", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let trip = await Trip.findById(rating['Trip']);
 
         if(!trip){
-            return next({ message: "cant find trip by passed id", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Nie mozna odszukać wycieczki", status: NOT_ACCEPTABLE } as AppError);
         }
 
         let userId = req.user.id; 
 
         if(rating['User'] != userId){
-            return next({ message: "you can only change your own ratings", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Możesz usunąć jedynie własne oceny", status: NOT_ACCEPTABLE } as AppError);
         }
 
         await Rating.deleteOne({ _id: rating._id });
@@ -425,9 +525,10 @@ export const deleteRating = async (req:any, res:Response, next: NextFunction) =>
 
 export const getRating = async (req:any, res:Response, next: NextFunction) => {
     try{
+        
         let { TripId } = req.query;
         if(!TripId){
-            return next({ message: "TripId is wrong", status: NOT_ACCEPTABLE } as AppError);
+            return next({ message: "Parametr jest nieprawidłowy", status: NOT_ACCEPTABLE } as AppError);
         }
         let results = await Rating.find({ Trip: TripId }).sort({ createdAt: -1 });
         res.status(OK).send({ results })

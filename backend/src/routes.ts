@@ -11,6 +11,7 @@ import {
   postLogout,
   postRegister, 
   getProfile,
+  postProfile,
   getHomePage,
   getPublicTrip,
   postRezerwation,
@@ -30,15 +31,15 @@ router.post('/auth/login', postLogin);
 router.post('/auth/logout', postLogout);
 
 router.get('/auth/profile', getUserFromJWTToken, getProfile);
+router.post('/auth/profile', getUserFromJWTToken, postProfile);
+
 router.post('/auth/Reservation', getUserFromJWTToken, postRezerwation);
 router.post('/auth/Reservation/pay', getUserFromJWTToken, postRezerwationPay);
 router.post('/auth/Reservation/cancel', getUserFromJWTToken, postRezerwationCancel);
 router.post('/auth/Reservation', getUserFromJWTToken, postRezerwation);
 
 router.post('/auth/Rating', getUserFromJWTToken, postRating);
-
-  //!!! czy tu nie powinien być post, używasz w deleteRating req.body a w delete nie mamy body (z tego co kojarze), więc może jak trip post i dodać do url /cancel
-router.delete('/auth/Rating', getUserFromJWTToken, deleteRating);
+router.post('/auth/Rating/cancel', getUserFromJWTToken, deleteRating);
 
 router.get('/public/Rating', getRating); 
 router.get('/public/Trip', getPublicTrip);
