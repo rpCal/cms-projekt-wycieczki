@@ -1,3 +1,33 @@
-<p>
-  trip-rating works!
-</p>
+<div class=container>
+    
+    <div class="rating-label">
+      <h2>{{trip.name}}</h2>
+    </div>
+            
+    <div class="trip-image">
+        <img src="./assets/city_image_example_cracow.png">
+    </div>
+    
+
+    <div class="trip-rating">
+      <div class="trip-info" *ngFor="let rating of ratings">
+        <div class=label-wrapper>
+          <div >Kto:</div> 
+          <div >{{rating.user.email}}</div>
+        </div>
+        <div class=label-wrapper>
+          <div>Ocena:</div> 
+          <div>{{rating.rateMark}}</div>
+        </div>
+        <div class="comment-label">Komentarz:</div>
+        <div class="comment">
+          <div>
+            {{rating.comment}}
+          </div>
+        </div>        
+      </div>    
+    </div>
+    
+    <button (click)="backToPrevious()">Powrót</button>
+    
+</div>

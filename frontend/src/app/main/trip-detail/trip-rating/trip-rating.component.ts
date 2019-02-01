@@ -1,8 +1,9 @@
+import { Location } from '@angular/common';
 import { FakeDbService } from './../../../service-fake-db/fake-db.service';
 import { Rating } from 'src/app/model/rating';
 import { ApiService } from './../../../service-api/api.service';
 import { Trip } from './../../../model/trip';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,24 +12,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trip-rating.component.scss']
 })
 export class TripRatingComponent implements OnInit {
-  rating: Rating[];
+  ratings: Rating[];
+  trip: Trip;
 
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
-    private fakeDb: FakeDbService
+    private fakeDb: FakeDbService,
+    private location: Location,
+    private router: Router
   ) { 
     this.route
     .queryParams
     .subscribe(params => {
-      const trip: Trip = JSON.parse(params['trip']);
+      this.trip = JSON.parse(params['trip']);
+      this.ratings = fakeDb.createRating().filter(r => r.trip.id === this.trip.id);
       // api.getRating( trip.id ); //TODO 
     });
     //TO DELETE
-    fakeDb.createRating();
   }
 
   ngOnInit() {
+
   }
+  
+  backToPrevious() {
+    this.router.navigate(['main-page']);
+  }
+  
 
 }

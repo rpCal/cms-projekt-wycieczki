@@ -1,0 +1,102 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    
+    button{
+        background: #f47c48;
+        width: 200px;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 18px;
+        line-height: 35px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        border: 1px solid #f47c48;
+        cursor: pointer;
+        transition: 0.2s all ease-in-out;
+        outline: 0;
+    }
+    
+    button:hover{
+        border: 1px solid #f47c48;
+        color: #f47c48;
+        background: #fff;
+    }
+    
+
+    .rating-label{
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+        box-shadow: 6px 6px 10px #f47c4867;
+        background: #fde6da;
+
+        h2{
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+    .trip-image{
+        display: flex;
+        justify-content: center;
+        img{
+            width: 250px;
+            height: 230px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .trip-rating{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+
+        .trip-info{
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #fde6da;
+            box-shadow: 6px 6px 10px #f47c4867;
+            width: 200px; 
+            margin: 10px;
+
+            .label-wrapper{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 200px;
+                margin-bottom: 5px;
+                font-size: 18px;
+            }
+            
+            .comment-label{
+                width: 200px;
+                text-align: left;
+                font-size: 18px;
+            }
+  
+            .comment{
+                white-space: pre-wrap;
+                width: 200px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                flex-flow: wrap;
+                margin-bottom: 5px;
+            }
+        } 
+
+
+        
+    }
+
+}

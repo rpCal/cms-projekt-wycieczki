@@ -29,7 +29,7 @@ export class TripDetailComponent implements OnInit {
   }
 
   backToPrevious() {
-      this.location.back();
+    this.router.navigate(['main-page']);
   }
 
   modifyTrip(){
