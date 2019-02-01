@@ -6,7 +6,7 @@ const Types = mongoose.Schema.Types;
 const userSchema = new mongoose.Schema({
   FirstName: {type: Types.String, access: 'public', required: true },
   LastName: {type: Types.String, access: 'public', required: true },
-  Email: {type: Types.String, access: 'public', required: false, unique: true},
+  Email: {type: Types.String, access: 'public', required: false},
   Password: {type: Types.String, access: 'public', required: false},
   PasswordResetToken: {type: Types.String, access: 'public', required: false},
   PasswordResetExpires: {type: Types.Date, access: 'public', required: false},
