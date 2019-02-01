@@ -13,8 +13,8 @@ export class FakeDbService {
 
   trip1 = new Trip(1, 'Super Warszawa',  'Warszawa', new Date(2019, 1, 5), new Date(2019, 1,10), 700, 'Poznaj warszawe od zupełnie innej strony',  'Warszawa',  15, 10, false, 0, 3.42,  "http://tu.url.do.zdjęcia.html");
   trip2 = new Trip(2, 'Łódzki odkrywca',  'Łódź', new Date(2019, 1, 5), new Date(2019, 1,12),  1500, "Łódzka wyprawa po muzeach ", "Warszawa", 10, 3, false , 0, 3.41, "http://tu.url.do.zdjęcia.html");
-  user1 = new User(1, 'test@test.pl', 'haslo', 'Jan', 'Nowak');
-  user2 = new User(1, 'test@test.pl', 'haslo', 'Janusz', 'Kowalski');
+  user1 = new User({Id: 1, Email: 'test@test.pl', Password: 'haslo', FirstName: 'Jan', LastName: 'Nowak'});
+  user2 = new User({Id: 1, Email: 'test@test.pl', Password: 'haslo', FirstName: 'Janusz', LastName: 'Kowalski'});
   
   createTrips() {
     const fakeTrips: Array<Trip> = [

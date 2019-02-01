@@ -17,8 +17,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'https://pjatk-travel-agency.herokuapp.com/';
-  constructor(private http: HttpClient) { }
+  // private baseUrl = 'https://pjatk-travel-agency.herokuapp.com/';
+  private baseUrl = 'http://localhost:5000/';
+  constructor(private http: HttpClient) { 
+    
+  }
 
 /** - Pobieranie listy wycieczek wraz z filtrowaniem, sortowaniem, paginacja 
  * (plus filtrowanie po id, Name, City, Date, Price, AvaiableNumberOfPlaces)
@@ -71,7 +74,7 @@ login(email, password){
  * RETURN User
  */
   register(user: User){
-    return this.http.post<User>(this.baseUrl + '/auth/register' , { Email: user.email, Password: user.password, FirstName: user.firstName, LastName: user.lastName });
+    return this.http.post<any>(this.baseUrl + '/auth/register' , { Email: user.Email, Password: user.Password, FirstName: user.FirstName, LastName: user.LastName });
   }
 
  /**

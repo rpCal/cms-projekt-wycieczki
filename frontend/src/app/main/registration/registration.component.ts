@@ -3,6 +3,7 @@ import { User } from './../../model/user';
 import { LoggerService } from 'src/app/service-logger/logger.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,10 +12,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
+  loading: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private log: LoggerService,
+    public dataService: DataService,
     private api: ApiService
   ) { }
 
@@ -29,9 +32,33 @@ export class RegistrationComponent implements OnInit {
 
   sendToServer(){
     if(this.registrationForm.valid){
-      const user: User = new User(null, this.registrationForm.controls['email'].value, this.registrationForm.controls['password'].value, this.registrationForm.controls['imie'].value, this.registrationForm.controls['nazwisko'].value); 
-      // api do rejestracji TODO
-      this.log.openSnackBar("TU INTEGRACJA Z API");
+      const user: User = new User({
+        IsAdmin: false, 
+        Email: this.registrationForm.controls['email'].value, 
+        Password: this.registrationForm.controls['password'].value, 
+        FirstName: this.registrationForm.controls['imie'].value, 
+        LastName: this.registrationForm.controls['nazwisko'].value
+      }); 
+      this.loading = true;
+      this.api.register(user).subscribe(response => {
+        this.loading = false;
+        if(response.results && response.results.user){
+          this.log.openSnackBar("Pomyślnie zarejestrowano");
+          this.api.login(user.Email, user.Password)
+          .subscribe(response => {
+            if(response.results && response.results.token && response.results.user){
+              this.dataService.login(response.results.token, response.results.user);
+              this.log.openSnackBar("Pomyślnie zalogowano");
+              this.loading = false;
+            }
+          }, error => {
+            this.log.openSnackBar(error.message);
+            this.loading = false;
+          });
+      }}, error => {
+          this.log.openSnackBar(error.message);
+          this.loading = false;
+        });
     } else {
       this.log.openSnackBar("błąd danych")
     }

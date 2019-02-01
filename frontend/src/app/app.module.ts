@@ -11,7 +11,8 @@ import { FooterComponent } from './footer/footer.component';
 import { NavComponent } from './nav/nav.component';
 import { MainPageComponent } from './main/main-page/main-page.component';
 import { TripListComponent } from './main/trip-list/trip-list.component';
-import { LoginComponent } from './main/login/login.component';
+import { LoginComponent } from './main/auth/login/login.component';
+import { LogoutComponent } from './main/auth/logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BurgerComponent } from './nav/burger/burger.component';
 import { MaterialModule } from './_modules/material.module';
@@ -34,6 +35,7 @@ import { TripRatingComponent } from './main/trip-detail/trip-rating/trip-rating.
     MainPageComponent,
     TripListComponent,
     LoginComponent,
+    LogoutComponent,
     BurgerComponent,
     TripDetailComponent,
     TripAddComponent,

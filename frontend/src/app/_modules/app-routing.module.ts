@@ -1,7 +1,8 @@
 import { TripRatingComponent } from './../main/trip-detail/trip-rating/trip-rating.component';
 import { AuthGuard } from './../auth-guard/auth.guard';
 import { TripDetailComponent } from './../main/trip-detail/trip-detail.component';
-import { LoginComponent } from '../main/login/login.component';
+import { LoginComponent } from '../main/auth/login/login.component';
+import { LogoutComponent } from '../main/auth/logout/logout.component';
 import { TripListComponent } from '../main/trip-list/trip-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,7 +15,9 @@ const routes: Routes = [
   { path: '', redirectTo: "main-page", pathMatch: "full"},
   { path: "main-page", component: MainPageComponent },
   { path: "trip-list", component: TripListComponent },
-  { path: "login", component: LoginComponent },
+  { path: "auth/login", component: LoginComponent },
+  { path: "auth/logout", component: LogoutComponent },
+  // { path: "/auth/profile", component: ProfileComponent },
   { path: "trip-detail", component: TripDetailComponent },
   { path: "trip-add", component: TripAddComponent },
   { path: "user-reservation", component: RezerwationUserComponent },

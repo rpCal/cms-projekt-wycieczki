@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AuthenticationService } from '../../service-authentication/authentication.service';
+import { AuthenticationService } from '../../../service-authentication/authentication.service';
 import { LoggerService } from 'src/app/service-logger/logger.service';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
         private log: LoggerService,
         private route: ActivatedRoute,
         private router: Router,
+        public dataService: DataService,
         private authenticationService: AuthenticationService) {}
 
     ngOnInit() {
@@ -37,20 +39,17 @@ export class LoginComponent implements OnInit {
         this.loading = true;    
         this.authenticationService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
             .subscribe(
-              data => {
-                window.location.reload();
+              response => {
                 this.loading = false;
-                window.location.reload();
+                if(response.results && response.results.token && response.results.user){
+                    this.dataService.login(response.results.token, response.results.user);
+                    this.log.openSnackBar("Pomyślnie zalogowano");
+                    this.router.navigate(['/'])
+                }
             },
               error => {
                 this.log.openSnackBar(error.message);
                 this.loading = false;
               });
-               
-    }
-
-    logout(){
-        this.authenticationService.logout();
-        window.location.reload();
     }
 }

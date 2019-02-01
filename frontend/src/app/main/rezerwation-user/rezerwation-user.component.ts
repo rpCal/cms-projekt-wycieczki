@@ -25,7 +25,7 @@ export class RezerwationUserComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.reservations = this.fakeDb.createRezerwation().filter(r => r.user.firstName === 'Jan');
+    this.reservations = this.fakeDb.createRezerwation().filter(r => r.user.FirstName === 'Jan');
   }
 
   openMarkDialog(reservation: Reservation) {

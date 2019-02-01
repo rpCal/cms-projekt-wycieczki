@@ -1,7 +1,7 @@
 <div class='form-login-wrapper'>
   <form [formGroup]="loginForm">
     <h2>Logowanie</h2>
-    <div *ngIf="isLogin==false">
+    <div>
         <div>
             <label for="email">Email</label>
             <input type="text" placeholder="email@example.com" formControlName="email"  />
@@ -11,11 +11,8 @@
             <input type="password" placeholder="*****" formControlName="password" />
         </div>
     </div>
-    <div *ngIf="isLogin==false">
+    <div >
         <button (click)="login()">Zaloguj się</button>
-    </div>
-    <div *ngIf=isLogin>
-        <button (click)="logout()">Wyloguj się</button>
     </div>
   </form>
 

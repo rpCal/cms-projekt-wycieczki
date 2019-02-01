@@ -4,8 +4,16 @@
         <li routerLink="/trip-list" routerLinkActive="active">Lista wycieczek</li>
         <li (click)="goToDodaj()" routerLinkActive="active">Dodaj</li>
         <li routerLink="/user-reservation" routerLinkActive="active">Rezerwacje</li>
-        <li routerLink="/login" routerLinkActive="active"><i class="fas fa-user"></i> Logowanie</li>
         <li routerLink="/search" routerLinkActive="active"><i class="fas fa-search"></i><span id="szukaj-li">Szukaj</span></li>
+        <li *ngIf="dataService.state.isAuth == false" routerLink="/auth/login" routerLinkActive="active">
+            <i class="fas fa-user"></i> Logowanie
+        </li>
+        <li *ngIf="dataService.state.isAuth == true" routerLink="/auth/profile" routerLinkActive="active">
+            {{ dataService.state.user.FirstName }} &nbsp; {{ dataService.state.user.LastName }}
+        </li>
+        <li *ngIf="dataService.state.isAuth == true" routerLink="/auth/logout" routerLinkActive="active">
+            Wyloguj
+        </li>
         <app-burger (click)='slideMenu()'></app-burger>
     </ul>
 </div>

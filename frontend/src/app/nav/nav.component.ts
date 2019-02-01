@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { AuthenticationService } from './../service-authentication/authentication.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+
 import {
   trigger,
   state,
@@ -9,10 +10,13 @@ import {
   transition
 } from '@angular/animations';
 
+import { DataService } from './../data.service';
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
+  providers: [DataService],
   animations: [
     trigger('menuToggle', [
       state('slideLeft', style({
@@ -37,10 +41,10 @@ export class NavComponent implements OnInit {
   role: string = "";
   
   constructor(private auth: AuthenticationService,
-    private router:Router) { }
+    public dataService: DataService,
+    private router:Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   slideMenu(){
     this.isMenuToggle = this.isMenuToggle ? false : true;
