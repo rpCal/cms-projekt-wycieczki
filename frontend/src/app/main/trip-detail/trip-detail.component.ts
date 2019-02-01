@@ -5,7 +5,7 @@ import { Trip } from './../../model/trip';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { RezerwationAddComponent } from '../rezerwation-add/rezerwation-add.component';
+import { RezerwationAddComponent } from './rezerwation-add/rezerwation-add.component';
 
 
 @Component({
