@@ -32,9 +32,12 @@ export class TripAddComponent implements OnInit {
       } else {
         this.trip = JSON.parse(tripJson);
       }
+
+      this.tripForm = this.createFormGroup();
+      this.tripForm.controls["departureDate"].setValue(this.trip.departureDate);
+      this.tripForm.controls["arrivalDate"].setValue(this.trip.arrivalDate);
     });
     
-    this.tripForm = this.createFormGroup();
   }
 
   createFormGroup() {
@@ -64,21 +67,35 @@ export class TripAddComponent implements OnInit {
   }
 
   sendToServer(){
-    if(this.tripForm.valid && this.tripForm.controls["departureDate"].value < this.tripForm.controls["arrivalDate"].value){
+
+
+    if(this.tripForm.valid){
+      const id = this.trip._id;
       this.trip = this.tripForm.value;
+      console.log(this.trip);
+      this.trip._id = id;
+
       if(!this.trip._id){
         this.trip.availableNumberOfPlaces = this.trip.numberOfPlaces;
       }
       if(this.trip.availableNumberOfPlaces > this.trip.numberOfPlaces){
         this.log.openSnackBar("Nie można zmienić, za mało wolnych miejsc");
       } else {
-        this.api.postTripAdmin(this.trip).subscribe(t => {
-          this.log.openSnackBar("Wysylanie się powiodło")
-          
-          err => {
-            this.log.openSnackBar("Coś się nie powiodło, skontaktuj się z administratorem")  
-          }
-        });
+        if(!this.trip._id){
+          this.api.postTripAdmin(this.trip).subscribe(t => {
+            this.log.openSnackBar("Wysylanie się powiodło")
+            err => {
+              this.log.openSnackBar("Coś się nie powiodło, skontaktuj się z administratorem")  
+            }
+          });
+        } else {
+          this.api.modifyTrip(this.trip).subscribe( t => {
+            console.log(t);
+            this.log.openSnackBar("Aktualizacja się powiodła")
+          })
+        }
+
+        
       }
     } else {
       this.validateMessage();

@@ -2,6 +2,7 @@
     <div *ngIf="trip"  class="trip-detail">
         <div class=block-icon>
             <button (click)="modifyTrip()" class="edit"><i id="wrench" class="fa fa-wrench"></i></button>
+            <button (click)="deleteTrip()" class="rating"><i id="wrench" class="fas fa-trash"></i></button>
             <button (click)="ratingTrip()" class="rating"><i id="wrench" class="fas fa-star"></i></button>
         </div>
         <h2>{{trip.name}}</h2>

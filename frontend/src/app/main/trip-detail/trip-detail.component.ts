@@ -1,3 +1,4 @@
+import { ApiService } from './../../service-api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from './../../service-authentication/authentication.service';
 import { Trip } from './../../model/trip';
@@ -5,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { RezerwationAddComponent } from './rezerwation-add/rezerwation-add.component';
+import { LoggerService } from 'src/app/service-logger/logger.service';
 
 
 @Component({
@@ -18,7 +20,9 @@ export class TripDetailComponent implements OnInit {
               private dialog: MatDialog,
               private auth: AuthenticationService,
               private router: Router,
-              private route: ActivatedRoute, ) { }
+              private route: ActivatedRoute, 
+              private log: LoggerService,
+              private api: ApiService) { }
 
   ngOnInit() {
     this.route
@@ -30,6 +34,13 @@ export class TripDetailComponent implements OnInit {
 
   backToPrevious() {
     this.router.navigate(['main-page']);
+  }
+
+  deleteTrip(){
+    this.api.delTrip(this.trip).subscribe( t => {
+      this.log.openSnackBar("Trip usunięty");
+      this.router.navigate(['main-page']);
+    });
   }
 
   modifyTrip(){

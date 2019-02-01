@@ -20,7 +20,7 @@ export class MainPageComponent implements OnInit {
     this.trips = new Array<Trip>();
     this.api.getTrips().subscribe(trips => {
       trips.results.forEach(t => {
-        if(t.Promote > 1){
+        if(t.Promote > 0){
           this.trips.push(Trip.createTripFromApiTrip(t));
         }
       });

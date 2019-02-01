@@ -22,6 +22,7 @@ export class Trip {
     }
 
     static createTripFromApiTrip(obj){
-        return new Trip(obj._id, obj.Name, obj.City, obj.DepartureDate, obj.ArrivalDate, obj.Price, obj.Describe, obj.DeparturePlace, obj.NumberOfPlaces, obj.AvailableNumberOfPlaces, obj.Archive, obj.Promote, obj.AverageRating, obj.Photos[0]);
+        const trip = new Trip(obj._id, obj.Name, obj.City, obj.DepartureDate, obj.ArrivalDate, obj.Price, obj.Describe, obj.DeparturePlace, obj.NumberOfPlaces, obj.AvaiableNumberOfPlaces, obj.Archive, obj.Promote, obj.AverageRating, obj.Photos[0]);
+        return trip;
     }
 }

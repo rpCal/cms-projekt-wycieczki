@@ -52,6 +52,14 @@ getTrips(parameters?: Parameters) {
 
 }
 
+modifyTrip(obj){
+  return this.http.patch<any>(this.baseUrl + '/api/v1/Trip/' + obj._id, { id: obj._id, Name: obj.name, City: obj.city, DepartureDate: obj.departureDate, ArrivalDate: obj.arrivalDate, Price: obj.price, Describe: obj.describe, DeparturePlace: obj.departurePlace, NumberOfPlaces: obj.numberOfPlaces, AvaiableNumberOfPlaces: obj.availableNumberOfPlaces, Archive: obj.archive, Promote: obj.promote, AverageRating: obj.averageRating, Photos: obj.photos});
+}
+
+delTrip(trip){
+  return this.http.delete<any>(this.baseUrl + '/api/v1/Trip/' + trip._id);
+}
+
 /** 
 * - LOGOWANIE:
 * URL POST /auth/login
