@@ -10,18 +10,44 @@ import { logger } from '../utils/logger';
 import { inspect } from 'util';
 import Rezerwation from './../models/Reservation';
 import Rating from './../models/Rating';
+import { not, string, empty, object, validate } from 'joi';
 
 export const postRegister = async (req: Request, res:Response, next: NextFunction) => {
     try{
-      let _user = new User({
-        Email: req.body.Email,
-        Password: req.body.Password,
-        FirstName: req.body.FirstName,
-        LastName: req.body.LastName,
-        IsAdmin: false,
-      });
-      let newUser = await _user.save();
-      res.status(OK).json({ results: newUser });
+
+        let requestSchema = object().keys({
+            Email:    string().min(4).email().required(),
+            Password: string().min(5).required(),
+            FirstName:string().min(2).required(),
+            LastName: string().min(2).required(),
+        });
+        
+        let validation = validate(req.body, requestSchema);
+
+        if(validation.error != null){
+            return next({ message: "Przekazane parametry są bledne", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let { Email, Password, FirstName, LastName } = req.body;
+        
+        let user:any = await User.findOne({ "Email": Email });
+
+        if(user != null){
+            return next({ message: "User with that email exists", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let _user = new User({
+            Email: Email,
+            Password: Password,
+            FirstName: FirstName,
+            LastName: LastName,
+            IsAdmin: false,
+        });
+
+
+        let newUser = await _user.save();
+
+        res.status(OK).json({ results: newUser });
     }catch(err){
       if (err.name === 'MongoError' && err.code === 11000) {
         next({ message: err.message, status: NOT_ACCEPTABLE, stack: err.stack } as AppError);
