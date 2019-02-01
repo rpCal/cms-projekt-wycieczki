@@ -17,8 +17,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ApiService {
-  // private baseUrl = 'https://pjatk-travel-agency.herokuapp.com/';
-  private baseUrl = 'http://localhost:5000/';
+  private baseUrl = window.location.host == "localhost" ? 'http://localhost:5000/' : 'https://pjatk-travel-agency.herokuapp.com/';
   constructor(private http: HttpClient) { 
     
   }
