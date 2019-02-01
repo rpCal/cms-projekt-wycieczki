@@ -17,10 +17,14 @@ export class MainPageComponent implements OnInit {
               private fakeDb: FakeDbService) { }
 
   ngOnInit() {
-    this.trips = this.fakeDb.createTrips();
-    // let res = this.api.getTrips().subscribe(trips => {
-    //   this.trips = trips;
-    // })
+    this.trips = new Array<Trip>();
+    this.api.getTrips().subscribe(trips => {
+      trips.results.forEach(t => {
+        if(t.Promote > 1){
+          this.trips.push(Trip.createTripFromApiTrip(t));
+        }
+      });
+    })
   }
 
   getDetailTrip(trip: Trip){

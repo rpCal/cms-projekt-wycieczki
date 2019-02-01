@@ -21,4 +21,7 @@ export class Trip {
         return new Trip(null,null,null,null,null,null,null,null,null,null,null,null,0,null);
     }
 
+    static createTripFromApiTrip(obj){
+        return new Trip(obj.Id, obj.Name, obj.City, obj.DepartureDate, obj.ArrivalDate, obj.Price, obj.Describe, obj.DeparturePlace, obj.NumberOfPlaces, obj.AvailableNumberOfPlaces, obj.Archive, obj.Promote, obj.AverageRating, obj.Photos[0]);
+    }
 }

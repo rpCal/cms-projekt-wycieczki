@@ -43,13 +43,12 @@ getTrips(parameters?: Parameters) {
     params = (parameters.where_Price) ? params : params.append('', parameters.where_Price);
     params = (parameters.where_Promote) ? params : params.append('', parameters.where_Promote);
     params = (parameters.where_AvaiableNumberOfPlaces) ? params : params.append('', parameters.where_AvaiableNumberOfPlaces);
-    return this.http.get<Trip[]>(this.baseUrl + '/public/Trip', { params: params })
+    return this.http.get<any>(this.baseUrl + '/public/Trip', { params: params })
   } else {
-    return this.http.get<Trip[]>(this.baseUrl + '/public/Trip');
+    return this.http.get<any>(this.baseUrl + '/public/Trip');
   }  
 
 }
-
 
 /** 
 * - LOGOWANIE:

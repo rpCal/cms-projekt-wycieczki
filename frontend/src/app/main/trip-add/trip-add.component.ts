@@ -65,7 +65,10 @@ export class TripAddComponent implements OnInit {
   sendToServer(){
     if(this.tripForm.valid && this.tripForm.controls["departureDate"].value < this.tripForm.controls["arrivalDate"].value){
       this.log.openSnackBar("Tu wysłanie do api")
-      this.api.postTripAdmin(this.trip);
+
+      this.api.postTripAdmin(this.trip).subscribe(t => {
+        console.log(t);
+      });
     } else {
       this.validateMessage();
     }

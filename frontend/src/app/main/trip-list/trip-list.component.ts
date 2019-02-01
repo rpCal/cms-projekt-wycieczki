@@ -18,10 +18,10 @@ export class TripListComponent implements OnInit {
               private fakeDb: FakeDbService) { }
 
   ngOnInit() {
-    this.trips = this.fakeDb.createTrips();
-    // let res = this.api.getTrips().subscribe(trips => {
-    //   this.trips = trips;
-    // })
+    this.trips = new Array<Trip>();
+    this.api.getTrips().subscribe(trips => {
+      trips.results.forEach(t => this.trips.push(Trip.createTripFromApiTrip(t)));
+    })
   }
 
   getDetailTrip(trip: Trip){
