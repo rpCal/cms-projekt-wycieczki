@@ -13,6 +13,7 @@ import { MainPageComponent } from './main/main-page/main-page.component';
 import { TripListComponent } from './main/trip-list/trip-list.component';
 import { LoginComponent } from './main/auth/login/login.component';
 import { LogoutComponent } from './main/auth/logout/logout.component';
+import { ProfileComponent } from './main/auth/profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BurgerComponent } from './nav/burger/burger.component';
 import { MaterialModule } from './_modules/material.module';
@@ -36,6 +37,7 @@ import { TripRatingComponent } from './main/trip-detail/trip-rating/trip-rating.
     TripListComponent,
     LoginComponent,
     LogoutComponent,
+    ProfileComponent,
     BurgerComponent,
     TripDetailComponent,
     TripAddComponent,

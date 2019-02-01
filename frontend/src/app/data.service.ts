@@ -66,6 +66,17 @@ export class DataService {
     this.setAuth(undefined, undefined);
   }
 
+  public updateProfile(user: User){
+    localStorage.setItem('pjatk-travel-agency-user', JSON.stringify({
+      _id: user._id,
+      Email: user.Email,
+      FirstName: user.FirstName,
+      LastName: user.LastName,
+      IsAdmin: user.IsAdmin,
+    }));
+    this.setAuth(this.state.token, user);
+  }
+
   private readFromLocalStorage() {
     let token = localStorage.getItem('pjatk-travel-agency-jwt');
     let userData = localStorage.getItem('pjatk-travel-agency-user');

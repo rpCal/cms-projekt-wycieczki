@@ -76,6 +76,12 @@ login(email, password){
     return this.http.post<any>(this.baseUrl + '/auth/register' , { Email: user.Email, Password: user.Password, FirstName: user.FirstName, LastName: user.LastName });
   }
 
+
+  updateProfile(user: User){
+    return this.http.post<any>(this.baseUrl + '/auth/profile' , { _id: user._id, Password: user.Password, FirstName: user.FirstName, LastName: user.LastName });
+  }
+  
+
  /**
  * - POBIERZ AKTUALNEGO USERA
  * URL GET /auth/profile
@@ -186,7 +192,7 @@ login(email, password){
   */
  //!!! czy tu nie powinien być post, używasz w deleteRating req.body a w delete nie mamy body (z tego co kojarze), więc może jak trip post i dodać do url /cancel
   deleteRating(ratingId: number){
-    return this.http.delete<Rating>(this.baseUrl + '/auth/Rating');
+    return this.http.post<Rating>(this.baseUrl + '/auth/Rating/cancel', {RatingId: ratingId});
   }
 
 }

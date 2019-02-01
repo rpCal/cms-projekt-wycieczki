@@ -1,0 +1,34 @@
+<div class='form-login-wrapper'>
+  <h2> Witaj, {{ dataService.state.user.FirstName }} </h2>
+
+  <div class="form-block">
+      <form [formGroup]="profileForm">
+    
+          <div class=fieldset>
+            <label>Email:</label>
+            <input type="text" formControlName="email" disabled="disabled">
+          </div>
+        
+          <div class=fieldset>
+            <label>Imie:</label>
+            <input type="text" formControlName="imie" >
+          </div>
+    
+          <div class=fieldset>
+            <label>Nazwisko:</label>
+            <input type="text" formControlName="nazwisko" >
+          </div>
+    
+          <div class=fieldset>
+            <label>Hasło:</label>
+            <input type="password" formControlName="password">
+          </div>
+  
+          <div class=fieldset>
+            <button id="but1" (click)="sendToServer()" *ngIf="loading == false">Aktualizuj profil</button>
+            <button id="but1" (click)="sendToServer()" *ngIf="loading == true">Czekaj...</button>
+          </div>
+    
+        </form>
+  </div>
+</div>

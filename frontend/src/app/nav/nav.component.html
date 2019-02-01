@@ -8,7 +8,8 @@
         <li *ngIf="dataService.state.isAuth == false" routerLink="/auth/login" routerLinkActive="active">
             <i class="fas fa-user"></i> Logowanie
         </li>
-        <li *ngIf="dataService.state.isAuth == true" routerLink="/auth/profile" routerLinkActive="active">
+        <li *ngIf="dataService.state.isAuth == true" routerLink="/auth/profile" routerLinkActive="active" 
+        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;">
             {{ dataService.state.user.FirstName }} &nbsp; {{ dataService.state.user.LastName }}
         </li>
         <li *ngIf="dataService.state.isAuth == true" routerLink="/auth/logout" routerLinkActive="active">

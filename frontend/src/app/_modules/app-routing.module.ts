@@ -3,6 +3,7 @@ import { AuthGuard } from './../auth-guard/auth.guard';
 import { TripDetailComponent } from './../main/trip-detail/trip-detail.component';
 import { LoginComponent } from '../main/auth/login/login.component';
 import { LogoutComponent } from '../main/auth/logout/logout.component';
+import { ProfileComponent } from '../main/auth/profile/profile.component';
 import { TripListComponent } from '../main/trip-list/trip-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: "trip-list", component: TripListComponent },
   { path: "auth/login", component: LoginComponent },
   { path: "auth/logout", component: LogoutComponent },
-  // { path: "/auth/profile", component: ProfileComponent },
+  { path: "auth/profile", component: ProfileComponent },
   { path: "trip-detail", component: TripDetailComponent },
   { path: "trip-add", component: TripAddComponent },
   { path: "user-reservation", component: RezerwationUserComponent },
