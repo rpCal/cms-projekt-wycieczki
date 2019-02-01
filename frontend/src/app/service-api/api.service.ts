@@ -63,7 +63,7 @@ getTrips(parameters?: Parameters) {
 }
 */
 login(email, password){
-  return this.http.post<any>(this.baseUrl + 'auth/login', { Email:email, Password:password });
+  return this.http.post<any>(this.baseUrl + '/auth/login', { Email:email, Password:password });
 }
 
 /**
@@ -95,31 +95,31 @@ login(email, password){
  *
 */
   getTripAdmin(){
-    return this.http.get<any>(this.baseUrl + 'api/v1/Trip');
+    return this.http.get<any>(this.baseUrl + '/api/v1/Trip');
   }
 
   postTripAdmin(obj: Trip){
     console.log(obj)
-    return this.http.post<any>(this.baseUrl + 'api/v1/Trip', { id: obj._id, Name: obj.name, City: obj.city, DepartureDate: obj.departureDate, ArrivalDate: obj.arrivalDate, Price: obj.price, Describe: obj.describe, DeparturePlace: obj.departurePlace, NumberOfPlaces: obj.numberOfPlaces, AvaiableNumberOfPlaces: obj.availableNumberOfPlaces, Archive: obj.archive, Promote: obj.promote, AverageRating: obj.averageRating, Photos: obj.photos});
+    return this.http.post<any>(this.baseUrl + '/api/v1/Trip', { id: obj._id, Name: obj.name, City: obj.city, DepartureDate: obj.departureDate, ArrivalDate: obj.arrivalDate, Price: obj.price, Describe: obj.describe, DeparturePlace: obj.departurePlace, NumberOfPlaces: obj.numberOfPlaces, AvaiableNumberOfPlaces: obj.availableNumberOfPlaces, Archive: obj.archive, Promote: obj.promote, AverageRating: obj.averageRating, Photos: obj.photos});
   }
 
   delTripAdmin(trip){
-    return this.http.delete<any>(this.baseUrl + 'api/v1/Trip');
+    return this.http.delete<any>(this.baseUrl + '/api/v1/Trip');
   }
 
 /** 
  * URL /api/v1/USER 
 */
   getUserAdmin(){
-    return this.http.get<User>(this.baseUrl + 'api/v1/User');
+    return this.http.get<User>(this.baseUrl + '/api/v1/User');
   }
 
   postUserAdmin(user: User){
-    return this.http.post<Trip>(this.baseUrl + 'api/v1/User', { user });
+    return this.http.post<Trip>(this.baseUrl + '/api/v1/User', { user });
   }
 
   delUserAdmin(userId: number){
-    return this.http.delete<User>(this.baseUrl + 'api/v1/User', {
+    return this.http.delete<User>(this.baseUrl + '/api/v1/User', {
       params: new HttpParams().set('TripId', userId+"" )
     })
   }
@@ -132,7 +132,7 @@ login(email, password){
  * 
 */
   postReservation(reservation: Reservation){
-    return this.http.post<Reservation>(this.baseUrl + 'auth/Reservation', { TripId: reservation.trip._id, NumberOfPlcaes: reservation.numberOfPlaces });
+    return this.http.post<Reservation>(this.baseUrl + '/auth/Reservation', { TripId: reservation.trip._id, NumberOfPlcaes: reservation.numberOfPlaces });
   }
 
 /*
@@ -141,7 +141,7 @@ login(email, password){
  * PAYLOAD {RezerwationId}
 */
   deleteReservation(reservationId: number){
-    return this.http.post<Reservation>(this.baseUrl + 'auth/Reservation/cancel', { RezerwationId: reservationId });
+    return this.http.post<Reservation>(this.baseUrl + '/auth/Reservation/cancel', { RezerwationId: reservationId });
   }
 
 /*
@@ -151,7 +151,7 @@ login(email, password){
   *
 */
   postPayReservation(reservationId: number){
-    return this.http.post<Reservation>(this.baseUrl + 'auth/Reservation/pay', { RezerwationId: reservationId });
+    return this.http.post<Reservation>(this.baseUrl + '/auth/Reservation/pay', { RezerwationId: reservationId });
   }
 
 /*
