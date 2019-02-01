@@ -47,12 +47,12 @@ export class ProfileComponent implements OnInit {
       this.api.updateProfile(user).subscribe(response => {
         this.loading = false;
         if(response.results == true){
-          this.dataService.updateProfile(user);
           this.log.openSnackBar("Pomyślnie zaktualizowano profil")
+          this.dataService.updateProfile(user);
         }
       }, error => {
-          this.log.openSnackBar(error.message);
-          this.loading = false;
+        this.log.handleError(error);
+        this.loading = false;
       });
     } else {
       this.log.openSnackBar("popraw dane w formularzu")

@@ -5,6 +5,7 @@ import { Trip } from './../model/trip';
 import { Parameters } from './parameters';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, } from '@angular/common/http';
+import { DataService } from '../data.service';
 
 
 const httpOptions = {
@@ -19,7 +20,7 @@ const httpOptions = {
 export class ApiService {
   // private baseUrl = window.location.host == "localhost:4200" ? 'http://localhost:5000' : 'https://pjatk-travel-agency.herokuapp.com';
   private baseUrl = 'https://pjatk-travel-agency.herokuapp.com';
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private dataService: DataService) { 
     
   }
 
@@ -78,7 +79,10 @@ login(email, password){
 
 
   updateProfile(user: User){
-    return this.http.post<any>(this.baseUrl + '/auth/profile' , { _id: user._id, Password: user.Password, FirstName: user.FirstName, LastName: user.LastName });
+    return this.http.post<any>(this.baseUrl + '/auth/profile' , 
+    { _id: user._id, Password: user.Password, FirstName: user.FirstName, LastName: user.LastName },{
+      headers: new HttpHeaders().set('Authorization', this.dataService.state.token)
+    });
   }
   
 

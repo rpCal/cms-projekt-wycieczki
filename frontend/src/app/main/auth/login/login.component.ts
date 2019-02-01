@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
                 }
             },
               error => {
-                this.log.openSnackBar(error.message);
+                this.log.handleError(error);
                 this.loading = false;
               });
     }

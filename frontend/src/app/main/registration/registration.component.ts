@@ -55,11 +55,11 @@ export class RegistrationComponent implements OnInit {
               this.loading = false;
             }
           }, error => {
-            this.log.openSnackBar(error.message);
+            this.log.handleError(error);
             this.loading = false;
           });
       }}, error => {
-          this.log.openSnackBar(error.message);
+        this.log.handleError(error);
           this.loading = false;
         });
     } else {

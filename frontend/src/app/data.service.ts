@@ -75,6 +75,17 @@ export class DataService {
       IsAdmin: user.IsAdmin,
     }));
     this.setAuth(this.state.token, user);
+    this.setState({
+      ...this.state,
+      user: {
+        _id: user._id,
+        Email: user.Email,
+        FirstName: user.FirstName,
+        LastName: user.LastName,
+        IsAdmin: user.IsAdmin,
+        Password: null,
+      }
+    })
   }
 
   private readFromLocalStorage() {

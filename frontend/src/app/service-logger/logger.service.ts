@@ -17,4 +17,15 @@ export class LoggerService {
       });
     })
   }
+  public handleError(error){
+    if(error && error.error && error.error.message){
+      if(error.error.message == "JWT AUTH problem"){
+        this.openSnackBar("Twoja sesja wygasła. Prosimy abyś zalogował się ponownie.");
+        return
+      }
+      this.openSnackBar(error.error.message);
+    }else{
+      this.openSnackBar(error.message);
+    }
+  }
 }
