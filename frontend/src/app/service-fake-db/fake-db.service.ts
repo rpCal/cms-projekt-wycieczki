@@ -1,3 +1,4 @@
+import { Rating } from './../model/rating';
 import { Trip } from './../model/trip';
 import { Reservation } from './../model/reservation';
 import { Injectable } from '@angular/core';
@@ -13,6 +14,8 @@ export class FakeDbService {
   trip1 = new Trip(1, 'Super Warszawa',  'Warszawa', new Date(2019, 1, 5), new Date(2019, 1,10), 700, 'Poznaj warszawe od zupełnie innej strony',  'Warszawa',  15, 10, false, 0, 3.42,  "http://tu.url.do.zdjęcia.html");
   trip2 = new Trip(2, 'Łódzki odkrywca',  'Łódź', new Date(2019, 1, 5), new Date(2019, 1,12),  1500, "Łódzka wyprawa po muzeach ", "Warszawa", 10, 3, false , 0, 3.41, "http://tu.url.do.zdjęcia.html");
   user1 = new User(1, 'test@test.pl', 'haslo', 'Jan', 'Nowak');
+  user2 = new User(1, 'test@test.pl', 'haslo', 'Janusz', 'Kowalski');
+  
   createTrips() {
     const fakeTrips: Array<Trip> = [
       this.trip1,
@@ -50,9 +53,18 @@ export class FakeDbService {
   createRezerwation() {
     const fakeRezerwation: Array<Reservation> = [
       new Reservation(1, false, 7, this.trip1, this.user1),
-      new Reservation(1, true, 6, this.trip2, this.user1)
+      new Reservation(1, true, 6, this.trip2, this.user1),
+      new Reservation(1, true, 6, this.trip2, this.user2),
     ];
     return fakeRezerwation;
+  }
+
+  createRating() {
+    const fakeRating: Array<Rating> = [
+      new Rating(1, "super wycieczka polecam !", 5, this.trip1, this.user1),  
+      new Rating(2, "słabuitko...", 1, this.trip1, this.user2),  
+    ];
+  return fakeRating;
   }
 
 }

@@ -1,3 +1,4 @@
+import { LoggerService } from './../../service-logger/logger.service';
 import { DeleteComponent } from './delete/delete.component';
 import { ApiService } from './../../service-api/api.service';
 import { PayComponent } from './pay/pay.component';
@@ -18,12 +19,13 @@ export class RezerwationUserComponent implements OnInit {
   constructor(
     private fakeDb: FakeDbService,
     private dialog: MatDialog,
-    private api: ApiService
+    private api: ApiService,
+    private log: LoggerService
     ) { 
     }
 
   ngOnInit() {
-    this.reservations = this.fakeDb.createRezerwation();
+    this.reservations = this.fakeDb.createRezerwation().filter(r => r.user.firstName === 'Jan');
   }
 
   openMarkDialog(reservation: Reservation) {
@@ -35,11 +37,15 @@ export class RezerwationUserComponent implements OnInit {
   }
 
   openPayDialog(reservation: Reservation) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = reservation;
-    this.dialog.open(PayComponent, dialogConfig);
+    if(!reservation.isPayed){
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = reservation;
+      this.dialog.open(PayComponent, dialogConfig);
+    } else {
+      this.log.openSnackBar("Już zaplacone");
+    }
   }
 
   openDeleteDialog(reservation: Reservation) {
