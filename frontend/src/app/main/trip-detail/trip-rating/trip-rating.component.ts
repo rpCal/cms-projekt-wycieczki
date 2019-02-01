@@ -26,7 +26,7 @@ export class TripRatingComponent implements OnInit {
     .queryParams
     .subscribe(params => {
       this.trip = JSON.parse(params['trip']);
-      this.ratings = fakeDb.createRating().filter(r => r.trip.id === this.trip.id);
+      this.ratings = fakeDb.createRating().filter(r => r.trip._id === this.trip._id);
       // api.getRating( trip.id ); //TODO 
     });
     //TO DELETE

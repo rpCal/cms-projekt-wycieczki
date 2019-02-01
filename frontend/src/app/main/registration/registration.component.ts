@@ -4,6 +4,7 @@ import { LoggerService } from 'src/app/service-logger/logger.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -17,6 +18,7 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private log: LoggerService,
+    private router: Router,
     public dataService: DataService,
     private api: ApiService
   ) { }
@@ -49,6 +51,7 @@ export class RegistrationComponent implements OnInit {
             if(response.results && response.results.token && response.results.user){
               this.dataService.login(response.results.token, response.results.user);
               this.log.openSnackBar("Pomyślnie zalogowano");
+              this.router.navigate(['/']);
               this.loading = false;
             }
           }, error => {

@@ -130,7 +130,7 @@ login(email, password){
  * 
 */
   postReservation(reservation: Reservation){
-    return this.http.post<Reservation>(this.baseUrl + 'auth/Reservation', { TripId: reservation.trip.id, NumberOfPlcaes: reservation.numberOfPlaces });
+    return this.http.post<Reservation>(this.baseUrl + 'auth/Reservation', { TripId: reservation.trip._id, NumberOfPlcaes: reservation.numberOfPlaces });
   }
 
 /*
@@ -171,7 +171,7 @@ login(email, password){
   * 
  */
   postRating(rating: Rating){
-    return this.http.post<Rating>(this.baseUrl + '/auth/Rating', {Comment: rating.comment, RateMark: rating.rateMark, TripId: rating.trip.id});
+    return this.http.post<Rating>(this.baseUrl + '/auth/Rating', {Comment: rating.comment, RateMark: rating.rateMark, TripId: rating.trip._id});
   }
 
 

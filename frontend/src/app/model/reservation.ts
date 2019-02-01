@@ -2,7 +2,7 @@ import { User } from './user';
 import { Trip } from './trip';
 export class Reservation {
     constructor(
-        public id: number,
+        public _id: number,
         public isPayed: boolean,
         public numberOfPlaces: number,
         public trip: Trip,
