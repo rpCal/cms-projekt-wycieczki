@@ -18,7 +18,7 @@ export class RezerwationAddComponent implements OnInit {
   }
 
   save() {
-    this.log.openSnackBar("Logika backendu!!! Proponuje tutaj przekierwoać na strone z platnosciami");
+    this.log.openSnackBar("TU INTEGRACJA Z API");
     this.dialogRef.close();
   }
 

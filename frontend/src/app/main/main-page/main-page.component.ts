@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { ApiService } from './../../service-api/api.service';
 import { Trip } from './../../model/trip';
 import { Component, OnInit } from '@angular/core';
-import { SharedTripService } from 'src/app/service-shared-trip/shared-trip.service';
 
 @Component({
   selector: 'app-main-page',
@@ -15,7 +14,6 @@ export class MainPageComponent implements OnInit {
 
   constructor(private router:Router, 
               private api: ApiService,
-              private sharedTrip: SharedTripService,
               private fakeDb: FakeDbService) { }
 
   ngOnInit() {
@@ -26,8 +24,8 @@ export class MainPageComponent implements OnInit {
   }
 
   getDetailTrip(trip: Trip){
-    this.sharedTrip.trip = trip;
-    this.router.navigate(['trip-detail']);
-  }
+    const tripJson: string = JSON.stringify(trip);
+    this.router.navigate(['trip-detail'],  { queryParams: { trip: tripJson }, skipLocationChange: true} );
+   }
 
 }

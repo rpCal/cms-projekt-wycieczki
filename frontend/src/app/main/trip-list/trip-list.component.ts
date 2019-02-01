@@ -1,7 +1,6 @@
 import { FakeDbService } from './../../service-fake-db/fake-db.service';
 import { ApiService } from './../../service-api/api.service';
 import { Router } from '@angular/router';
-import { SharedTripService } from './../../service-shared-trip/shared-trip.service';
 import { Component, OnInit } from '@angular/core';
 import { Trip } from 'src/app/model/trip';
 
@@ -14,8 +13,7 @@ export class TripListComponent implements OnInit {
 
   trips: Array<Trip>;
 
-  constructor(private sharedTrip: SharedTripService, 
-              private router: Router,
+  constructor(private router: Router,
               private api: ApiService,
               private fakeDb: FakeDbService) { }
 
@@ -27,8 +25,8 @@ export class TripListComponent implements OnInit {
   }
 
   getDetailTrip(trip: Trip){
-    this.sharedTrip.trip = trip;
-    this.router.navigate(['trip-detail']);
+    const tripJson: string = JSON.stringify(trip);
+    this.router.navigate(['trip-detail'],  { queryParams: { trip: tripJson}, skipLocationChange: true} );
   }
 
 }

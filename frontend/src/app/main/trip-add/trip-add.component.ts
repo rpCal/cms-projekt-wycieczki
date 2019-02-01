@@ -1,6 +1,6 @@
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from './../../service-api/api.service';
 import { LoggerService } from './../../service-logger/logger.service';
-import { SharedTripService } from './../../service-shared-trip/shared-trip.service';
 import { Trip } from './../../model/trip';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -16,16 +16,17 @@ export class TripAddComponent implements OnInit {
   trip: Trip;
 
   constructor(private formBuilder: FormBuilder,
-              private sharedTrip: SharedTripService,
               private api: ApiService,
-              private log: LoggerService
+              private log: LoggerService,
+              private route: ActivatedRoute
               ) { }
 
   ngOnInit() {
-    this.trip = this.sharedTrip.trip;
-    if(!this.trip){
-      this.trip = Trip.createEmptyTrip();
-    }
+    this.route
+    .queryParams
+    .subscribe(params => {
+      this.trip = JSON.parse(params['trip']);
+    });
     this.tripForm = this.createFormGroup();
   }
 

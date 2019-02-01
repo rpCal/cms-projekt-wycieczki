@@ -1,6 +1,5 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from './../../service-authentication/authentication.service';
-import { SharedTripService } from './../../service-shared-trip/shared-trip.service';
 import { Trip } from './../../model/trip';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
@@ -15,17 +14,18 @@ import { RezerwationAddComponent } from './rezerwation-add/rezerwation-add.compo
 })
 export class TripDetailComponent implements OnInit {
   trip: Trip;
-  constructor(private sharedTrip: SharedTripService,
-              private location: Location,
+  constructor(private location: Location,
               private dialog: MatDialog,
               private auth: AuthenticationService,
-              private router: Router ) { }
+              private router: Router,
+              private route: ActivatedRoute, ) { }
 
   ngOnInit() {
-    this.trip = this.sharedTrip.trip;
-    if(this.trip == null){
-      this.backToPrevious();
-    }
+    this.route
+      .queryParams
+      .subscribe(params => {
+        this.trip = JSON.parse(params['trip']);
+      });
   }
 
   backToPrevious() {
@@ -33,13 +33,14 @@ export class TripDetailComponent implements OnInit {
   }
 
   modifyTrip(){
-    this.sharedTrip.trip = this.trip;
-    this.router.navigate(['trip-add']);
+    const tripJson: string = JSON.stringify(this.trip);
+    this.router.navigate(['trip-add'],  { queryParams: { trip: tripJson}, skipLocationChange: true} );
   }
 
   ratingTrip(){
-    this.sharedTrip.trip = this.trip;
-    this.router.navigate(['trip-rating']);
+    const tripJson: string = JSON.stringify(this.trip);
+    this.router.navigate(['trip-rating'],  { queryParams: { trip: tripJson}, skipLocationChange: true} );
+
   }
 
   openDialog() {
