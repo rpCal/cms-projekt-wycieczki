@@ -1,5 +1,5 @@
 export class User {
-    public Id: number;
+    public _id: number;
     public Email: string;
     public Password: string = "";
     public FirstName: string;
@@ -7,7 +7,7 @@ export class User {
     public IsAdmin: boolean;
 
     constructor(user:any){
-        this.Id = user.Id
+        this._id = user._id
         this.Email = user.Email
         this.FirstName = user.FirstName
         this.Password = user.Password

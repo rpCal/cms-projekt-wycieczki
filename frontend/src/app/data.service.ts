@@ -50,7 +50,7 @@ export class DataService {
   public login(token:string, user:User){
     localStorage.setItem('pjatk-travel-agency-jwt', token);
     localStorage.setItem('pjatk-travel-agency-user', JSON.stringify({
-      Id: user.Id,
+      _id: user._id,
       Email: user.Email,
       FirstName: user.FirstName,
       LastName: user.LastName,
