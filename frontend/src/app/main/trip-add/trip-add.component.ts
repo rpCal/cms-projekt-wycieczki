@@ -25,8 +25,14 @@ export class TripAddComponent implements OnInit {
     this.route
     .queryParams
     .subscribe(params => {
-      this.trip = JSON.parse(params['trip']);
+      const tripJson = params['trip'];
+      if(!tripJson){
+        this.trip = Trip.createEmptyTrip();
+      } else {
+        this.trip = JSON.parse(tripJson);
+      }
     });
+    
     this.tripForm = this.createFormGroup();
   }
 

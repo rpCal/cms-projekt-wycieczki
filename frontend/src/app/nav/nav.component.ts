@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { SharedTripService } from 'src/app/service-shared-trip/shared-trip.service';
 import { AuthenticationService } from './../service-authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -37,7 +36,8 @@ export class NavComponent implements OnInit {
   isMenuToggle: boolean = false;
   role: string = "";
   
-  constructor(private auth: AuthenticationService, private sharedTrip: SharedTripService, private router:Router) { }
+  constructor(private auth: AuthenticationService,
+    private router:Router) { }
 
   ngOnInit() {
   }
@@ -47,7 +47,6 @@ export class NavComponent implements OnInit {
   }
 
   goToDodaj(){
-    this.sharedTrip.trip = null;
     this.router.navigate(['trip-add']);
   }
   
