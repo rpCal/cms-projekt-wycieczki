@@ -179,7 +179,7 @@ export const getPublicTrip = async (req:Request, res:Response, next: NextFunctio
 
         let sort;
         if(!sort_by_field || !sort_by_order){
-            sort = {Promote: 1, AverageRating: 1, createdAt: -1}
+            sort = {Promote: -1, AverageRating: -1, createdAt: -1}
         }else{
             sort = {[sort_by_field]: sort_by_order};
         }
