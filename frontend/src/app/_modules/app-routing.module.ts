@@ -1,3 +1,4 @@
+import { TripRatingComponent } from './../main/trip-detail/trip-rating/trip-rating.component';
 import { AuthGuard } from './../auth-guard/auth.guard';
 import { TripDetailComponent } from './../main/trip-detail/trip-detail.component';
 import { LoginComponent } from '../main/login/login.component';
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: "trip-detail", component: TripDetailComponent },
   { path: "trip-add", component: TripAddComponent },
   { path: "user-reservation", component: RezerwationUserComponent },
-  { path: "registration-user", component: RegistrationComponent }
+  { path: "registration-user", component: RegistrationComponent },
+  { path: "trip-rating", component: TripRatingComponent}
 ]
 
 @NgModule({

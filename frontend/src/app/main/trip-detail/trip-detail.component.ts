@@ -37,6 +37,10 @@ export class TripDetailComponent implements OnInit {
     this.router.navigate(['trip-add']);
   }
 
+  ratingTrip(){
+    this.sharedTrip.trip = this.trip;
+    this.router.navigate(['trip-rating']);
+  }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
