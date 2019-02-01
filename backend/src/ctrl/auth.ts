@@ -240,7 +240,7 @@ export const postLogout = async (req:Request, res:Response, next: NextFunction) 
 export const postRezerwation = async (req:any, res:Response, next: NextFunction) => {
     try{
         let requestSchema = object().keys({
-            TripId: number().required(),
+            TripId: string().required(),
             NumberOfPlaces: number().required(),
         });
         
@@ -304,7 +304,7 @@ export const postRezerwation = async (req:any, res:Response, next: NextFunction)
 export const postRezerwationPay = async (req:any, res:Response, next: NextFunction) => {
     try{
         let requestSchema = object().keys({
-            RezerwationId: number().required(),
+            RezerwationId: string().required(),
         });
         
         let validation = validate(req.body, requestSchema);
@@ -350,7 +350,7 @@ export const postRezerwationPay = async (req:any, res:Response, next: NextFuncti
 export const postRezerwationCancel = async (req:any, res:Response, next: NextFunction) => {
     try{
         let requestSchema = object().keys({
-            RezerwationId: number().required(),
+            RezerwationId: string().required(),
         });
         
         let validation = validate(req.body, requestSchema);
@@ -405,7 +405,7 @@ export const postRezerwationCancel = async (req:any, res:Response, next: NextFun
 export const postRating = async (req:any, res:Response, next: NextFunction) => {
     try{
         let requestSchema = object().keys({
-            TripId: number().required(),
+            TripId: string().required(),
             RateMark: number().min(-1).max(7).required(),
             Comment: string().required()
         });
@@ -476,7 +476,7 @@ export const postRating = async (req:any, res:Response, next: NextFunction) => {
 export const deleteRating = async (req:any, res:Response, next: NextFunction) => {
     try{
         let requestSchema = object().keys({
-            RatingId: number().required(),
+            RatingId: string().required(),
         });
         
         let validation = validate(req.body, requestSchema);
