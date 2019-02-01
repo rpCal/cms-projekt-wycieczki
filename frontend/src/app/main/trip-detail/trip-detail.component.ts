@@ -2,11 +2,12 @@ import { ApiService } from './../../service-api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from './../../service-authentication/authentication.service';
 import { Trip } from './../../model/trip';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { RezerwationAddComponent } from './rezerwation-add/rezerwation-add.component';
 import { LoggerService } from 'src/app/service-logger/logger.service';
+import { DataService } from 'src/app/data.service';
 
 
 @Component({
@@ -14,10 +15,12 @@ import { LoggerService } from 'src/app/service-logger/logger.service';
   templateUrl: './trip-detail.component.html',
   styleUrls: ['./trip-detail.component.scss']
 })
-export class TripDetailComponent implements OnInit {
+export class TripDetailComponent implements OnInit, OnDestroy {
   trip: Trip;
+  sub;
   constructor(private location: Location,
               private dialog: MatDialog,
+              public dataService: DataService,
               private auth: AuthenticationService,
               private router: Router,
               private route: ActivatedRoute, 
@@ -25,11 +28,14 @@ export class TripDetailComponent implements OnInit {
               private api: ApiService) { }
 
   ngOnInit() {
-    this.route
+    this.sub = this.route
       .queryParams
       .subscribe(params => {
-        this.trip = JSON.parse(params['trip']);
+        this.trip = this.dataService.getTripById(params['_id']);
       });
+  }
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
   backToPrevious() {
@@ -37,7 +43,7 @@ export class TripDetailComponent implements OnInit {
   }
 
   deleteTrip(){
-    this.api.delTrip(this.trip).subscribe( t => {
+    this.api.delTrip(this.trip).subscribe(t => {
       this.log.openSnackBar("Trip usunięty");
       this.router.navigate(['main-page']);
     });
@@ -45,16 +51,17 @@ export class TripDetailComponent implements OnInit {
 
   modifyTrip(){
     const tripJson: string = JSON.stringify(this.trip);
-    this.router.navigate(['trip-add'],  { queryParams: { trip: tripJson}, skipLocationChange: true} );
+    this.router.navigate(['trip-add'],  { queryParams: { trip: tripJson, _id: this.trip._id}, skipLocationChange: true} );
   }
 
   ratingTrip(){
     const tripJson: string = JSON.stringify(this.trip);
-    this.router.navigate(['trip-rating'],  { queryParams: { trip: tripJson}, skipLocationChange: true} );
+    this.router.navigate(['trip-rating'],  { queryParams: { trip: tripJson, _id: this.trip._id}, skipLocationChange: true} );
 
   }
 
   openDialog() {
+    const _id = this.trip._id;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;

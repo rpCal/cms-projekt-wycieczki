@@ -1,7 +1,7 @@
 export class Trip {
     
     constructor(
-        public _id: number,
+        public _id: string,
         public name: string, 
         public city: string, 
         public departureDate: Date, 
@@ -22,7 +22,10 @@ export class Trip {
     }
 
     static createTripFromApiTrip(obj){
-        const trip = new Trip(obj._id, obj.Name, obj.City, obj.DepartureDate, obj.ArrivalDate, obj.Price, obj.Describe, obj.DeparturePlace, obj.NumberOfPlaces, obj.AvaiableNumberOfPlaces, obj.Archive, obj.Promote, obj.AverageRating, obj.Photos[0]);
+        const trip = new Trip(obj._id, obj.Name,
+             obj.City, obj.DepartureDate, obj.ArrivalDate, obj.Price, obj.Describe,
+              obj.DeparturePlace, obj.NumberOfPlaces, obj.AvaiableNumberOfPlaces, 
+              obj.Archive, obj.Promote, obj.AverageRating, obj.Photos[0]);
         return trip;
     }
 }

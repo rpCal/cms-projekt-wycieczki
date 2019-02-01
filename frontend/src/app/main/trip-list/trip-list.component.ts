@@ -18,22 +18,12 @@ export class TripListComponent implements OnInit {
               private fakeDb: FakeDbService) { }
 
   ngOnInit() {
-    this.api.getTrips().subscribe(response => {
-      this.dataService.setState({ 
-        ...this.dataService.state,
-        trips: response.results.map(t => Trip.createTripFromApiTrip(t))
-      });
-    });
+    this.dataService.refreshTrips(this.api);
   }
 
   getDetailTrip(trip: Trip){
-    console.log('co wybralem?', trip)
-    this.dataService.setState({ 
-      ...this.dataService.state,
-      selectedTrip: trip
-    });
-    // const tripJson: string = JSON.stringify(trip);
-    // this.router.navigate(['trip-detail'],  { queryParams: { trip: tripJson}, skipLocationChange: true} );
+    const tripJson: string = JSON.stringify(trip);
+    this.router.navigate(['trip-detail'],  { queryParams: { _id: trip._id}, skipLocationChange: true} );
   }
 
 }

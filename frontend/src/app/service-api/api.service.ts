@@ -56,7 +56,7 @@ modifyTrip(obj){
   return this.http.patch<any>(this.baseUrl + '/api/v1/Trip/' + obj._id, { id: obj._id, Name: obj.name, City: obj.city, DepartureDate: obj.departureDate, ArrivalDate: obj.arrivalDate, Price: obj.price, Describe: obj.describe, DeparturePlace: obj.departurePlace, NumberOfPlaces: obj.numberOfPlaces, AvaiableNumberOfPlaces: obj.availableNumberOfPlaces, Archive: obj.archive, Promote: obj.promote, AverageRating: obj.averageRating, Photos: obj.photos});
 }
 
-delTrip(trip){
+delTrip(trip:any){
   return this.http.delete<any>(this.baseUrl + '/api/v1/Trip/' + trip._id);
 }
 
@@ -118,7 +118,18 @@ login(email, password){
 
   postTripAdmin(obj: Trip){
     console.log(obj)
-    return this.http.post<any>(this.baseUrl + '/api/v1/Trip', { id: obj._id, Name: obj.name, City: obj.city, DepartureDate: obj.departureDate, ArrivalDate: obj.arrivalDate, Price: obj.price, Describe: obj.describe, DeparturePlace: obj.departurePlace, NumberOfPlaces: obj.numberOfPlaces, AvaiableNumberOfPlaces: obj.availableNumberOfPlaces, Archive: obj.archive, Promote: obj.promote, AverageRating: obj.averageRating, Photos: obj.photos});
+    return this.http.post<any>(this.baseUrl + '/api/v1/Trip', { id: obj._id, 
+      Name: obj.name, 
+      City: obj.city, DepartureDate: obj.departureDate, ArrivalDate: obj.arrivalDate, 
+      Price: obj.price, 
+      Describe: obj.describe, 
+      DeparturePlace: obj.departurePlace, 
+      NumberOfPlaces: obj.numberOfPlaces, 
+      AvaiableNumberOfPlaces: obj.availableNumberOfPlaces, 
+      Archive: obj.archive, 
+      Promote: obj.promote, 
+      AverageRating: obj.averageRating, 
+      Photos: obj.photos});
   }
 
   delTripAdmin(trip){
@@ -150,7 +161,9 @@ login(email, password){
  * 
 */
   postReservation(reservation: Reservation){
-    return this.http.post<Reservation>(this.baseUrl + '/auth/Reservation', { TripId: reservation.trip._id, NumberOfPlcaes: reservation.numberOfPlaces });
+    return this.http.post<any>(this.baseUrl + '/auth/Reservation', { TripId: reservation.trip._id, NumberOfPlaces: reservation.numberOfPlaces },{
+      headers: new HttpHeaders().set('Authorization', this.dataService.state.token)
+    });
   }
 
 /*
@@ -159,7 +172,9 @@ login(email, password){
  * PAYLOAD {RezerwationId}
 */
   deleteReservation(reservationId: number){
-    return this.http.post<Reservation>(this.baseUrl + '/auth/Reservation/cancel', { RezerwationId: reservationId });
+    return this.http.post<Reservation>(this.baseUrl + '/auth/Reservation/cancel', { RezerwationId: reservationId }, {
+      headers: new HttpHeaders().set('Authorization', this.dataService.state.token)
+    });
   }
 
 /*
@@ -169,7 +184,9 @@ login(email, password){
   *
 */
   postPayReservation(reservationId: number){
-    return this.http.post<Reservation>(this.baseUrl + '/auth/Reservation/pay', { RezerwationId: reservationId });
+    return this.http.post<Reservation>(this.baseUrl + '/auth/Reservation/pay', { RezerwationId: reservationId }, {
+      headers: new HttpHeaders().set('Authorization', this.dataService.state.token)
+    });
   }
 
 /*
@@ -191,7 +208,9 @@ login(email, password){
   * 
  */
   postRating(rating: Rating){
-    return this.http.post<Rating>(this.baseUrl + '/auth/Rating', {Comment: rating.comment, RateMark: rating.rateMark, TripId: rating.trip._id});
+    return this.http.post<Rating>(this.baseUrl + '/auth/Rating', {Comment: rating.comment, RateMark: rating.rateMark, TripId: rating.trip._id},{
+      headers: new HttpHeaders().set('Authorization', this.dataService.state.token)
+    });
   }
 
 
@@ -202,9 +221,10 @@ login(email, password){
   * PAYLOAD {RatingId}
   * 
   */
- //!!! czy tu nie powinien być post, używasz w deleteRating req.body a w delete nie mamy body (z tego co kojarze), więc może jak trip post i dodać do url /cancel
   deleteRating(ratingId: number){
-    return this.http.post<Rating>(this.baseUrl + '/auth/Rating/cancel', {RatingId: ratingId});
+    return this.http.post<Rating>(this.baseUrl + '/auth/Rating/cancel', {RatingId: ratingId}, {
+      headers: new HttpHeaders().set('Authorization', this.dataService.state.token)
+    });
   }
 
 }

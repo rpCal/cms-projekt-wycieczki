@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import {User} from './model/user';
 import { Trip } from './model/trip';
+import { ApiService } from './service-api/api.service';
 
 
 export type DataServiceState = {
@@ -10,7 +11,6 @@ export type DataServiceState = {
   user: User | null;
   token: string;
   trips: Array<Trip>;
-  selectedTrip: Trip | null;
 }
 
 let enabled = false;
@@ -30,7 +30,6 @@ export class DataService {
         user: null,
         token: "",
         trips: [],
-        selectedTrip: null
       };
       _state$ = new BehaviorSubject(initState);
       state$ = _state$.asObservable();
@@ -51,6 +50,28 @@ export class DataService {
     _state$.next(nextState);
   }
 
+  public getTripById(_id: string): Trip{
+    return this.state.trips.filter(e => e._id)[0];
+  }
+
+  public updateFieldOnTrips(_id, fieldName, fieldValue){
+    let _trips = [...this.state.trips];
+    let _index = _trips.findIndex(e => e._id == _id)
+    _trips[_index][fieldName] = fieldValue;
+    this.setState({
+      ...this.state,
+      trips: _trips
+    });
+  }
+  
+  public refreshTrips(apiService){
+    apiService.getTrips().subscribe(response => {
+        this.setState({ 
+          ...this.state,
+          trips: response.results.map(t => Trip.createTripFromApiTrip(t))
+        });
+      });
+  }
   
   public login(token:string, user:User){
     localStorage.setItem('pjatk-travel-agency-jwt', token);
