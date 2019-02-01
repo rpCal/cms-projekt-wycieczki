@@ -44,7 +44,7 @@ export class RegistrationComponent implements OnInit {
       this.loading = true;
       this.api.register(user).subscribe(response => {
         this.loading = false;
-        if(response.results && response.results.user){
+        if(response.results && response.results.Email && response.results._id){
           this.log.openSnackBar("Pomyślnie zarejestrowano");
           this.api.login(user.Email, user.Password)
           .subscribe(response => {
