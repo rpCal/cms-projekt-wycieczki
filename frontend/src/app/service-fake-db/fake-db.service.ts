@@ -50,7 +50,7 @@ export class FakeDbService {
   createRezerwation() {
     const fakeRezerwation: Array<Reservation> = [
       new Reservation(1, false, 7, this.trip1, this.user1),
-      new Reservation(1, false, 6, this.trip2, this.user1)
+      new Reservation(1, true, 6, this.trip2, this.user1)
     ];
     return fakeRezerwation;
   }

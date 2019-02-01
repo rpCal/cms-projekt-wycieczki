@@ -1,0 +1,131 @@
+.header{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 25px;
+
+    h1{
+        font-size: 25px;
+        font-weight: bold;
+    }
+}
+.container{
+    display:flex;
+    justify-content: center;
+
+    .reservation{
+        background: #fde6da;
+        box-shadow: 6px 6px 10px #f47c4867;   
+        margin:10px;
+    
+        image{
+            width: 250px;
+            height: 230px;
+        }
+
+        #res-name{
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+
+        .text-block{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding: 5px;
+
+            div{
+              width: 150px;
+              text-align: center;
+            }
+
+            div:nth-child(1){
+                text-align: left;
+            }
+
+            div:nth-child(2){
+                text-align: right;
+            }
+            
+
+            .mark-wrapper{
+                display: flex;
+                justify-content: flex-end;
+                
+                .mark{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 5px;
+                    font-size: 18px;
+                    color: white;
+                    width: 32px;
+                    height: 30px;
+                    background-color: #f47c48;
+                    transition: .2s all;
+                }
+
+                .mark:hover{
+                    background: #fde6da;
+                    color: black;
+                }
+            }
+        }
+
+        .pay-block{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+
+            .pay-text{
+               width: 150px;
+            }
+
+            .pay-wrapper{
+                display: flex;
+                justify-content: flex-end;
+                width: 150px;
+                cursor: pointer;
+
+                .pay-icon-block{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: whitesmoke;
+                    font-size: 20px;
+                    width: 25px;
+                    height: 30px;
+                    background-color: #f47c48;
+                    border-top-left-radius: 5px;
+                    border-bottom-left-radius: 5px;
+                    transition: .2s all;
+                }   
+                
+                .pay-icon-block:hover{
+                    background: #fde6da;
+                    color: black;
+                }
+
+                .pay{
+                    width: 5px;
+                    height: 30px;
+                    background-color: rgb(29, 167, 29);
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
+    
+                .not-pay{
+                    width: 5px;
+                    height: 30px;
+                    background-color: rgb(185, 30, 30);
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
+            }
+
+        }
+
+    }
+
+}

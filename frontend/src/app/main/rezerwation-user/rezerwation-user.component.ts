@@ -1,4 +1,6 @@
+import { FakeDbService } from './../../service-fake-db/fake-db.service';
 import { Component, OnInit } from '@angular/core';
+import { Reservation } from 'src/app/model/reservation';
 
 @Component({
   selector: 'app-rezerwation-user',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rezerwation-user.component.scss']
 })
 export class RezerwationUserComponent implements OnInit {
+  reservations: Array<Reservation>;
 
-  constructor() { }
+  constructor(
+    private fakeDb: FakeDbService) { 
+    }
 
   ngOnInit() {
+    this.reservations = this.fakeDb.createRezerwation();
   }
 
 }

@@ -1,3 +1,48 @@
-<p>
-  rezerwation-user works!
-</p>
+<div class=header>
+  <h1>Moje Wycieczki</h1>
+</div>
+<div class="container">
+  <div class="reservation" *ngFor="let reservation of reservations">
+    <div class="photo">
+      <img class="image" src="./assets/city_image_example_cracow.png"/>
+    </div>
+    <div class="text-block" id="res-name">
+      <div>Nazwa wycieczki:</div> <div>{{reservation.trip.name}}</div>
+    </div>
+    <div class="text-block">
+      <div>Gdzie:</div><div>{{reservation.trip.city}}</div>
+    </div>
+    <div class="text-block">
+      <div>Kiedy:</div> <div>{{reservation.trip.departureDate | date:'dd-MM-yyyy'}}</div>
+    </div>
+    <div class="text-block">
+      <div>Powrót:</div> <div>{{reservation.trip.arrivalDate | date:'dd-MM-yyyy'}}</div>
+    </div>
+    <div class="text-block">
+      <div>Cena:</div> <div>{{reservation.trip.price}}</div>
+    </div>
+    <div class="text-block">
+      <div>Cena całkowita:</div> <div>{{reservation.trip.price * reservation.numberOfPlaces}}</div>
+    </div>
+    <div class="text-block">
+      <div>Zajęte miejsca:</div> <div>{{reservation.numberOfPlaces}}</div>
+    </div>
+    <div class="pay-block">
+      <div class="pay-text">
+          Zapłacone: 
+      </div>
+      <div class=pay-wrapper>
+          <div class="pay-icon-block">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+          <div *ngIf="reservation.isPayed" class="pay">
+          </div>
+          <div *ngIf="!reservation.isPayed" class="not-pay"> 
+          </div>        
+      </div>
+    </div>
+    <div class="text-block">
+        <div>Oceń</div> <div class=mark-wrapper><div class=mark><i class="fas fa-marker"></i></div></div>
+    </div>
+  </div>
+</div>
