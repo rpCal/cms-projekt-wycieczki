@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import {User} from './model/user';
+import { Trip } from './model/trip';
 
 
 export type DataServiceState = {
@@ -8,6 +9,8 @@ export type DataServiceState = {
   isAdmin: boolean;
   user: User | null;
   token: string;
+  trips: Array<Trip>;
+  selectedTrip: Trip | null;
 }
 
 let enabled = false;
@@ -26,6 +29,8 @@ export class DataService {
         isAdmin: false,
         user: null,
         token: "",
+        trips: [],
+        selectedTrip: null
       };
       _state$ = new BehaviorSubject(initState);
       state$ = _state$.asObservable();

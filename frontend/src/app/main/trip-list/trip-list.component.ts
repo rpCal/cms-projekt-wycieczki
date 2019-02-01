@@ -3,6 +3,7 @@ import { ApiService } from './../../service-api/api.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Trip } from 'src/app/model/trip';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-trip-list',
@@ -11,22 +12,28 @@ import { Trip } from 'src/app/model/trip';
 })
 export class TripListComponent implements OnInit {
 
-  trips: Array<Trip>;
-
   constructor(private router: Router,
+              public dataService: DataService,
               private api: ApiService,
               private fakeDb: FakeDbService) { }
 
   ngOnInit() {
-    this.trips = new Array<Trip>();
-    this.api.getTrips().subscribe(trips => {
-      trips.results.forEach(t => this.trips.push(Trip.createTripFromApiTrip(t)));
-    })
+    this.api.getTrips().subscribe(response => {
+      this.dataService.setState({ 
+        ...this.dataService.state,
+        trips: response.results.map(t => Trip.createTripFromApiTrip(t))
+      });
+    });
   }
 
   getDetailTrip(trip: Trip){
-    const tripJson: string = JSON.stringify(trip);
-    this.router.navigate(['trip-detail'],  { queryParams: { trip: tripJson}, skipLocationChange: true} );
+    console.log('co wybralem?', trip)
+    this.dataService.setState({ 
+      ...this.dataService.state,
+      selectedTrip: trip
+    });
+    // const tripJson: string = JSON.stringify(trip);
+    // this.router.navigate(['trip-detail'],  { queryParams: { trip: tripJson}, skipLocationChange: true} );
   }
 
 }
