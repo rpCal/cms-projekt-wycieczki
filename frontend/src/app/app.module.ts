@@ -22,6 +22,7 @@ import { RezerwationUserComponent } from './main/rezerwation-user/rezerwation-us
 import { MarkComponent } from './main/rezerwation-user/mark/mark.component';
 import { PayComponent } from './main/rezerwation-user/pay/pay.component';
 import { DeleteComponent } from './main/rezerwation-user/delete/delete.component';
+import { RegistrationComponent } from './main/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DeleteComponent } from './main/rezerwation-user/delete/delete.component
     RezerwationUserComponent,
     MarkComponent,
     PayComponent,
-    DeleteComponent
+    DeleteComponent,
+    RegistrationComponent
   ],
   entryComponents: [
     RezerwationAddComponent,

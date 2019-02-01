@@ -1,0 +1,37 @@
+<div class="container">
+  
+  <div class="label-name">
+      <h2>Rejestracja</h2>
+  </div>
+  
+  <div class="form-block">
+      <form [formGroup]="registrationForm">
+    
+          <div class=fieldset>
+            <label>Email:</label>
+            <input type="text" formControlName="email">
+          </div>
+        
+          <div class=fieldset>
+            <label>Imie:</label>
+            <input type="text" formControlName="imie">
+          </div>
+    
+          <div class=fieldset>
+            <label>Nazwisko:</label>
+            <input type="text" formControlName="nazwisko">
+          </div>
+    
+          <div class=fieldset>
+            <label>Hasło:</label>
+            <input type="password" formControlName="password">
+          </div>
+  
+          <div class=fieldset>
+            <button id="but1" (click)="sendToServer()">Zapisz</button>
+            <button id="but2" (click)="clear()">Wyczyść dane</button>
+          </div>
+    
+        </form>
+  </div>
+</div>

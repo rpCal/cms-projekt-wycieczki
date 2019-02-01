@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from '../main/main-page/main-page.component';
 import { TripAddComponent } from '../main/trip-add/trip-add.component';
 import { RezerwationUserComponent } from '../main/rezerwation-user/rezerwation-user.component';
+import { RegistrationComponent } from '../main/registration/registration.component';
 
 const routes: Routes = [
   { path: '', redirectTo: "main-page", pathMatch: "full"},
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "trip-detail", component: TripDetailComponent },
   { path: "trip-add", component: TripAddComponent },
-  { path: "user-reservation", component: RezerwationUserComponent }
+  { path: "user-reservation", component: RezerwationUserComponent },
+  { path: "registration-user", component: RegistrationComponent }
 ]
 
 @NgModule({
