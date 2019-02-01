@@ -8,7 +8,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { RezerwationAddComponent } from './rezerwation-add/rezerwation-add.component';
 import { LoggerService } from 'src/app/service-logger/logger.service';
 import { DataService } from 'src/app/data.service';
-
+import { DeleteTripComponent } from './delete/delete.component';
 
 @Component({
   selector: 'app-trip-detail',
@@ -66,6 +66,14 @@ export class TripDetailComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     this.dialog.open(RezerwationAddComponent, dialogConfig);
+  }
+
+  openDeleteDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.trip;
+    this.dialog.open(DeleteTripComponent, dialogConfig);
   }
 
 }

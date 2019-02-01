@@ -1,3 +1,4 @@
+import { DeleteTripComponent } from './main/trip-detail/delete/delete.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -23,7 +24,7 @@ import { RezerwationAddComponent } from './main/trip-detail/rezerwation-add/reze
 import { RezerwationUserComponent } from './main/rezerwation-user/rezerwation-user.component';
 import { MarkComponent } from './main/rezerwation-user/mark/mark.component';
 import { PayComponent } from './main/rezerwation-user/pay/pay.component';
-import { DeleteComponent } from './main/rezerwation-user/delete/delete.component';
+import { DeleteRezerwationComponent } from './main/rezerwation-user/delete/delete.component';
 import { RegistrationComponent } from './main/registration/registration.component';
 import { TripRatingComponent } from './main/trip-detail/trip-rating/trip-rating.component';
 
@@ -45,15 +46,18 @@ import { TripRatingComponent } from './main/trip-detail/trip-rating/trip-rating.
     RezerwationUserComponent,
     MarkComponent,
     PayComponent,
-    DeleteComponent,
     RegistrationComponent,
-    TripRatingComponent
+    TripRatingComponent,
+    DeleteRezerwationComponent,
+    DeleteTripComponent
   ],
   entryComponents: [
     RezerwationAddComponent,
     PayComponent,
     MarkComponent,
-    DeleteComponent
+    DeleteRezerwationComponent,
+    DeleteTripComponent,
+    MarkComponent
   ],
   imports: [
     BrowserModule,

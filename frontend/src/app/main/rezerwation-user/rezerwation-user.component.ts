@@ -1,5 +1,4 @@
 import { LoggerService } from './../../service-logger/logger.service';
-import { DeleteComponent } from './delete/delete.component';
 import { ApiService } from './../../service-api/api.service';
 import { PayComponent } from './pay/pay.component';
 import { MarkComponent } from './mark/mark.component';
@@ -7,6 +6,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { FakeDbService } from './../../service-fake-db/fake-db.service';
 import { Component, OnInit } from '@angular/core';
 import { Reservation } from 'src/app/model/reservation';
+import { DeleteRezerwationComponent } from './delete/delete.component';
 
 @Component({
   selector: 'app-rezerwation-user',
@@ -53,6 +53,6 @@ export class RezerwationUserComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.data = reservation;
-    this.dialog.open(DeleteComponent, dialogConfig);
+    this.dialog.open(DeleteRezerwationComponent, dialogConfig);
   }
 }
