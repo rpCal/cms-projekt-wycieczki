@@ -21,6 +21,7 @@ import { RezerwationAddComponent } from './main/trip-detail/rezerwation-add/reze
 import { RezerwationUserComponent } from './main/rezerwation-user/rezerwation-user.component';
 import { MarkComponent } from './main/rezerwation-user/mark/mark.component';
 import { PayComponent } from './main/rezerwation-user/pay/pay.component';
+import { DeleteComponent } from './main/rezerwation-user/delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +38,14 @@ import { PayComponent } from './main/rezerwation-user/pay/pay.component';
     RezerwationAddComponent,
     RezerwationUserComponent,
     MarkComponent,
-    PayComponent
+    PayComponent,
+    DeleteComponent
   ],
   entryComponents: [
     RezerwationAddComponent,
     PayComponent,
-    MarkComponent
+    MarkComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,

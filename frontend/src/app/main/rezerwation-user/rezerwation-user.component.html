@@ -31,7 +31,7 @@
       <div class="pay-text">
           Zapłacone: 
       </div>
-      <div class=pay-wrapper>
+      <div (click)="openPayDialog(reservation)" class=pay-wrapper>
           <div class="pay-icon-block">
             <i class="fas fa-dollar-sign"></i>
           </div>
@@ -42,7 +42,22 @@
       </div>
     </div>
     <div class="text-block">
-        <div>Oceń</div> <div class=mark-wrapper><div class=mark><i class="fas fa-marker"></i></div></div>
+        <div>Oceń</div> 
+        <div (click)="openMarkDialog(reservation)" class=icon-wrapper>
+          <div class=icon>
+            <i class="fas fa-marker"></i>
+          </div>
+        </div>
     </div>
+    <div class="text-block">
+      <div>Oceń</div> 
+      <div (click)="openDeleteDialog(reservation)" class=icon-wrapper>
+        <div class=icon>
+          <i class="fas fa-trash"></i>
+        </div>
+      </div>
   </div>
+  </div>
+
+  
 </div>

@@ -23,6 +23,7 @@
         }
 
         #res-name{
+            padding-top: 5px;
             font-size: 17px;
             font-weight: bold;
         }
@@ -32,7 +33,7 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
-            padding: 5px;
+            padding-bottom: 5px;
 
             div{
               width: 150px;
@@ -48,11 +49,11 @@
             }
             
 
-            .mark-wrapper{
+            .icon-wrapper{
                 display: flex;
                 justify-content: flex-end;
                 
-                .mark{
+                .icon{
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -65,7 +66,7 @@
                     transition: .2s all;
                 }
 
-                .mark:hover{
+                .icon:hover{
                     background: #fde6da;
                     color: black;
                 }
@@ -77,6 +78,7 @@
             justify-content: center;
             align-items: center;
             height: 30px;
+            padding-bottom: 10px;
 
             .pay-text{
                width: 150px;

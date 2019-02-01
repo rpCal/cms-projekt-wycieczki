@@ -1,3 +1,20 @@
-<p>
-  mark works!
-</p>
+<div class="container">
+  <form [formGroup]="ratingForm">
+      <div class=fieldset>
+          <label>Ocena[0-5]:</label>
+          <input formControlName="rateMark" type="number"/>  
+      </div>
+      <div class=fieldset>
+          <label>Opis:</label>
+          <textarea formControlName="comment" type="text"></textarea>  
+      </div>
+
+  </form>
+
+  <div class=fieldset>
+    <button class="but1" (click)="save()">Zapisz</button>
+    <button class="but2" (click)="close()">Anuluj</button>  
+  </div>
+  
+  </div>
+  

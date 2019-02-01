@@ -5,31 +5,31 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
-  selector: 'app-pay',
-  templateUrl: './pay.component.html',
-  styleUrls: ['./pay.component.scss']
+  selector: 'app-delete',
+  templateUrl: './delete.component.html',
+  styleUrls: ['./delete.component.scss']
 })
-export class PayComponent implements OnInit {
+export class DeleteComponent implements OnInit {
 
   constructor(
-    private dialogRef: MatDialogRef<PayComponent>,
+    private dialogRef: MatDialogRef<DeleteComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Reservation,
     private log: LoggerService,
     private api: ApiService
-    ) { }
-
+  ) { }
+  
   ngOnInit() {
-    
+     
   }
-
+  
   save() {
     this.log.openSnackBar("TU INTEGRACJA Z API");
-    // this.api.postPayReservation() TODO
+    // this.api.deleteRating() TODO
     this.dialogRef.close();
   }
-
+  
   close() {
       this.dialogRef.close();
   }
-
 }
+  

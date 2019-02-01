@@ -15,9 +15,6 @@ import { RezerwationAddComponent } from './rezerwation-add/rezerwation-add.compo
 })
 export class TripDetailComponent implements OnInit {
   trip: Trip;
-  isAdmin: boolean = false;
-  isUser: boolean = false;
-  
   constructor(private sharedTrip: SharedTripService,
               private location: Location,
               private dialog: MatDialog,
