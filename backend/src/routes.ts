@@ -40,6 +40,7 @@ router.post('/auth/Reservation/pay', getUserFromJWTToken, postRezerwationPay);
 router.post('/auth/Reservation/cancel', getUserFromJWTToken, postRezerwationCancel);
 router.post('/auth/Reservation', getUserFromJWTToken, postRezerwation);
 
+router.get('/auth/Rating', getUserFromJWTToken, getRating);
 router.post('/auth/Rating', getUserFromJWTToken, postRating);
 router.post('/auth/Rating/cancel', getUserFromJWTToken, deleteRating);
 
