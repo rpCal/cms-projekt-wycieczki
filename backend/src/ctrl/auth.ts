@@ -546,7 +546,8 @@ export const getRating = async (req:any, res:Response, next: NextFunction) => {
         if(!TripId){
             return next({ message: "Parametr jest nieprawidłowy", status: NOT_ACCEPTABLE } as AppError);
         }
-        let results = await Rating.find({ Trip: TripId }).sort({ createdAt: -1 });
+        let results = await Rating.find({ Trip: TripId }).sort({ createdAt: -1 })
+            .populate('User', "FirstName LastName Email _id", User);
         res.status(OK).send({ results })
     }catch(err){
         return next({ message: err.message, status: NOT_ACCEPTABLE, stack: err.stack } as AppError);
