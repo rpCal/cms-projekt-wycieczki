@@ -240,7 +240,7 @@ export const getPublicTrip = async (req:Request, res:Response, next: NextFunctio
         if(where_AvaiableNumberOfPlaces != undefined){
             WHERE['AvaiableNumberOfPlaces'] = {"$gte": parseInt(where_AvaiableNumberOfPlaces, 10)};
         }
-        let results = await Trip.find(WHERE).skip(skip).limit(limit).sort(sort).populate("Rating");
+        let results = await Trip.find(WHERE).skip(skip).limit(limit).sort(sort);
         res.status(OK).send({ results })
     }catch(err){
         return next({ message: err.message, status: NOT_ACCEPTABLE, stack: err.stack } as AppError);
