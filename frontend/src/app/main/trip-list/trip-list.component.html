@@ -59,7 +59,7 @@
       <div *ngFor="let trip of trips" class="offer-block">
     
         <div class="offer-image">
-          <img src="./assets/city_image_example_cracow.png"/>
+          <img src="{{ trip.photos ? trip.photos : './assets/city_image_example_cracow.png' }}">
         </div>
         
         <div class="offer-data">
