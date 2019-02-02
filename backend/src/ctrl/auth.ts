@@ -190,7 +190,8 @@ export const getPublicTrip = async (req:Request, res:Response, next: NextFunctio
             where_Date,
             where_Price,
             where_Promote,
-            where_AvaiableNumberOfPlaces
+            where_AvaiableNumberOfPlaces,
+            where_DeparturePlace
         } = req.query;
 
         let sort;
@@ -225,6 +226,9 @@ export const getPublicTrip = async (req:Request, res:Response, next: NextFunctio
         }
         if(where_City != undefined){
             WHERE['City'] = {$regex: '.*' + where_City + '.*'};;
+        }
+        if(where_DeparturePlace != undefined){
+            WHERE['DeparturePlace'] = {$regex: '.*' + where_DeparturePlace + '.*'};;
         }
         if(where_Date != undefined){
             const selectedDate = new Date(`${where_Date}T19:38:34.203Z`);
