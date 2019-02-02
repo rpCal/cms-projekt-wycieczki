@@ -283,7 +283,7 @@ export const postRezerwation = async (req:any, res:Response, next: NextFunction)
 
         NumberOfPlaces = parseInt(NumberOfPlaces);
 
-        if(trip['AvaiableNumberOfPlaces'] < NumberOfPlaces){
+        if(NumberOfPlaces > trip['AvaiableNumberOfPlaces']){
             return next({ message: "Nie możesz zarejestrowac wycieczki na tak dużą liczbe osób", status: NOT_ACCEPTABLE } as AppError);
         }
 
