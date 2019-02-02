@@ -56,7 +56,7 @@ export class DataService {
   }
 
   public getTripById(_id: string): Trip{
-    return this.state.trips.filter(e => e._id)[0];
+    return this.state.trips.filter(e => e._id == _id)[0];
   }
 
   public updateFieldOnTrips(_id, fieldName, fieldValue){

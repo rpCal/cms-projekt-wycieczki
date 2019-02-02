@@ -2,9 +2,9 @@
     <ul>
         <li routerLink="/main-page" routerLinkActive="active">Polecane</li>
         <li routerLink="/trip-list" routerLinkActive="active">Lista wycieczek</li>
-        <li (click)="goToDodaj()" routerLinkActive="active">Dodaj</li>
-        <li routerLink="/user-reservation" routerLinkActive="active">Rezerwacje</li>
-        <li routerLink="/search" routerLinkActive="active"><i class="fas fa-search"></i><span id="szukaj-li">Szukaj</span></li>
+        <li *ngIf="dataService.state.isAuth == true && dataService.state.isAdmin == true" (click)="goToDodaj()" routerLinkActive="active">Dodaj</li>
+        <li *ngIf="dataService.state.isAuth == true" routerLink="/user-reservation" routerLinkActive="active">Rezerwacje</li>
+        <!-- <li routerLink="/search" routerLinkActive="active"><i class="fas fa-search"></i><span id="szukaj-li">Szukaj</span></li> -->
         <li *ngIf="dataService.state.isAuth == false" routerLink="/auth/login" routerLinkActive="active">
             <i class="fas fa-user"></i> Logowanie
         </li>

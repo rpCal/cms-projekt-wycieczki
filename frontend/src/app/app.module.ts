@@ -27,6 +27,8 @@ import { PayComponent } from './main/rezerwation-user/pay/pay.component';
 import { DeleteRezerwationComponent } from './main/rezerwation-user/delete/delete.component';
 import { RegistrationComponent } from './main/registration/registration.component';
 import { TripRatingComponent } from './main/trip-detail/trip-rating/trip-rating.component';
+import { RatingDeleteComponent } from './main/trip-detail/rating-delete/rating-delete.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { TripRatingComponent } from './main/trip-detail/trip-rating/trip-rating.
     RegistrationComponent,
     TripRatingComponent,
     DeleteRezerwationComponent,
-    DeleteTripComponent
+    DeleteTripComponent,
+    RatingDeleteComponent
   ],
   entryComponents: [
     RezerwationAddComponent,
@@ -57,7 +60,9 @@ import { TripRatingComponent } from './main/trip-detail/trip-rating/trip-rating.
     MarkComponent,
     DeleteRezerwationComponent,
     DeleteTripComponent,
-    MarkComponent
+    MarkComponent,
+
+    RatingDeleteComponent
   ],
   imports: [
     BrowserModule,

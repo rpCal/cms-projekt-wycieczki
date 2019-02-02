@@ -2,29 +2,36 @@
   <h1>Moje Wycieczki</h1>
 </div>
 <div class="container">
-  <div *ngIf="dataService.state.loadingReservations">Wczytywanie...</div>
-  <div class="reservation" *ngFor="let reservation of dataService.state.reservations">
+    <div *ngIf="dataService.state.loadingReservations">Wczytywanie...</div>
+    <div *ngIf="dataService.state.reservations.length == 0">Nie ma aktualnych zamowień...</div>
+</div>
 
+<div class="container">
+  <div class="reservation" *ngFor="let reservation of dataService.state.reservations">
     <div class="photo">
       <img class="image" src="./assets/city_image_example_cracow.png"/>
     </div>
-    <div class="text-block" id="res-name">
-      <div>Nazwa wycieczki:</div> <div>{{reservation.trip.name}}</div>
-    </div>
-    <div class="text-block">
-      <div>Gdzie:</div><div>{{reservation.trip.city}}</div>
-    </div>
-    <div class="text-block">
-      <div>Kiedy:</div> <div>{{reservation.trip.departureDate | date:'dd-MM-yyyy'}}</div>
-    </div>
-    <div class="text-block">
-      <div>Powrót:</div> <div>{{reservation.trip.arrivalDate | date:'dd-MM-yyyy'}}</div>
-    </div>
-    <div class="text-block">
-      <div>Cena:</div> <div>{{reservation.trip.price}}</div>
-    </div>
-    <div class="text-block">
-      <div>Cena całkowita:</div> <div>{{reservation.trip.price * reservation.numberOfPlaces}}</div>
+
+    <div *ngIf="reservation.trip">
+      <div class="text-block" id="res-name">
+        <div>Nazwa wycieczki:</div> <div>{{reservation.trip.name}}</div>
+      </div>
+      <div class="text-block">
+        <div>Gdzie:</div><div>{{reservation.trip.city}}</div>
+      </div>
+      <div class="text-block">
+        <div>Kiedy:</div> <div>{{reservation.trip.departureDate | date:'dd-MM-yyyy'}}</div>
+      </div>
+      <div class="text-block">
+        <div>Powrót:</div> <div>{{reservation.trip.arrivalDate | date:'dd-MM-yyyy'}}</div>
+      </div>
+      <div class="text-block">
+        <div>Cena jednostkowa:</div> <div>{{reservation.trip.price}} zł</div>
+      </div>
+
+      <div class="text-block">
+        <div>Cena całkowita:</div> <div>{{reservation.trip.price * reservation.numberOfPlaces}} zł</div>
+      </div>
     </div>
     <div class="text-block">
       <div>Zajęte miejsca:</div> <div>{{reservation.numberOfPlaces}}</div>

@@ -1,9 +1,9 @@
 <div class="container">
     <div *ngIf="trip"  class="trip-detail">
         <div class=block-icon>
-            <button (click)="modifyTrip()" class="edit"><i id="wrench" class="fa fa-wrench"></i></button>
-            <button (click)="openDeleteDialog()" class="rating"><i id="wrench" class="fas fa-trash"></i></button>
-            <button (click)="ratingTrip()" class="rating"><i id="wrench" class="fas fa-star"></i></button>
+            <button (click)="modifyTrip()" *ngIf="dataService.state.isAdmin" class="edit"><i id="wrench" class="fa fa-wrench"></i></button>
+            <button (click)="openDeleteDialog()"  *ngIf="dataService.state.isAdmin" class="rating"><i id="wrench" class="fas fa-trash"></i></button>
+            <!-- <button (click)="ratingTrip()" class="rating"><i id="wrench" class="fas fa-star"></i></button> -->
         </div>
         <h2>{{trip.name}}</h2>
         
@@ -17,19 +17,44 @@
             <div><label>Od kiedy: </label><span>{{trip.departureDate  | date:'dd.MM.yyyy' }}</span></div>
             <div><label>Do kiedy: </label><span>{{trip.arrivalDate | date:'dd.MM.yyyy' }}</span></div>
             <div><label>Cena: </label><span>{{trip.price}}</span></div>
+            <div><label>Średnia ocen: </label><span>{{trip.averageRating}}</span></div>
             <div><label>Liczba miejsc: </label><span>{{trip.numberOfPlaces}}</span></div>
+            
             <div><label>Liczba wolnych miejsc: </label><span>{{trip.availableNumberOfPlaces}}</span></div> 
             <div><label>Opis: </label><span></span></div>
             <span class=describe>{{trip.describe}}</span>        
         </div>
         
-        <div class="trip-button">
+        <div class="trip-button" *ngIf="dataService.state.isAuth">
                 <button id="but1" (click)="openDialog()">Rezerwuj</button>
                 <button [ngClass]="{
                     'but3' : isUser==false,
                     'but2' : isUser==true
                 }" (click)="backToPrevious()">Powrót</button>
         </div>
-    
+
+
+        <div class="container" *ngIf="loadingRatings == true" style="margin-top: 20px">Wczytuje opinie...</div>
+        <div class="container" *ngIf="loadingRatings == false" class="ratings-wrapper">
+            <br><br><h3>Opinie:</h3><br>
+            <div class="container" *ngIf="ratings.length == 0" style="margin-bottom: 40px">
+                Ta wycieczka nie otrzymała jeszcze żadnej opini...
+            </div>
+            <div *ngFor="let rate of ratings" class="list">
+                <div> 
+                    <span style="font-size: 20px;"><strong>{{ rate.rateMark }}</strong> / 5</span> 
+                    <strong *ngIf="rate.comment"><i>"{{ rate.comment }}"</i></strong>
+                    <small> wystawiony przez {{ rate.user.FirstName }} {{ rate.user.LastName }}</small>
+                    <div (click)="openDeleteRatingDialog(rate)"   class=icon-wrapper
+                    *ngIf="dataService.state.isAdmin || (dataService.state.isAuth && rate.user.Email == dataService.state.user.Email)">
+                        <div class=icon>
+                            <i class="fas fa-trash"></i>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
     </div>
 </div>

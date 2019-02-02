@@ -147,4 +147,39 @@
         
     }
 
+
+    .ratings-wrapper{
+        max-width: 550px;
+    
+        .list{
+            position: relative; 
+            margin-bottom: 20px; border-bottom: 1px solid #eee; display: block;
+
+            .icon-wrapper{
+                position: absolute;
+                top: 0;
+                right: 20px;
+                z-index: 2;
+            }
+            i{
+                display: inline-block;
+                margin-left: 10px;
+            }
+            small{
+                font-size: 13px;
+                color: #8d8080;
+                padding-top: 4px;
+                padding-left: 10px;
+                padding-right: 10px;
+                text-align: right;
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                
+            }
+        }
+    }
+    
+
 }

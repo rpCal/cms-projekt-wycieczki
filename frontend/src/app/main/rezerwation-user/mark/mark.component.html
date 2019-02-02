@@ -2,11 +2,11 @@
   <form [formGroup]="ratingForm">
       <div class=fieldset>
           <label>Ocena[0-5]:</label>
-          <input formControlName="rateMark" type="number"/>  
+          <input formControlName="rateMark" type="number" max="5" min="0" value="5" />  
       </div>
       <div class=fieldset>
           <label>Opis:</label>
-          <textarea formControlName="comment" type="text"></textarea>  
+          <textarea formControlName="comment" type="text"  style="width: 100%; min-height: 60px;"></textarea>  
       </div>
 
   </form>

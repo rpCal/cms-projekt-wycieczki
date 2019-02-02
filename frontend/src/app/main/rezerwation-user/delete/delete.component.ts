@@ -4,6 +4,7 @@ import { LoggerService } from 'src/app/service-logger/logger.service';
 import { Reservation } from './../../../model/reservation';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Component, OnInit, Inject } from '@angular/core';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-delete',
@@ -16,6 +17,7 @@ export class DeleteRezerwationComponent implements OnInit {
     private dialogRef: MatDialogRef<DeleteRezerwationComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Reservation,
     private log: LoggerService,
+    public dataService: DataService,
     private api: ApiService,
     private router: Router
   ) { }
@@ -25,11 +27,11 @@ export class DeleteRezerwationComponent implements OnInit {
   }
   
   save() {
-    this.api.deleteReservation(this.data._id).subscribe( r => {
+    this.api.deleteReservation(this.data._id).subscribe(res => {
       this.log.openSnackBar("Rezerwacja usunięta");
-      this.router.navigate(['main-page']);
+      this.dataService.refreshRezerwations(this.api);
       this.dialogRef.close();
-    })
+    }, error => this.log.handleError(error));
     this.dialogRef.close();
   }
   

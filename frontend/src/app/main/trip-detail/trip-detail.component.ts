@@ -9,6 +9,8 @@ import { RezerwationAddComponent } from './rezerwation-add/rezerwation-add.compo
 import { LoggerService } from 'src/app/service-logger/logger.service';
 import { DataService } from 'src/app/data.service';
 import { DeleteTripComponent } from './delete/delete.component';
+import { Rating } from 'src/app/model/rating';
+import { RatingDeleteComponent} from './rating-delete/rating-delete.component'
 
 @Component({
   selector: 'app-trip-detail',
@@ -17,7 +19,10 @@ import { DeleteTripComponent } from './delete/delete.component';
 })
 export class TripDetailComponent implements OnInit, OnDestroy {
   trip: Trip;
+  ratings: Array<Rating> = [];
+  loadingRatings: boolean = false;
   sub;
+  ratingsSub;
   constructor(private location: Location,
               private dialog: MatDialog,
               public dataService: DataService,
@@ -33,14 +38,22 @@ export class TripDetailComponent implements OnInit, OnDestroy {
       .subscribe(params => {
         this.trip = this.dataService.getTripById(params['_id']);
       });
+
+    this.loadingRatings = true;
+    this.ratingsSub = this.api.getRating(this.trip._id).subscribe(res => {
+      this.ratings = res.results.map(e => Rating.createFromApi(e))
+      this.loadingRatings = false;
+    });
   }
   ngOnDestroy(){
     this.sub.unsubscribe();
+    this.ratingsSub.unsubscribe();
   }
 
   backToPrevious() {
     this.router.navigate(['main-page']);
   }
+
 
   deleteTrip(){
     this.api.delTrip(this.trip).subscribe(t => {
@@ -75,4 +88,21 @@ export class TripDetailComponent implements OnInit, OnDestroy {
     this.dialog.open(DeleteTripComponent, dialogConfig);
   }
 
+
+  openDeleteRatingDialog(rating: Rating){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = rating;
+    this.dialog.open(RatingDeleteComponent, dialogConfig).afterClosed()
+    .subscribe(result=> {
+      if(result){
+        this.loadingRatings = true;
+        this.ratingsSub = this.api.getRating(this.trip._id).subscribe(res => {
+          this.ratings = res.results.map(e => Rating.createFromApi(e))
+          this.loadingRatings = false;
+        });
+      }
+    })
+  }
 }

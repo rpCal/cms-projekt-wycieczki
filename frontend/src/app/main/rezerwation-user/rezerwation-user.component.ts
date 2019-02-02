@@ -28,7 +28,6 @@ export class RezerwationUserComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.refreshRezerwations(this.api);
-    // this.reservations = this.fakeDb.createRezerwation().filter(r => r.user.FirstName === 'Jan');
   }
 
   openMarkDialog(reservation: Reservation) {
@@ -47,7 +46,7 @@ export class RezerwationUserComponent implements OnInit {
       dialogConfig.data = reservation;
       this.dialog.open(PayComponent, dialogConfig);
     } else {
-      this.log.openSnackBar("Już zaplacone");
+      this.log.openSnackBar("Rezerwacja została opłacona.");
     }
   }
 

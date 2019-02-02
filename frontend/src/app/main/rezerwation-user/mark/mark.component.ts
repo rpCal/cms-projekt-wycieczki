@@ -5,6 +5,7 @@ import { Reservation } from './../../../model/reservation';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Rating } from 'src/app/model/rating';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-mark',
@@ -19,14 +20,15 @@ export class MarkComponent implements OnInit {
     private dialogRef: MatDialogRef<MarkComponent>,
     @Inject(MAT_DIALOG_DATA) private data: Reservation,
     private log: LoggerService,
+    public dataService: DataService,
     private api: ApiService
     ) { }
 
   ngOnInit() {
     this.ratingForm = this.formBuilder.group({
-      rateMark: ['', Validators.compose(
+      rateMark: [5, Validators.compose(
         [Validators.max(5), Validators.min(0), Validators.required])],
-      comment: ['', Validators.required]
+      comment: ['Myśle ze ta wycieczka była: ', Validators.required]
     });
   }
 
@@ -35,11 +37,14 @@ export class MarkComponent implements OnInit {
       const rating: Rating = new Rating(null,  this.ratingForm.controls["comment"].value, 
                         this.ratingForm.controls["rateMark"].value,
                         this.data.trip, this.data.user);
-      this.log.openSnackBar("TU INTEGRACJA Z API");
-      // this.api.postRating(); TODO
+      this.api.postRating(rating).subscribe(res => {
+        this.log.openSnackBar("Dziękujemy za Twoją opinie");
+        this.dataService.refreshRezerwations(this.api);
+        this.dialogRef.close();
+      }, error => this.log.handleError(error));
       this.dialogRef.close();
     } else {
-      this.log.openSnackBar("Błąd w danych");
+      this.log.openSnackBar("Formularz nie poprawny");
     }
 
   }

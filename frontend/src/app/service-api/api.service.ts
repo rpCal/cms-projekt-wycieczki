@@ -200,8 +200,8 @@ login(email, password){
   * EXAMPLE: URL GET /public/Rating?TripId=5c526d35217a680eaa9aed02
   * 
 */
-  getRating(tripId: number){
-    return this.http.get<Rating>(this.baseUrl + '/auth/Rating', {
+  getRating(tripId: string){
+    return this.http.get<any>(this.baseUrl + '/public/Rating', {
       params: new HttpParams().set('TripId', tripId+"" )
     })
   }
@@ -226,8 +226,8 @@ login(email, password){
   * PAYLOAD {RatingId}
   * 
   */
-  deleteRating(ratingId: number){
-    return this.http.post<Rating>(this.baseUrl + '/auth/Rating/cancel', {RatingId: ratingId}, {
+  deleteRating(ratingId: string){
+    return this.http.post<any>(this.baseUrl + '/auth/Rating/cancel', {RatingId: ratingId}, {
       headers: new HttpHeaders().set('Authorization', this.dataService.state.token)
     });
   }

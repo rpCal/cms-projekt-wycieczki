@@ -61,8 +61,8 @@ export class FakeDbService {
 
   createRating() {
     const fakeRating: Array<Rating> = [
-      new Rating(1, "super wycieczka polecam !", 5, this.trip1, this.user1),  
-      new Rating(2, "słabuitko...", 1, this.trip1, this.user2),  
+      new Rating("1", "super wycieczka polecam !", 5, this.trip1, this.user1),  
+      new Rating("2", "słabuitko...", 1, this.trip1, this.user2),  
     ];
   return fakeRating;
   }
