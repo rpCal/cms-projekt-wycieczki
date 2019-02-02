@@ -222,13 +222,13 @@ export const getPublicTrip = async (req:Request, res:Response, next: NextFunctio
         }
         
         if(where_Name != undefined){
-            WHERE['Name'] = {$regex: '.*' + where_Name + '.*i/'};
+            WHERE['Name'] = {$regex:  '^'+where_Name+'$', '$options' : 'i'};
         }
         if(where_City != undefined){
-            WHERE['City'] = {$regex: '.*' + where_City + '.*/i'};;
+            WHERE['City'] = {$regex:   '^'+where_City+'$', '$options' : 'i' };
         }
         if(where_DeparturePlace != undefined){
-            WHERE['DeparturePlace'] = {$regex: '.*' + where_DeparturePlace + '.*/i'};;
+            WHERE['DeparturePlace'] = {$regex:  '^'+where_DeparturePlace+'$', '$options' : 'i' };
         }
         if(where_Date != undefined){
             const selectedDate = new Date(`${where_Date}T19:38:34.203Z`);
