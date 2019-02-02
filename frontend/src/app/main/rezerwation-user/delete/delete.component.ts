@@ -32,6 +32,12 @@ export class DeleteRezerwationComponent implements OnInit {
       this.dataService.refreshRezerwations(this.api);
       this.dialogRef.close();
     }, error => this.log.handleError(error));
+    this.api.delTrip(this.data).subscribe( t => {
+      this.log.openSnackBar("Trip usunięty");
+      this.router.navigate(['main-page']);
+      this.dialogRef.close();
+    });
+
     this.dialogRef.close();
   }
   

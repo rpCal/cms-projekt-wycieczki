@@ -2,15 +2,18 @@
     <div class="form-block">
     <form [formGroup]="form">
         <div class=fieldset>
-            <label>Ile osób</label>
+            <label>Liczba osób</label>
             <input type="number" 
                 formControlName="numberOfPeople"
                 value="0" 
                 max="{{ trip ? trip.availableNumberOfPlaces : 99999}}"
                 min="0"  />  
         </div>
-        <button class="but1" (click)="save()">Save</button>
-        <button class="but2" (click)="close()">Close</button>
+        <div class="butons">
+            <button class="but1" (click)="save()">Rezerwuj</button>
+            <button class="but2" (click)="close()">Anuluj</button>
+        </div>
+     
     </form>
   </div>
 </div>

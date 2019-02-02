@@ -106,9 +106,8 @@
             text-align: center;
             
             button{
-                flex-basis: 60%;
                 background: #f47c48;
-                width: 50%;
+                width: 150px;
                 border-radius: 5px;
                 color: #fff;
                 font-size: 18px;
@@ -128,16 +127,7 @@
                 background: #fff;
             }
 
-            #but1{
-                border-top-right-radius: 0px;
-                border-bottom-right-radius: 0px;
-            }
-
-            .but2{
-                border-bottom-left-radius: 0px;
-                border-top-left-radius: 0px;
-            }
-
+            
             .but3{
                 border-radius: 5px;
             }
