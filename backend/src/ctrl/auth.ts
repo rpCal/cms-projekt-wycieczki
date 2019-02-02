@@ -16,7 +16,7 @@ import { not, string, empty, object, validate, number } from 'joi';
 export const getRezerwations = async (req: any, res:Response, next: NextFunction) => {
     try{
         
-        let reserwations:any = await Rezerwation.find({ User: req.user._id }).populate('Trip');
+        let reserwations:any = await Rezerwation.find({ User: req.user._id }).sort({ createdAt: -1 }).populate('Trip');
 
         res.status(OK).json({ results: reserwations });
     }catch(err){
