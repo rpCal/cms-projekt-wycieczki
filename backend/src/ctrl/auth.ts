@@ -520,8 +520,10 @@ export const deleteRating = async (req:any, res:Response, next: NextFunction) =>
 
         let userId = req.user.id; 
 
-        if(rating['User'] != userId){
-            return next({ message: "Możesz usunąć jedynie własne oceny", status: NOT_ACCEPTABLE } as AppError);
+        if(req.user.IsAdmin == false){
+            if(rating['User'] != userId){
+                return next({ message: "Możesz usunąć jedynie własne oceny", status: NOT_ACCEPTABLE } as AppError);
+            }
         }
 
         await Rating.deleteOne({ _id: rating._id });
