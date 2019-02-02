@@ -22,7 +22,7 @@
             
             <div><label>Liczba wolnych miejsc: </label><span>{{trip.availableNumberOfPlaces}}</span></div> 
             <div><label>Opis: </label><span></span></div>
-            <span class=describe>{{trip.describe}}</span>        
+            <span class=describe  style="white-space: pre-line;">{{trip.describe}}</span>        
         </div>
         
         <div class="trip-button" *ngIf="dataService.state.isAuth">

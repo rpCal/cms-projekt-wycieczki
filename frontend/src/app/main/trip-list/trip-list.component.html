@@ -68,19 +68,27 @@
             <h2>
               {{trip.name}}
             </h2>
+            
             <h3>
               <span>Termin:</span> <span> {{trip.departureDate | date:'dd.MM.yyyy' }}-{{trip.arrivalDate | date:'dd.MM.yyyy' }}</span>
             </h3>
+            
             <h4>
-              <span>Cena:</span> <span> {{trip.price}}zł</span>
+              <span>Cena:</span> <strong style="font-weight: bold;"> {{trip.price}}zł</strong>
             </h4>
-            <h5>
-              <span>Oceny:</span> <span> {{trip.averageRating | number : '1.2' }} </span>
+
+            <h5 *ngIf="trip.averageRating">
+              <span>Oceny:</span> <strong style="font-weight: bold;"> {{trip.averageRating | number : '1.2' }} </strong>
             </h5>
-            <h5>
-              <span>Opis:</span> <span> {{ trip.describe }}</span>
+            
+            <h5><br>
+              <span>Opis:</span> <span  style="white-space: pre-line;"> 
+                {{ trip.describe | truncate: 70 }}
+              </span>
             </h5>
           </div>
+
+
           
           <div class="data-submit">
             <button (click)="getDetailTrip(trip)">Szczegóły</button>

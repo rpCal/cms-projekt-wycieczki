@@ -28,7 +28,7 @@ import { DeleteRezerwationComponent } from './main/rezerwation-user/delete/delet
 import { RegistrationComponent } from './main/registration/registration.component';
 import { TripRatingComponent } from './main/trip-detail/trip-rating/trip-rating.component';
 import { RatingDeleteComponent } from './main/trip-detail/rating-delete/rating-delete.component';
-
+import { TruncatePipe } from './_modules/TruncatePipe'
 
 @NgModule({
   declarations: [
@@ -52,7 +52,8 @@ import { RatingDeleteComponent } from './main/trip-detail/rating-delete/rating-d
     TripRatingComponent,
     DeleteRezerwationComponent,
     DeleteTripComponent,
-    RatingDeleteComponent
+    RatingDeleteComponent,
+    TruncatePipe
   ],
   entryComponents: [
     RezerwationAddComponent,
