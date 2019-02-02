@@ -31,20 +31,20 @@ export class ApiService {
 */
 getTrips(parameters?: Parameters) {
 
-  let params = new HttpParams();
-
-  if (parameters) {
-    params = (parameters.limit) ? params : params.append('', parameters.limit);
-    params = (parameters.sort_by_field) ? params : params.append('', parameters.sort_by_field);
-    params = (parameters.sort_by_order) ? params : params.append('', parameters.sort_by_order);
-    params = (parameters.skip) ? params : params.append('', parameters.skip);
-    params = (parameters.where_id) ? params : params.append('', parameters.where_id);
-    params = (parameters.where_Name) ? params : params.append('', parameters.where_Name);
-    params = (parameters.where_City) ? params : params.append('', parameters.where_City);
-    params = (parameters.where_Date) ? params : params.append('', parameters.where_Date);
-    params = (parameters.where_Price) ? params : params.append('', parameters.where_Price);
-    params = (parameters.where_Promote) ? params : params.append('', parameters.where_Promote);
-    params = (parameters.where_AvaiableNumberOfPlaces) ? params : params.append('', parameters.where_AvaiableNumberOfPlaces);
+  if (parameters != undefined) {
+    let params = new HttpParams();
+    if(parameters.limit){ params = params.append('limit', parameters.limit); }
+    if(parameters.sort_by_field){ params = params.append('sort_by_field', parameters.sort_by_field); }
+    if(parameters.sort_by_order){ params = params.append('sort_by_order', parameters.sort_by_order); }
+    if(parameters.skip){ params = params.append('skip', parameters.skip); }
+    if(parameters.where_id){ params = params.append('where_id', parameters.where_id); }
+    if(parameters.where_Name){ params = params.append('where_Name', parameters.where_Name); }
+    if(parameters.where_City){ params = params.append('where_City', parameters.where_City); }
+    if(parameters.where_DeparturePlace){ params = params.append('where_DeparturePlace', parameters.where_DeparturePlace); }
+    if(parameters.where_Date){ params = params.append('where_Date', parameters.where_Date); }
+    if(parameters.where_Price){ params = params.append('where_Price', parameters.where_Price); }
+    if(parameters.where_Promote){ params = params.append('where_Promote', parameters.where_Promote); }
+    if(parameters.where_AvaiableNumberOfPlaces){ params = params.append('where_AvaiableNumberOfPlaces', parameters.where_AvaiableNumberOfPlaces); }
     return this.http.get<any>(this.baseUrl + '/public/Trip', { params: params })
   } else {
     return this.http.get<any>(this.baseUrl + '/public/Trip');
@@ -53,7 +53,11 @@ getTrips(parameters?: Parameters) {
 }
 
 modifyTrip(obj){
-  return this.http.patch<any>(this.baseUrl + '/api/v1/Trip/' + obj._id, { id: obj._id, Name: obj.name, City: obj.city, DepartureDate: obj.departureDate, ArrivalDate: obj.arrivalDate, Price: obj.price, Describe: obj.describe, DeparturePlace: obj.departurePlace, NumberOfPlaces: obj.numberOfPlaces, AvaiableNumberOfPlaces: obj.availableNumberOfPlaces, Archive: obj.archive, Promote: obj.promote, AverageRating: obj.averageRating, Photos: obj.photos});
+  return this.http.patch<any>(this.baseUrl + '/api/v1/Trip/' + obj._id, { 
+    id: obj._id, Name: obj.name, City: obj.city, DepartureDate: obj.departureDate, ArrivalDate: obj.arrivalDate, 
+    Price: obj.price, Describe: obj.describe, DeparturePlace: obj.departurePlace, NumberOfPlaces: obj.numberOfPlaces,
+    AvaiableNumberOfPlaces: obj.availableNumberOfPlaces, Archive: obj.archive, Promote: obj.promote, 
+    AverageRating: obj.averageRating, Photos: obj.photos});
 }
 
 delTrip(trip:any){

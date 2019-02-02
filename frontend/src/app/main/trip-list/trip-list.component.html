@@ -1,40 +1,62 @@
 <div class="container">
 
     <div class="filters-block">
-      <form>
+      <form [formGroup]="searchForm">
         <h2>Filtruj po:</h2>
+
         <div class=fieldset>
-          <label for="date_when">Kiedy</label>
-          <input type="date" name="date_when" required placeholder="Data" />
-        </div>
-        
+            <label for="where_Name">Nazwa wycieczki</label>
+            <input type="text" name="where_Name" required placeholder="np. wycieczka" formControlName="where_Name" />  
+          </div>
+
         <div class=fieldset>
-          <label for="end_place">Dokąd</label>
-          <input type="text" name="end_place" required placeholder="np. Majorka" />  
-        </div>
-  
-        <div class=fieldset>
-          <label for="start_place">Skąd</label>
-          <input type="text" name="start_place" required placeholder="np. Warszawa"/>
-        </div>
-  
-        <div class=fieldset>
-          <label for="amount">Osoby</label>
-          <select name="amount" required>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
+            <label for="where_Date">Data </label>
+            <input type="date" name="where_Date" required placeholder="Data" formControlName="where_Date" />
+          </div>
+          
+          <div class=fieldset>
+            <label for="where_City">Dokąd</label>
+            <input type="text" name="where_City" required placeholder="np. Majorka" formControlName="where_City" />  
+          </div>
+
+          <div class=fieldset>
+            <label for="where_DeparturePlace">Skąd</label>
+            <input type="text" name="where_DeparturePlace" required placeholder="np. Warszawa" formControlName="where_DeparturePlace" />  
+          </div>
+
+          <div class=fieldset>
+            <label for="where_Price">Cena</label>
+            <input type="number" name="where_Price" required placeholder="np. 500" formControlName="where_Price" />  
+          </div>
+          
+    
+          <div class=fieldset>
+            <label for="where_AvaiableNumberOfPlaces">Osoby</label>
+            <select name="where_AvaiableNumberOfPlaces" required formControlName="where_AvaiableNumberOfPlaces">
+              <option selected="selected">0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </div>
+          
+          <div class=fieldset>
+            <button type="submit" (onclick)="triggerSearch()">Wyszukaj</button>
+          </div>
         
       </form>
     </div>
 
 
     <div  class="results-block">
-      <div *ngFor="let trip of dataService.state.trips" class="offer-block">
+      <div *ngFor="let trip of trips" class="offer-block">
     
         <div class="offer-image">
           <img src="./assets/city_image_example_cracow.png"/>
@@ -56,7 +78,7 @@
               <span>Oceny:</span> <span> {{trip.averageRating | number : '1.2' }} </span>
             </h5>
             <h5>
-              <span>Opis:</span> <span> BRAK W MODELU </span>
+              <span>Opis:</span> <span> {{ trip.describe }}</span>
             </h5>
           </div>
           

@@ -1,35 +1,36 @@
 <div class="container">
   <div class="block" id="input-block">
-    <form>
+    <form [formGroup]="searchForm">
       <h2>Wyszukaj wycieczke</h2>
       <div class=fieldset>
-        <label for="date_when">Kiedy</label>
-        <input type="date" name="date_when" required placeholder="Data" />
+        <label for="where_Date">Kiedy</label>
+        <input type="date" name="where_Date" required placeholder="Data" formControlName="where_Date" />
       </div>
       
       <div class=fieldset>
-        <label for="end_place">Dokąd</label>
-        <input type="text" name="end_place" required placeholder="np. Majorka" />  
+        <label for="where_DeparturePlace">Dokąd</label>
+        <input type="text" name="where_DeparturePlace" required placeholder="np. Majorka" formControlName="where_DeparturePlace" />  
       </div>
 
       <div class=fieldset>
-        <label for="start_place">Skąd</label>
-        <input type="text" name="start_place" required placeholder="np. Warszawa"/>
-      </div>
-
-      <div class=fieldset>
-        <label for="amount">Osoby</label>
-        <select name="amount" required>
+        <label for="where_AvaiableNumberOfPlaces">Osoby</label>
+        <select name="where_AvaiableNumberOfPlaces" required formControlName="where_AvaiableNumberOfPlaces">
+          <option selected="selected">0</option>
           <option>1</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
           <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
         </select>
       </div>
       
       <div class=fieldset>
-        <button type="submit">Wyszukaj</button>
+        <button type="submit" (click)="triggerSearch()">Wyszukaj</button>
       </div>
     </form>
   </div>
@@ -37,7 +38,7 @@
 
   <div *ngFor="let trip of promotedTrips" id="trip-block" class="block">
     <h2>{{trip.name}}</h2>
-    <img src="./assets/city_image_example_cracow.png">
+    <img src="{{ trip.photos ? trip.photos : './assets/city_image_example_cracow.png' }}">
     <div class="data-block">
       <div class="info-block">
           <h4>Już od {{trip.price}}zł</h4>

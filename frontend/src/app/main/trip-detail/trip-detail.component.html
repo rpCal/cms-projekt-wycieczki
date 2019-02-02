@@ -8,7 +8,7 @@
         <h2>{{trip.name}}</h2>
         
         <div class="trip-image">
-            <img src="./assets/city_image_example_cracow.png">
+            <img src="{{ trip.photos ? trip.photos : './assets/city_image_example_cracow.png' }}">
         </div>
         
         <div class="trip-info">
@@ -17,7 +17,7 @@
             <div><label>Od kiedy: </label><span>{{trip.departureDate  | date:'dd.MM.yyyy' }}</span></div>
             <div><label>Do kiedy: </label><span>{{trip.arrivalDate | date:'dd.MM.yyyy' }}</span></div>
             <div><label>Cena: </label><span>{{trip.price}}</span></div>
-            <div><label>Średnia ocen: </label><span>{{trip.averageRating}}</span></div>
+            <div><label>Średnia ocen: </label><span>{{trip.averageRating | number : '1.2'}}</span></div>
             <div><label>Liczba miejsc: </label><span>{{trip.numberOfPlaces}}</span></div>
             
             <div><label>Liczba wolnych miejsc: </label><span>{{trip.availableNumberOfPlaces}}</span></div> 
