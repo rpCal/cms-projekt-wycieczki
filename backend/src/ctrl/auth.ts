@@ -13,22 +13,9 @@ import Rating from './../models/Rating';
 import { not, string, empty, object, validate, number } from 'joi';
 
 
-export const getRezerwations = async (req: Request, res:Response, next: NextFunction) => {
-    try{
-
-        let requestSchema = object().keys({
-            TripId:    string().min(24).required(),
-        });
-        
-        let validation = validate(req.query, requestSchema);
-
-        if(validation.error != null){
-            return next({ message: "Przekazane parametry są bledne", status: NOT_ACCEPTABLE } as AppError);
-        }
-
-        let { TripId } = req.body;
-        
-        let reserwations:any = await Rezerwation.find({ Trip: TripId });
+export const getRezerwations = async (req: any, res:Response, next: NextFunction) => {
+    try{        
+        let reserwations:any = await Rezerwation.find({ User: req.user._id }).populate('Trip');
 
         res.status(OK).json({ results: reserwations });
     }catch(err){
