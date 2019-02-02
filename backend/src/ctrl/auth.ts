@@ -12,6 +12,34 @@ import Rezerwation from './../models/Reservation';
 import Rating from './../models/Rating';
 import { not, string, empty, object, validate, number } from 'joi';
 
+
+export const getRezerwations = async (req: Request, res:Response, next: NextFunction) => {
+    try{
+
+        let requestSchema = object().keys({
+            TripId:    string().min(24).required(),
+        });
+        
+        let validation = validate(req.query, requestSchema);
+
+        if(validation.error != null){
+            return next({ message: "Przekazane parametry są bledne", status: NOT_ACCEPTABLE } as AppError);
+        }
+
+        let { TripId } = req.body;
+        
+        let reserwations:any = await Rezerwation.find({ Trip: TripId });
+
+        res.status(OK).json({ results: reserwations });
+    }catch(err){
+      if (err.name === 'MongoError' && err.code === 11000) {
+        next({ message: err.message, status: NOT_ACCEPTABLE, stack: err.stack } as AppError);
+      }
+      next({ message: err, status: INTERNAL_SERVER_ERROR, stack: err.stack } as AppError);
+    }
+}
+
+
 export const postRegister = async (req: Request, res:Response, next: NextFunction) => {
     try{
 

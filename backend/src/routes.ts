@@ -19,7 +19,8 @@ import {
   postRezerwationCancel,
   postRating,
   deleteRating,
-  getRating
+  getRating,
+  getRezerwations
 } from './ctrl/auth';
 
 const router = express.Router();
@@ -33,6 +34,7 @@ router.post('/auth/logout', postLogout);
 router.get('/auth/profile', getUserFromJWTToken, getProfile);
 router.post('/auth/profile', getUserFromJWTToken, postProfile);
 
+router.post('/auth/Trip/Reservation/', getUserFromJWTToken, getRezerwations);
 router.post('/auth/Reservation', getUserFromJWTToken, postRezerwation);
 router.post('/auth/Reservation/pay', getUserFromJWTToken, postRezerwationPay);
 router.post('/auth/Reservation/cancel', getUserFromJWTToken, postRezerwationCancel);
