@@ -222,18 +222,21 @@ export const getPublicTrip = async (req:Request, res:Response, next: NextFunctio
         }
         
         if(where_Name != undefined){
-            WHERE['Name'] = {$regex:  '^'+where_Name+'$', '$options' : 'i'};
+            WHERE['Name'] = {$text: { $search: where_Name }}
+            // WHERE['Name'] = {$regex:  '^'+where_Name+'$', '$options' : 'i'};
         }
         if(where_City != undefined){
-            WHERE['City'] = {$regex:   '^'+where_City+'$', '$options' : 'i' };
+            WHERE['City'] = {$text: { $search: where_City }}
+            // WHERE['City'] = {$regex:   '^'+where_City+'$', '$options' : 'i' };
         }
         if(where_DeparturePlace != undefined){
-            WHERE['DeparturePlace'] = {$regex:  '^'+where_DeparturePlace+'$', '$options' : 'i' };
+            WHERE['DeparturePlace'] = {$text: { $search: where_DeparturePlace }}
+            // WHERE['DeparturePlace'] = {$regex:  '^'+where_DeparturePlace+'$', '$options' : 'i' };
         }
         if(where_Date != undefined){
             const selectedDate = new Date(`${where_Date}T19:38:34.203Z`);
-            WHERE['DepartureDate'] = {"$gt": selectedDate};
-            WHERE['ArrivalDate'] = {"$lt": selectedDate};
+            WHERE['ArrivalDate'] = {"$gt": selectedDate};
+            WHERE['DepartureDate'] = {"$lt": selectedDate};
         }
         if(where_Price != undefined){
             WHERE['Price'] = {"$gte": parseFloat(where_Price)};
