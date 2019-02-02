@@ -2,7 +2,9 @@
   <h1>Moje Wycieczki</h1>
 </div>
 <div class="container">
-  <div class="reservation" *ngFor="let reservation of reservations">
+  <div *ngIf="dataService.state.loadingReservations">Wczytywanie...</div>
+  <div class="reservation" *ngFor="let reservation of dataService.state.reservations">
+
     <div class="photo">
       <img class="image" src="./assets/city_image_example_cracow.png"/>
     </div>
@@ -50,7 +52,7 @@
         </div>
     </div>
     <div class="text-block">
-      <div>Oceń</div> 
+      <div>Usuń</div> 
       <div (click)="openDeleteDialog(reservation)" class=icon-wrapper>
         <div class=icon>
           <i class="fas fa-trash"></i>

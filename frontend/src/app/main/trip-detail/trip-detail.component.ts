@@ -61,7 +61,6 @@ export class TripDetailComponent implements OnInit, OnDestroy {
   }
 
   openDialog() {
-    const _id = this.trip._id;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;

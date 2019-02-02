@@ -153,6 +153,11 @@ login(email, password){
     })
   }
   
+  getReservations(){
+    return this.http.get<any>(this.baseUrl + '/auth/Trip/Reservation/', {
+      headers: new HttpHeaders().set('Authorization', this.dataService.state.token)
+    });
+  }
 
 /**
   - Stworz zamowienie jako zalogowany

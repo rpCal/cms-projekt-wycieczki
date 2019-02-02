@@ -7,6 +7,7 @@ import { FakeDbService } from './../../service-fake-db/fake-db.service';
 import { Component, OnInit } from '@angular/core';
 import { Reservation } from 'src/app/model/reservation';
 import { DeleteRezerwationComponent } from './delete/delete.component';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-rezerwation-user',
@@ -20,12 +21,14 @@ export class RezerwationUserComponent implements OnInit {
     private fakeDb: FakeDbService,
     private dialog: MatDialog,
     private api: ApiService,
+    public dataService: DataService,
     private log: LoggerService
     ) { 
     }
 
   ngOnInit() {
-    this.reservations = this.fakeDb.createRezerwation().filter(r => r.user.FirstName === 'Jan');
+    this.dataService.refreshRezerwations(this.api);
+    // this.reservations = this.fakeDb.createRezerwation().filter(r => r.user.FirstName === 'Jan');
   }
 
   openMarkDialog(reservation: Reservation) {

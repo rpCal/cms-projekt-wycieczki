@@ -9,4 +9,10 @@ export class Reservation {
         public user: User 
     
     ){};
+
+
+    static createFromApi(obj){
+        let trip = obj.Trip ? Trip.createTripFromApiTrip(obj.Trip) : null
+        return new Reservation(obj._id, obj.IsPayed, obj.NumberOfPlaces, trip, null);
+    }
 }

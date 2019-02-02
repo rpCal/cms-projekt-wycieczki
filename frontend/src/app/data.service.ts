@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import {User} from './model/user';
 import { Trip } from './model/trip';
 import { ApiService } from './service-api/api.service';
+import { Reservation } from './model/reservation';
 
 
 export type DataServiceState = {
@@ -11,6 +12,8 @@ export type DataServiceState = {
   user: User | null;
   token: string;
   trips: Array<Trip>;
+  reservations: Array<Reservation>;
+  loadingReservations: boolean;
 }
 
 let enabled = false;
@@ -30,6 +33,8 @@ export class DataService {
         user: null,
         token: "",
         trips: [],
+        reservations: [],
+        loadingReservations: false,
       };
       _state$ = new BehaviorSubject(initState);
       state$ = _state$.asObservable();
@@ -63,12 +68,26 @@ export class DataService {
       trips: _trips
     });
   }
-  
-  public refreshTrips(apiService){
-    apiService.getTrips().subscribe(response => {
+
+  public refreshTrips(apiService: ApiService){
+    return apiService.getTrips().subscribe(response => {
         this.setState({ 
           ...this.state,
           trips: response.results.map(t => Trip.createTripFromApiTrip(t))
+        });
+      });
+  }
+
+  public refreshRezerwations(apiService: ApiService){
+    this.setState({
+      ...this.state,
+      loadingReservations: true,
+    })
+    apiService.getReservations().subscribe(response => {
+        this.setState({ 
+          ...this.state,
+          reservations: response.results.map(t => Reservation.createFromApi(t)),
+          loadingReservations: false,
         });
       });
   }
